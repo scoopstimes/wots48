@@ -9,7 +9,19 @@
   user-select: none;
   color: #fff;
 }
+a:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
 
+a:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+a {
+  -webkit-tap-highlight-color: transparent; /* Menghilangkan efek highlight pada perangkat mobile */
+}
 hr {
 	border: 2px solid rgba(255, 255, 255, 0.205);
 	border-style: dashed;
