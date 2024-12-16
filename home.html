@@ -59,7 +59,7 @@
                         
                 </div>
         </nav>
-    <div id="loader"></div>
+
     <div class="section">
         <div class="container">
             <div class="slideshow-container">
@@ -110,22 +110,11 @@
         </div>
     </div>
 
-    <div id="scrollToTopBtn" class="scroll-to-top-btn">
-        <button onclick="scrollToTop()" title="Go to top">
-            <i class="fas fa-arrow-up" style="color:#ffff;"></i>
-        </button>
-    </div>
+
 
     <div class="section">
         <div class="container">
-            <div class="discord-container">
-                <div class="discord-bg">
-                    <img src="/assets/logo.png" alt="Discord Logo">
-                </div>
-                <div class="label">48Intens Community Discord</div>
-                <div class="member-count" id="memberCount">Loading data...</div>
-                <a class="btn" href="https://48intens.com/discord" target="_blank">Join Noww</a>
-            </div>
+
 
             <div class="box">
                 <h1 class="titleup"><span class="icon"><i class="fa fa-play-circle"></i></span> Now Live</h1>
@@ -537,7 +526,7 @@
                                     window.removeEventListener("resize", lazyload);
                                     window.removeEventListener("orientationChange", lazyload);
                                 }
-                            }, 20);
+                            },20);
                         }
 
                         document.addEventListener("scroll", lazyload);
@@ -548,13 +537,7 @@
                 });
 
                 // loader script
-                const loader = document.getElementById('loader');
-                setTimeout(() => {
-                    loader.classList.add('hide');
-                    document.body.style.overflow = 'visible';
-                }, 3000)
-                document.body.style.overflow = 'hidden';
-
+                
 
                 // discord 
 
