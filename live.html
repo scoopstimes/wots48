@@ -11,7 +11,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <meta name="author" content="48Intens Official" />
-    <meta name="description" content="48Intens Official - 48Intens adalah fanbase besar dan aktif untuk JKT48 dengan lebih dari 45,000 member. Kami selalu memberikan informasi terbaru seputar JKT48 setiap hari, termasuk berita, event, dan masih banyak lagi." />
+    <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Zen Maru Gothic' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Barlow Condensed' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.3.67/css/materialdesignicons.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js"
         crossorigin="anonymous"></script>
 
@@ -22,57 +25,46 @@
 </head>
 
 <body>
+        <nav>
+                <div class="navbar-container">
+
+                                 <button class="buttongoweb" onclick="goToLink('/home')">
+                                         <div class="navbar-box" ontouchstart="addOverlayNavbar(event)" ontouchend="removeOverlayNavbar(event)" ontouchcancel="removeOverlayNavbar(event)">
+                                                 <div class="overlay-navbar"></div>
+                                                 <span class="mdi mdi-home"></span>
+                                                 <h1>Home</h1>
+                                         </div>
+                                 </button>
+                       <div class="navbar-box" ontouchstart="addOverlayNavbar(event)" ontouchend="removeOverlayNavbar(event)" ontouchcancel="removeOverlayNavbar(event)">
+                          <div class="overlay-navbar"></div>
+                          <span class="mdi mdi-history active" style="color: #white;background: #6C6C6C80;
+                                border-radius: 50%;
+                                width: 25px;
+                                height: 25px;"></span>
+                          <h1>Recent</h1>
+
+                        </div>
+
+                       <button class="buttongoweb" onclick="goToLink('/member')"><div class="navbar-box"ontouchstart="addOverlayNavbar(event)" ontouchend="removeOverlayNavbar(event)" ontouchcancel="removeOverlayNavbar(event)">                                                        <div class="overlay-navbar"></div>
+                                <span class="mdi mdi-account-group"></span>
+                                <h1>Member</h1>
+                        </div>
+                       </button>
+                       <button class="buttongoweb" onclick="goToLink('/news')"><div class="navbar-box"ontouchstart="addOverlayNavbar(event)" ontouchend="removeOverlayNavbar(event)" ontouchcancel="removeOverlayNavbar(event)">                                                        <div class="overlay-navbar"></div>
+                                <span class="mdi mdi-newspaper-variant"></span>
+                                <h1>News</h1>
+                        </div>
+                       </button>
 
 
-    <div class="section">
-        <div class="container">
-            <div class="slideshow-container">
-                <div class="slideshow-image">
-                    <a href="https://www.youtube.com/watch?v=5cy3vDjTfFY"><img src="/assets/heading-bg.jpg"
-                            alt="Slide 1" loading="lazy"></a>
+                       <button class="buttongoweb" onclick="goToLink('/event')"><div class="navbar-box"ontouchstart="addOverlayNavbar(event)" ontouchend="removeOverlayNavbar(event)" ontouchcancel="removeOverlayNavbar(event)">                                                        <div class="overlay-navbar"></div>
+                                <span class="mdi mdi-clipboard-text-clock"></span>
+                                <h1>Theather</h1>
+                        </div>
+                        
                 </div>
-                <div class="slideshow-image">
-                    <a href="https://www.youtube.com/watch?v=OpACc2RRTlA"><img src="/assets/heading-bg1.jpg"
-                            alt="Slide 2" loading="lazy"></a>
-                </div>
-                <div class="slideshow-image">
-                    <a href="https://ssk.jkt48.com/2024/id/vote"><img src="/assets/heading-bg6.jpg"
-                            alt="Slide 8" loading="lazy"></a>
-                </div>
-                <div class="slideshow-image">
-                    <a href="https://jkt48.com/ramadhaneventshow2024pb?lang=id"><img src="/assets/heading-bg2.jpg"
-                            alt="Slide 3" loading="lazy"></a>
-                </div>
-                <div class="slideshow-image">
-                    <a href="https://www.showroom-live.com/premium_live/officialJKT48/B45325"><img
-                            src="/assets/heading-bg3.jpg" alt="Slide 4" loading="lazy"></a>
-                </div>
-                <div class="slideshow-image">
-                    <a href="https://jkt48.com/springhascome?lang=id"><img src="/assets/heading-bg4.jpg" alt="Slide 5"
-                            loading="lazy"></a>
-                </div>
-                <div class="slideshow-image">
-                    <a href="https://jkt48.com/valkyrie48?lang=id"><img src="/assets/heading-bg5.jpg" alt="Slide 6"
-                            loading="lazy"></a>
-                </div>
-                <div class="slideshow-image">
-                    <a href="https://www.youtube.com/watch?v=XQpA7bqIcyY&ab_channel=JKT48"><img
-                            src="/assets/heading-bg6.jpeg" alt="Slide 7" loading="lazy"></a>
-                </div>
-            </div>
-            <br>
-            <div style="text-align:center">
-                <span class="dot" onclick="currentSlide(1)"></span>
-                <span class="dot" onclick="currentSlide(2)"></span>
-                <span class="dot" onclick="currentSlide(3)"></span>
-                <span class="dot" onclick="currentSlide(4)"></span>
-                <span class="dot" onclick="currentSlide(5)"></span>
-                <span class="dot" onclick="currentSlide(6)"></span>
-                <span class="dot" onclick="currentSlide(7)"></span>
-                <span class="dot" onclick="currentSlide(8)"></span>
-            </div>
-        </div>
-    </div>
+        </nav>
+
 
     <div class="section">
         <div class="container">
@@ -96,23 +88,17 @@
     </div>
     
     
-        <footer>
-        Powered by ♥️ <a style="text-decoration:none" href="https://48intens.com/discord"> 48Intens Official</a>
-        <div class="social-icons">
-            <p>Lets Connect With Us</p>
-            <a href="https://www.instagram.com/48intens" target="_blank" rel="noopener noreferrer">
-                <i class="fa-brands fa-instagram icon"></i>
-            </a>
-            <a href="https://48intens.com/discord" target="_blank" rel="noopener noreferrer">
-                <i class="fab fa-discord icon"></i>
-            </a>
-            <a href="about.html" target="_blank" rel="noopener noreferrer">
-                <i class="fas fa-wifi icon"></i>
-            </a>
-        </div>
-        <br>
-    </footer>
+    <br>
+    <br>
+    <br>
+            <footer>
+                By <a style="text-decoration:none" href=""> Januar Adhi N</a>
+
+                <br>
+            </footer>
+
     <!--SCRIPT-->
+    <script src="../script/main.js"></script>
     <script src="script/image.js"></script>
     <script src="/middleware/middleware.js"></script>
     <script src="script/live.js"></script>
