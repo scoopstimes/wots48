@@ -1076,12 +1076,14 @@ img {
 	display: flex;
 	margin-right: 15px;
 	color: #fff;
+	
 }
 
 .row-live {
 	display: flex;
 	margin-right: 15px;
 	color: #fff;
+	
 }
 
 .row-detail {
@@ -2091,6 +2093,7 @@ footer a:hover {
 
 	.box-live {
 		width: 95%;
+		background: #313131;
 	}
 
 	.postermemlive {
