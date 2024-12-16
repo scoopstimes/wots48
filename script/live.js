@@ -1,78 +1,82 @@
-function listEvent(_0x1b8fcd) {
-  fetch("https://api.crstlnz.my.id/api/next_schedule").then(_0xe3acce => _0xe3acce.json()).then(_0x1c62b8 => {
-    const _0x947132 = _0x1c62b8.filter(_0x9c05c2 => _0x9c05c2.url.startsWith('/event/schedule/id/') || _0x9c05c2.url.startsWith("/calendar/list/"));
-    const _0x26e222 = _0x947132.slice(0x0, 0x5);
-    document.getElementById("eventList").innerHTML = '';
-    _0x26e222.forEach(_0x314221 => {
-      const _0x473cb5 = _0x314221.title.replace(/^\d{2}:\d{2}\s/, '').replace(/^\d{8}-\d{2}:\d{2}-/, '').replace(/^\d{4}-\d{2}-\d{2}-\d{2}:\d{2}-/, '').replace(/^\d{4}-\d{2}-\d{2}-\d{2}:\d{2}-/, '');
-      const _0x1e8f1f = document.createElement("div");
-      const _0x1453c3 = {
-        'year': "numeric",
-        'month': 'long',
-        'day': 'numeric'
-      };
-      _0x1e8f1f.innerHTML = "\n                    <br>\n                    <div class=\"row1\">\n                        <img src=\"https://res.cloudinary.com/haymzm4wp/image/upload/assets/jkt48" + _0x314221.label + "\" alt=\"Category Icon\">\n                        <h4 class=\"date\">" + new Date(_0x314221.date).toLocaleDateString('id-ID', _0x1453c3) + "</h4>\n                    </div>\n                    <h2>⭐ " + _0x473cb5 + "</h2><br><hr>\n                ";
-      document.getElementById('eventList').appendChild(_0x1e8f1f);
-    });
-  })['catch'](_0x5886dd => console.error("Error fetching data:", _0x5886dd));
-}
+let currentPageIdn = 0x1;
+let currentPageShowroom = 0x1;
 document.addEventListener("DOMContentLoaded", function () {
-  listEvent();
+  listLiveIdn();
+  listLiveShowroom();
+  function _0x525952() {
+    console.log("Halaman recent live diperbarui pada: " + new Date().toLocaleString());
+  }
+  _0x525952();
+  setInterval(function () {
+    listLiveIdn();
+    listLiveShowroom();
+    _0x525952();
+  }, 0xea60);
 });
-function listEventt(_0x2a16e2) {
-  fetch("https://api.crstlnz.my.id/api/next_schedule").then(_0x4b9e5f => _0x4b9e5f.json()).then(_0x2c7502 => {
-    const _0x5d43a2 = _0x2c7502.filter(_0x11a309 => _0x11a309.url.startsWith("/event/schedule/id/") || _0x11a309.url.startsWith("/calendar/list/"));
-    const _0x1b8d71 = _0x5d43a2.slice(0x0, 0xa);
-    document.getElementById("eventList-dir").innerHTML = '';
-    _0x1b8d71.forEach(_0x2aba79 => {
-      const _0x5ef58c = _0x2aba79.title.replace(/^\d{2}:\d{2}\s/, '').replace(/^\d{8}-\d{2}:\d{2}-/, '').replace(/^\d{4}-\d{2}-\d{2}-\d{2}:\d{2}-/, '').replace(/^\d{4}-\d{2}-\d{2}-\d{2}:\d{2}-/, '');
-      const _0x322845 = document.createElement("div");
-      const _0x43ffe0 = {
-        'year': "numeric",
-        'month': 'long',
+function listLiveIdn(_0x567fc4) {
+  if (_0x567fc4 === 'prev' && currentPageIdn > 0x1) {
+    currentPageIdn--;
+  } else if (_0x567fc4 === "next") {
+    currentPageIdn++;
+  }
+  fetch("https://api.crstlnz.my.id/api/recent?sort=date&page=" + currentPageIdn + "&filter=all&order=-1&group=jkt48&type=idn&perpage=3").then(_0x21e7fa => _0x21e7fa.json()).then(_0x3d20b7 => {
+    const _0x3a1b3c = _0x3d20b7.recents.filter(_0x5a813d => _0x5a813d.idn.username !== 'ame-5xqz6mqgk4');
+    document.getElementById("liveListIdn").innerHTML = '';
+    _0x3a1b3c.map(_0x5ea784 => {
+      const _0x272e4c = document.createElement("div");
+      const _0x33d461 = {
+        'year': 'numeric',
+        'month': "long",
         'day': "numeric"
       };
-      _0x322845.innerHTML = "\n                    <br>\n                    <div class=\"row1\">\n                        <img src=\"https://res.cloudinary.com/haymzm4wp/image/upload/assets/jkt48" + _0x2aba79.label + "\" alt=\"Category Icon\">\n                        <h4 class=\"date\">" + new Date(_0x2aba79.date).toLocaleDateString('id-ID', _0x43ffe0) + "</h4>\n                    </div>\n                    <h2>⭐ " + _0x5ef58c + "</h2><br><hr>\n                ";
-      document.getElementById("eventList-dir").appendChild(_0x322845);
+      const _0x296de0 = new Date(_0x5ea784.live_info.date.start);
+      const _0x4759f1 = new Date(_0x5ea784.live_info.date.end);
+      const _0x4ec78b = _0x4759f1 - _0x296de0;
+      const _0x154c20 = Math.floor(_0x4ec78b / 3600000);
+      const _0x2342d3 = Math.floor(_0x4ec78b % 3600000 / 60000);
+      let _0x3f87e0 = '';
+      if (_0x154c20 > 0x0) {
+        _0x3f87e0 = _0x154c20 + " Jam " + _0x2342d3 + " Menit";
+      } else {
+        _0x3f87e0 = _0x2342d3 + " Menit";
+      }
+      _0x272e4c.innerHTML = "\n                    <br><hr><br>\n                    <a href=\"dmember.html?id=" + _0x5ea784.member.url + "\">\n                        <div class=\"row-live\">\n                            <img src=\"" + _0x5ea784.member.img_alt + "\" class=\"postermemlive\" loading=\"lazy\">\n                            <div>\n                                <h3>👥 Nama Member: " + _0x5ea784.member.nickname + " JKT48</h3>\n                                <h3>💻 Streaming di : " + _0x5ea784.type + "</h3>\n                                <h3>🗓️ Tanggal Live: " + new Date(_0x5ea784.live_info.date.start).toLocaleDateString('id-ID', _0x33d461) + "</h3>\n                                <h3>⏱️ Durasi: " + _0x3f87e0 + "</h3>\n                                <h3>👀 Penonton: " + (_0x5ea784.live_info.viewers ? _0x5ea784.live_info.viewers.num + " viewers" : "data tidak tersedia") + "</h3>\n                                <h3>🎁 Gift: " + _0x5ea784.gift_rate + " G</h3>\n                            </div>\n                        </div>\n                    </a>\n                ";
+      document.getElementById("liveListIdn").appendChild(_0x272e4c);
     });
-  })["catch"](_0x36c0a2 => console.error("Error fetching data:", _0x36c0a2));
+    document.getElementById("prevButtonIdn").disabled = currentPageIdn === 0x1;
+    document.getElementById("nextButtonIdn").disabled = currentPageIdn === Math.ceil(_0x3d20b7.total_count / 0x3);
+  })["catch"](_0x3c131d => console.error("Error fetching data:", _0x3c131d));
 }
-document.addEventListener('DOMContentLoaded', function () {
-  listEventt();
-});
-async function recentTheater() {
-  try {
-    const _0x180367 = await fetch('https://api.crstlnz.my.id/api/event');
-    const _0x1179f2 = await _0x180367.json();
-    const _0x5ecd75 = document.getElementById("recent");
-    _0x5ecd75.innerHTML = '';
-    const _0x867aa5 = await fetch("script/cdnpicture.json");
-    const _0x31ea16 = await _0x867aa5.json();
-    const _0x48567b = {
-      'year': "numeric",
-      'month': "long",
-      'day': "numeric"
-    };
-    if (_0x1179f2.theater.recent.length === 0x0) {
-      document.getElementById("noTheaterMessage").textContent = "Tidak ada theater 😢😢";
-      document.getElementById("noTheaterMessage").style.display = "block";
-      return;
-    }
-    const _0xc9f6a7 = _0x1179f2.theater.recent.slice(0x0, 0x3);
-    for (const _0xc66887 of _0xc9f6a7) {
-      const _0x30b502 = _0x31ea16.find(_0x40cf7e => _0x40cf7e.setlist === _0xc66887.title);
-      const _0x3ef67e = _0x30b502 ? _0x30b502.banner : '';
-      const _0x31bb7b = _0xc66887.seitansai && _0xc66887.seitansai.length > 0x0 ? _0xc66887.seitansai.map(_0x2adece => _0x2adece.name).join(", ") : '';
-      const _0x5f04c5 = _0x31bb7b ? "<h3>🎂 Seintansai: " + _0x31bb7b + "</h3>" : '';
-      const _0x2418a0 = document.createElement("div");
-      _0x2418a0.classList.add("card-up-recent");
-      _0x2418a0.innerHTML = "\n                <a href=\"dtheater?id=" + _0xc66887.id + "\">\n                    <img src=\"" + _0x3ef67e + "\" class=\"poster-event\" loading=\"lazy\"><br>\n                    <h3>🎪 Theater: " + _0xc66887.title + "</h3>\n                    <h3>⭐ Total Member : " + _0xc66887.member_count + " member yang tampil</h3>\n                    <h3>🗓️ Tanggal Show: " + new Date(_0xc66887.date).toLocaleDateString("id-ID", _0x48567b) + "</h3>\n                    " + _0x5f04c5 + "\n                    <br>\n                </a>  \n                <br>\n            ";
-      _0x5ecd75.appendChild(_0x2418a0);
-    }
-  } catch (_0x494fdc) {
-    console.error("Error fetching data:", _0x494fdc);
+function listLiveShowroom(_0x356b41) {
+  if (_0x356b41 === "prev" && currentPageShowroom > 0x1) {
+    currentPageShowroom--;
+  } else if (_0x356b41 === "next") {
+    currentPageShowroom++;
   }
+  fetch("https://api.crstlnz.my.id/api/recent?group=jkt48&page=" + currentPageShowroom + "&perpage=3").then(_0xcd6d7b => _0xcd6d7b.json()).then(_0x3e6070 => {
+    document.getElementById("liveListShowroom").innerHTML = '';
+    _0x3e6070.recents.map(_0x403cf0 => {
+      const _0x25eb1d = document.createElement("div");
+      const _0x4083aa = {
+        'year': "numeric",
+        'month': "long",
+        'day': "numeric"
+      };
+      const _0x1f52e7 = new Date(_0x403cf0.live_info.date.start);
+      const _0x4fdb4f = new Date(_0x403cf0.live_info.date.end);
+      const _0x378a0c = _0x4fdb4f - _0x1f52e7;
+      const _0x474121 = Math.floor(_0x378a0c / 3600000);
+      const _0x5f5016 = Math.floor(_0x378a0c % 3600000 / 60000);
+      let _0x1dc162 = '';
+      if (_0x474121 > 0x0) {
+        _0x1dc162 = _0x474121 + " Jam " + _0x5f5016 + " Menit";
+      } else {
+        _0x1dc162 = _0x5f5016 + " Menit";
+      }
+      _0x25eb1d.innerHTML = "\n                    <br><hr><br>\n                    <a href=\"dmember.html?id=" + _0x403cf0.member.url + "\">\n                        <div class=\"row-live\">\n                            <img src=\"" + _0x403cf0.member.img_alt + "\" class=\"postermemlive\" loading=\"lazy\">\n                            <div>\n                                <h3>👥 Nama Member: " + _0x403cf0.member.name + "</h3>\n                                <h3>💻 Streaming di : " + _0x403cf0.type + "</h3>\n                                <h3>🗓️ Tanggal Live: " + new Date(_0x403cf0.live_info.date.start).toLocaleDateString('id-ID', _0x4083aa) + "</h3>\n                                <h3>⏱️ Durasi: " + _0x1dc162 + "</h3>\n                                <h3>👀 Penonton: " + (_0x403cf0.live_info.viewers ? _0x403cf0.live_info.viewers.num + " viewers" : "data tidak tersedia") + "</h3>\n                                <h3>🎁 Gift: " + _0x403cf0.gift_rate + " G</h3>\n                            </div>\n                        </div>\n                    </a>\n                ";
+      document.getElementById('liveListShowroom').appendChild(_0x25eb1d);
+    });
+    document.getElementById('prevButtonShowroom').disabled = currentPageShowroom === 0x1;
+    document.getElementById("nextButtonShowroom").disabled = _0x3e6070.recents.length < 0x3;
+  })["catch"](_0xded9db => console.error("Error fetching data:", _0xded9db));
 }
-document.addEventListener("DOMContentLoaded", function () {
-  recentTheater();
-});
