@@ -16,7 +16,7 @@ hr {
 }
 
 body {
-	background-color: #0A0B15;
+	background-color: #1A1A1F;
 }
         .navbar-container{
                 position: fixed;
@@ -25,7 +25,7 @@ body {
                 z-index: 99999;
                 width: 100%;
                 height: 60px;
-                background: #141623;
+                background: #303032;
                 display: flex;
                 gap: 15px;
                 justify-content: center;
@@ -53,9 +53,7 @@ body {
                 width: 60px;
         }
         
-        #duration{
-                color: #FFFFFFE8;
-        }
+        
         .navbar-box span{
                 font-size: 25px;
                 display: flex;
