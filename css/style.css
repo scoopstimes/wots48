@@ -232,11 +232,14 @@ body {
 
 
 /* Setlist Item Container */
+/* Setlist Item */
 .setlist-item {
   position: relative;
-  overflow: hidden;
+  margin-left: 10px;
+  margin-right: 10px;
   border-radius: 10px;
   transition: transform 0.3s ease;
+  flex: 0 0 auto; /* Pastikan item tidak menyusut */
 }
 
 .setlist-item:hover {
@@ -244,18 +247,20 @@ body {
 }
 
 /* Setlist Image Container */
-
 .setlist-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 2fr));
+  display: flex;
   gap: 20px;
-  margin: 20px 0;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 20px 0;
 }
 
+
+
 .setlist-image {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
+  width: 200px; /* Lebar tetap untuk item */
+  aspect-ratio: 1 / 1.5; /* Rasio aspek gambar (1:1.5, bisa diubah sesuai kebutuhan) */
+  object-fit: cover; /* Memastikan gambar tidak gepeng */
   border-radius: 10px;
 }
 
@@ -323,11 +328,11 @@ a {
 }
 
 ::-webkit-scrollbar-track {
-	color: #333c5c;
+	color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-	background-color: #83b4ff;
+	background-color: transparent;
 	border-radius: 10px;
 }
 
@@ -345,7 +350,7 @@ a {
 	justify-content: center;
 	align-items: center;
 	padding: 8px 15px;
-	background-color: #83b4ff;
+	background-color: #1F242A;
 	border-radius: 10px;
 	color: #fff;
 	border: none;
@@ -357,7 +362,7 @@ a {
 
 .button {
 	padding: 8px 15px;
-	background-color: #83b4ff;
+	background-color: #1F242A;
 	border-radius: 10px;
 	color: #fff;
 	border: none;
@@ -826,6 +831,7 @@ header ul li a {
 .container {
 	width: 80%;
 	margin: 0 auto;
+	
 }
 
 .container:after {
@@ -902,7 +908,7 @@ span {
 }
 
 .box-event {
-	background-color: #333c5c;
+	background-color: #2F2F2F;
 	padding: 15px;
 	box-sizing: border-box;
 	margin-top: 10px;
@@ -913,7 +919,7 @@ span {
 }
 
 .box-news {
-	background-color: #333c5c;
+	background-color: #2F2F2F;
 	padding: 15px;
 	box-sizing: border-box;
 	margin-top: 10px;
@@ -924,7 +930,7 @@ span {
 }
 
 .box-special {
-	background-color: #333c5c;
+	background-color: #2F2F2F;
 	padding: 15px;
 	box-sizing: border-box;
 	margin-top: 10px;
@@ -1014,9 +1020,9 @@ img {
 	border-radius: 10px;
 	width: 120px;
 	justify-content: center;
-	padding: 2px;
+	padding: 3px;
 	font-size: 15px;
-	background-color: #83b4ff;
+	background-color: #1F242A;
 	color: #ffffff;
 }
 
@@ -1130,7 +1136,7 @@ img {
 
 .card-up {
 	position: relative;
-	background-color: #4b5f83;
+	background-color: #474747;
 	border-radius: 15px;
 	padding: 16px;
 	width: 299px;
@@ -1142,9 +1148,8 @@ img {
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 	/* border: 1px solid #83b4ff;  */
 }
-
 .card-up-recent {
-	background-color: #4b5f83;
+	background-color: #313131;
 	border-radius: 15px;
 	padding: 16px;
 	width: 299px;
@@ -1170,19 +1175,23 @@ img {
 }
 
 .btnn h1 {
-	background-color: #83b4ff;
+	background-color: #1F242A;
 	text-align: center;
 	border-radius: 8px;
 	padding: 2px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	font-size: 17px;
 	font-weight: 800;
+	height: 30px;
 	max-width: 300px;
 	width: 130px;
 	transition: background-color 0.3s ease;
 }
 
 .btnn h1:hover {
-	background-color: #4b5f83;
+	background-color: #3D4047;
 	cursor: pointer;
 	color: #fff;
 }
@@ -1489,12 +1498,12 @@ img {
 	width: 150px;
 	padding: 4px;
 	margin-top: 10px;
-	background-color: #2c3b64;
+	background-color: #1F242A;
 	color: #ffffff;
 }
 
 .item p:hover {
-	background-color: #4b5f83;
+	background-color: #4F4F4F;
 	color: #fff;
 }
 
@@ -1599,7 +1608,7 @@ footer a:hover {
 }
 
 .scroll-to-top-btn button {
-	background-color: #83b4ff;
+	background-color: #1F242A;
 	color: #fff;
 	border: none;
 	border-radius: 50%;
@@ -1612,7 +1621,7 @@ footer a:hover {
 }
 
 .scroll-to-top-btn button:hover {
-	background-color: #4b5f83;
+	background-color: #4B5F83;
 }
 
 /* scroll effect end */
@@ -1790,7 +1799,7 @@ footer a:hover {
 		justify-content: center;
 		align-items: center;
 		padding: 8px 15px;
-		background-color: #83b4ff;
+		background-color: #1F242A;
 		border-radius: 10px;
 		color: #fff;
 		border: none;
@@ -1919,6 +1928,7 @@ footer a:hover {
 
 	.box {
 		width: 95%;
+		background: #2F2F2F;
 	}
 
 	.icon i {
@@ -1927,6 +1937,7 @@ footer a:hover {
 
 	.box-event {
 		width: 95%;
+		background: #2F2F2F;
 	}
 
 	.link-item p {
@@ -1935,11 +1946,13 @@ footer a:hover {
 
 	.box-news {
 		width: 95%;
+		background: #2F2F2F;
 	}
 
 	.box-special {
 		width: 95%;
 		height: 220px;
+		background: #2F2F2F;
 	}
 
 	.flex-container {
@@ -2001,8 +2014,11 @@ footer a:hover {
 	}
 
 	.birthnext {
-		margin-left: 20px;
-		justify-content: start;
+		margin-left: 0px;
+		display: flex;
+		width: 100%;
+		flex-wrap: wrap;
+		justify-content: center; align-items: center;
 	}
 
 
@@ -2068,6 +2084,7 @@ footer a:hover {
 
 	.btn {
 		font-size: 14px;
+		background:   #1F242A;
 	}
 
 	#noLiveMessage,
@@ -2181,61 +2198,4 @@ footer a:hover {
     height: 250px;
   }
 
-	/* Responsive styles for mobile devices */
-	@media (max-width: 768px) {
-		.youtube-card {
-			width: 45%;
-			/* Adjust card width to fit more cards in smaller screens */
-		}
-
-		.channel-title,
-		.video-title {
-			font-size: 14px;
-			/* Reduce font size for mobile */
-		}
-
-		.profile-container img {
-			width: 35px;
-			height: 35px;
-			/* Adjust profile image size */
-		}
-	}
-
-	@media (max-width: 480px) {
-		.youtube-card {
-			width: 90%;
-			/* Full-width cards for small mobile screens */
-			margin-bottom: 15px;
-		}
-
-		  .setlist-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 10px;
-  }
-
-  .setlist-image {
-    height: 200px;
-  }
-
-
-
-		.thumbnail-container {
-			aspect-ratio: 16/9;
-			/* Adjust aspect ratio for smaller screens */
-		}
-
-		.channel-title,
-		.video-title {
-			font-size: 12px;
-			/* Further reduce font size for extra-small screens */
-		}
-
-		.profile-container {
-			padding: 8px 10px;
-		}
-
-		.video-content {
-			padding: 8px;
-		}
-	}
 }

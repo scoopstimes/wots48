@@ -44,7 +44,7 @@ async function nextTheater() {
       const _0x59a5d1 = _0x237de7.toLocaleString("id-ID", _0x3a2e74);
       const _0xf409de = _0x237de7.toLocaleString('id-ID', _0x2763e3);
       const _0x16857d = _0x27401a.seitansai && _0x27401a.seitansai.length > 0x0 ? _0x27401a.seitansai.map(_0x4dd941 => _0x4dd941.name).join(", ") : '';
-      const _0x261d70 = _0x16857d ? "<h3>🎂 Seintansai: " + _0x16857d + "</h3>" : '';
+      const _0x261d70 = _0x16857d ? "<h3>🎂 " + _0x16857d + "</h3>" : '';
       const _0x150cb5 = _0x237de7.toDateString() === _0x33f959.toDateString() ? _0x237de7 <= new Date() ? "Sedang Berlangsung" : "Hari ini" : _0x237de7.toDateString() === _0x14da25.toDateString() ? "Besok" : _0x59a5d1;
       const _0x450d7d = new Date().toLocaleTimeString('en-US', {
         'hour12': false,
@@ -55,7 +55,7 @@ async function nextTheater() {
       const _0x31d6f2 = _0x2d111f ? "Sedang Berlangsung" : _0x150cb5;
       const _0x4fa1fa = document.createElement('div');
       _0x4fa1fa.classList.add('card-up');
-      _0x4fa1fa.innerHTML = "\n                <a href=\"dtheater?id=" + _0x27401a.id + "\" class=\"btnn\">\n                    <h2>" + _0x31d6f2 + "</h2>\n                    <img src=\"" + _0x2fc9f3 + "\" class=\"poster-event\" loading=\"lazy\"><br>\n                    <h3>🎪 Theater: " + _0x27401a.title + "</h3>\n                    <h3>🗓️ Tanggal Show: " + _0x59a5d1 + "</h3>\n                    <h3>⏰ Start Show: " + _0xf409de + " WIB</h3>\n                    <h3>⭐ Total Member : " + _0x27401a.member_count + " </h3>\n                    " + _0x261d70 + "\n                    <br><h1>Cek Info</h1>\n                </a>\n            ";
+      _0x4fa1fa.innerHTML = "\n                <a href=\"dtheater?id=" + _0x27401a.id + "\" class=\"btnn\">\n                    <h2>" + _0x31d6f2 + "</h2>\n                    <img src=\"" + _0x2fc9f3 + "\" class=\"poster-event\" loading=\"lazy\"><br>\n                    <h3>🎪 " + _0x27401a.title + "</h3>\n                    <h3>🗓️ " + _0x59a5d1 + "</h3>\n                    <h3>⏰  " + _0xf409de + " WIB</h3>\n                    <h3>⭐ " + _0x27401a.member_count + " </h3>\n                    " + _0x261d70 + "\n                    <br><h1>Cek Info</h1></div>\n                </a>\n            ";
       _0x19090f.appendChild(_0x4fa1fa);
     }
   } catch (_0x403052) {
