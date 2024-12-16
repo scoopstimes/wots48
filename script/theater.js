@@ -55,7 +55,7 @@ async function nextTheater() {
       const _0x31d6f2 = _0x2d111f ? "Sedang Berlangsung" : _0x150cb5;
       const _0x4fa1fa = document.createElement('div');
       _0x4fa1fa.classList.add('card-up');
-      _0x4fa1fa.innerHTML = "\n                <a href=\"dtheater?id=" + _0x27401a.id + "\" class=\"btnn\">\n                    <h2>" + _0x31d6f2 + "</h2>\n                    <img src=\"" + _0x2fc9f3 + "\" class=\"poster-event\" loading=\"lazy\"><br>\n                    <h3>🎪 " + _0x27401a.title + "</h3>\n                    <h3>🗓️ " + _0x59a5d1 + "</h3>\n                    <h3>⏰  " + _0xf409de + " WIB</h3>\n                    <h3>⭐ " + _0x27401a.member_count + " </h3>\n                    " + _0x261d70 + "\n                    <br><h1>Cek Info</h1></div>\n                </a>\n            ";
+      _0x4fa1fa.innerHTML = "\n                <a href=\"dtheater?id=" + _0x27401a.id + "\" class=\"btnn\">\n                    <h2>" + _0x31d6f2 + "</h2>\n                    <img src=\"" + _0x2fc9f3 + "\" class=\"poster-event\" loading=\"lazy\"><br>\n                    <h3>🎪 " + _0x27401a.title + "</h3>\n                    <h3>🗓️ " + _0x59a5d1 + "</h3>\n                    <h3>⏰  " + _0xf409de + " WIB</h3>\n                    <h3>⭐ " + _0x27401a.member_count + " </h3>\n                    " + _0x261d70 + "\n                    <br><div style=\"display: flex; justify-content: center; align-items: center;\"><h1>Cek Info</h1></div>\n                </a>\n            ";
       _0x19090f.appendChild(_0x4fa1fa);
     }
   } catch (_0x403052) {

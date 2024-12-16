@@ -66,7 +66,7 @@ async function recentTheater() {
       const _0x5f04c5 = _0x31bb7b ? "<h3>🎂 Seintansai: " + _0x31bb7b + "</h3>" : '';
       const _0x2418a0 = document.createElement("div");
       _0x2418a0.classList.add("card-up-recent");
-      _0x2418a0.innerHTML = "\n                <a href=\"dtheater?id=" + _0xc66887.id + "\">\n                    <img src=\"" + _0x3ef67e + "\" class=\"poster-event\" loading=\"lazy\"><br>\n                    <h3>🎪 Theater: " + _0xc66887.title + "</h3>\n                    <h3>⭐ Total Member : " + _0xc66887.member_count + " member yang tampil</h3>\n                    <h3>🗓️ Tanggal Show: " + new Date(_0xc66887.date).toLocaleDateString("id-ID", _0x48567b) + "</h3>\n                    " + _0x5f04c5 + "\n                    <br>\n                </a>  \n                <br>\n            ";
+      _0x2418a0.innerHTML = "\n            <a href=\"dtheater?id=" + _0xc66887.id + "\">\n                    <img src=\"" + _0x3ef67e + "\" class=\"poster-event\" loading=\"lazy\"><br>\n                    <h3>🎪 Theater: " + _0xc66887.title + "</h3>\n                    <h3>⭐ Total Member : " + _0xc66887.member_count + " member yang tampil</h3>\n                    <h3>🗓️ Tanggal Show: " + new Date(_0xc66887.date).toLocaleDateString("id-ID", _0x48567b) + "</h3>\n                    " + _0x5f04c5 + "\n                    <br>\n                </a>  \n                <br>\n            ";
       _0x5ecd75.appendChild(_0x2418a0);
     }
   } catch (_0x494fdc) {
