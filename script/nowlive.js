@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const liveMembers = data.filter(member => member.started_at);
       const liveCount = liveMembers.length;
       const liveCountText = liveCount === 0 ? '0 member' : `${liveCount} member`;
-      document.getElementById('liveCount').textContent = `⭐ Sedang live: ${liveCountText}`;
+      document.getElementById('liveCount').textContent = `Sedang live: ${liveCountText}`;
 
       if (liveCount === 0) {
         document.getElementById('noLiveMessage').textContent = 'Tidak ada yang live 😭😭';
