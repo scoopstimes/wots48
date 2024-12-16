@@ -15,21 +15,50 @@
     <meta name="author" content="48Intens Official">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="icon" href="/assets/icon.png" />
+    <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Zen Maru Gothic' rel='stylesheet'>
+   <link href='https://fonts.googleapis.com/css?family=Barlow Condensed' rel='stylesheet'>
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.3.67/css/materialdesignicons.min.css">  
 
 </head>
 
 <body>
-    <header>
-        <div class="container-nav">
-            <h1><a href="/home">Wots48</a></h1>
-            <ul>
-                <li><a href="/home">Home</a></li>
-                <li><a href="/news">News</a></li>
-                <li><a href="/member">Member</a></li>
-                <li><a href="/about">About</a></li>
-            </ul>
-        </div>
-    </header>
+        <nav>
+                <div class="navbar-container">
+                        <div class="navbar-box" ontouchstart="addOverlayNavbar(event)" ontouchend="removeOverlayNavbar(event)" ontouchcancel="removeOverlayNavbar(event)">
+                                                        <div class="overlay-navbar"></div>
+                                <span class="mdi mdi-home active" style="color: #FFC601;background: #CECECE7A;
+                                border-radius: 50%;
+                                width: 25px;
+                                height: 25px;"></span>
+                                <h1 style="color: #FFC601;">Home</h1>
+
+                        </div>
+
+                       <button class="buttongoweb" onclick="goToLink('cari.html')"><div class="navbar-box"ontouchstart="addOverlayNavbar(event)" ontouchend="removeOverlayNavbar(event)" ontouchcancel="removeOverlayNavbar(event)">                                                        <div class="overlay-navbar"></div>
+                                <span class="mdi mdi-movie"></span>
+                                <h1>Movie</h1>
+                        </div>
+                       </button>
+                       <button class="buttongoweb" onclick="goToLink('history.html')"><div class="navbar-box"ontouchstart="addOverlayNavbar(event)" ontouchend="removeOverlayNavbar(event)" ontouchcancel="removeOverlayNavbar(event)">                                                        <div class="overlay-navbar"></div>
+                                <span class="mdi mdi-history"></span>
+                                <h1>History</h1>
+                        </div>
+                       </button>
+                                 <button class="buttongoweb" onclick="goToLink('favorit.html')">
+                                         <div class="navbar-box" ontouchstart="addOverlayNavbar(event)" ontouchend="removeOverlayNavbar(event)" ontouchcancel="removeOverlayNavbar(event)">
+                                                 <div class="overlay-navbar"></div>
+                                                 <span class="mdi mdi-bookmark"></span>
+                                                 <h1>Favorit</h1>
+                                         </div>
+                                 </button>
+                       <button class="buttongoweb" onclick="goToLink('lainnya.html')"><div class="navbar-box"ontouchstart="addOverlayNavbar(event)" ontouchend="removeOverlayNavbar(event)" ontouchcancel="removeOverlayNavbar(event)">                                                        <div class="overlay-navbar"></div>
+                                <span class="mdi mdi-account"></span>
+                                <h1>Profile</h1>
+                        </div>
+                        
+                </div>
+        </nav>
     <div id="loader"></div>
     <div class="section">
         <div class="container">
@@ -581,6 +610,7 @@
             <script src="script/image.js"></script>
             <script src="script/inject.js"></script>
             <script src="/middleware/middleware.js"></script>
+            <script src="../script/main.js"></script>
             <script src="script/log.js"></script>
             <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </body>

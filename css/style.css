@@ -17,7 +17,73 @@ hr {
 body {
 	background-color: #0A0B15;
 }
+        .navbar-container{
+                position: fixed;
+                bottom: 0;
+                right: 0;
+                z-index: 99999;
+                width: 100%;
+                height: 60px;
+                background: #141623;
+                display: flex;
+                gap: 15px;
+                justify-content: center;
+        }
+.buttongoweb{
 
+  background-color: transparent;
+
+  border: 0px solid transparent; /* Atur warna dan ukuran garis sesuai kebutuhan */
+  color: transparent; /* Atur warna teks sesuai kebutuhan */
+  padding: 0px 0px; /* Atur ukuran padding sesuai kebutuhan */
+  text-align: left;
+  margin: 0;
+  border-radius: 5px; /* Atur radius border sesuai kebutuhan */
+}
+        .navbar-box{
+                color: white;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                
+                
+                height: 60px;
+                width: 60px;
+        }
+        
+        #duration{
+                color: #FFFFFFE8;
+        }
+        .navbar-box span{
+                font-size: 25px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+        }
+        .navbar-box h1{
+                font-size: 15px;
+                font-family: 'Zen Maru Gothic';
+                
+        }
+
+        .overlay-navbar{
+
+  width: 65px;
+
+  height: 60px;
+  background-color: rgba(255, 255, 255, 0);
+  position: absolute;
+  top: 0;
+  
+  z-index: 1;
+  transition: background-color 0.2s ease;
+  border-radius: 30px 30px 30px 30px;
+}
+
+.overlay-navbar.active {
+  background-color: rgba(255, 255, 255, 0.5);
+}
 .member-details {
 	margin-right: 10px;
 }
