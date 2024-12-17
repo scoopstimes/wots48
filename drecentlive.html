@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Live Streaming</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #fff;
+        }
+        .container {
+            padding: 1rem;
+        }
+        .header img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .profile {
+            display: flex;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        .profile img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-right: 1rem;
+        }
+        .profile h1 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+        .badge {
+            background-color: #6a11cb;
+            padding: 0.25rem 0.5rem;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.8rem;
+        }
+        .details, .duration {
+            margin-top: 1.5rem;
+            background-color: #1e1e1e;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        .details h2, .duration h2 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        .stats {
+            margin-top: 0.5rem;
+        }
+        .stats h3 {
+            margin: 0.5rem 0;
+            font-size: 1rem;
+        }
+        footer {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 2rem;
+            background-color: #1e1e1e;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        footer a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img id="header-img" src="https://via.placeholder.com/800x200" alt="Header Image">
+        </div>
+
+        <div class="profile">
+            <img id="profile-img" src="https://via.placeholder.com/80" alt="Member Profile">
+            <div>
+                <h1 id="member-name">Loading...</h1>
+                <span class="badge" id="badge">Loading...</span>
+                <p id="member-status">Loading...</p>
+            </div>
+        </div>
+
+        <div class="duration">
+            <h2 id="live-date">Loading...</h2>
+            <p id="live-time">Loading...</p>
+            <h2 id="live-duration">Loading...</h2>
+        </div>
+
+        <div class="details">
+            <h2>🔍 Detail</h2>
+            <div class="stats">
+                <h3 id="gift">🎁 Gift: Loading...</h3>
+                <h3 id="excitement">🔥 Excitement Point: Loading...</h3>
+                <h3 id="viewers">👀 Viewer: Loading...</h3>
+                <h3 id="comments">💬 Comments: Loading...</h3>
+            </div>
+        </div>
+
+        <footer>
+            <a href="home.html">🏠 Home</a>
+            <a href="recent.html">⏳ Recent</a>
+            <a href="member.html">👤 Member</a>
+            <a href="event.html">📅 Event</a>
+            <a href="menu.html">📋 Menu</a>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const liveId = urlParams.get("id");
+            const liveStart = urlParams.get("start");
+            const liveEnd = urlParams.get("end");
+
+            // Fetch live details based on ID
+            fetch(`https://api.crstlnz.my.id/api/live-details/${liveId}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("header-img").src = data.headerImage || "https://via.placeholder.com/800x200";
+                    document.getElementById("profile-img").src = data.profileImage || "https://via.placeholder.com/80";
+                    document.getElementById("member-name").textContent = data.memberName || "Unknown Member";
+                    document.getElementById("badge").textContent = data.sousenkyo || "No Sousenkyo";
+                    document.getElementById("member-status").textContent = data.status || "No Status";
+                    document.getElementById("live-date").textContent = new Date(liveStart).toLocaleDateString("id-ID");
+                    document.getElementById("live-time").textContent = `Mulai pada: ${new Date(liveStart).toLocaleTimeString("id-ID")}`;
+                    document.getElementById("live-duration").textContent = `Durasi: ${calculateDuration(liveStart, liveEnd)}`;
+                    document.getElementById("gift").textContent = `🎁 Gift: ${data.gift} G`;
+                    document.getElementById("excitement").textContent = `🔥 Excitement: ${data.excitement}`;
+                    document.getElementById("viewers").textContent = `👀 Viewers: ${data.viewers} viewers`;
+                    document.getElementById("comments").textContent = `💬 Comments: ${data.comments}`;
+                })
+                .catch((error) => console.error("Error fetching live details:", error));
+
+            function calculateDuration(start, end) {
+                const startDate = new Date(start);
+                const endDate = new Date(end);
+                const durationMs = endDate - startDate;
+
+                const hours = Math.floor(durationMs / 3600000);
+                const minutes = Math.floor((durationMs % 3600000) / 60000);
+
+                return hours > 0 ? `${hours} Jam ${minutes} Menit` : `${minutes} Menit`;
+            }
+        });
+    </script>
+</body>
+</html>
