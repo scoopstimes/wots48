@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const title = document.createElement('div');
             title.textContent = member.name;
-            title.style = 'font-size: 14px; margin-top: 10px; font-weight: bold;';
+            title.style = 'font-size: 16px; margin-top: 10px; font-weight: bold;';
             card.appendChild(title);
 
             const optionsIcon = document.createElement('div');
