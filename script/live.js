@@ -91,7 +91,7 @@ function listLiveShowroom(action) {
               <img src="${live.member.img_alt}" style="width: 100px;
 		object-fit: cover; margin-top: 10px;" loading="lazy">
               <div style="margin-top: 10px; display: flex; flex-direction: column;">
-                <h3 style="font-size: 20px;"> ${live.member.name}</h3>
+                <h3 style="font-size: 17px;"> ${live.member.name}</h3>
                 <div style="margin-top: 10px; display: flex; flex-direction: column;">
                 <h3><span style="font-size: 17px" class="mdi  mdi-access-point-network"> ${live.type}</span></h3>
                 <h3><span style="font-size: 17px" class="mdi mdi-account-multiple"> ${formatDate(live.live_info.date.start)}</span></h3>

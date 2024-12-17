@@ -1160,6 +1160,7 @@ img {
 .row-live {
 	display: flex;
 	margin-right: 15px;
+	width: 95%;
 	color: #fff;
 	
 }
