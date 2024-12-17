@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const liveCount = liveMembers.length;
 
         // Menampilkan jumlah member yang sedang live
-        document.getElementById('liveCount').textContent = ` ${liveCount} member`;
+        document.getElementById('liveCount').textContent = ` ${liveCount} Member`;
 
         if (liveCount === 0) {
           document.getElementById('noLiveMessage').textContent = 'Tidak ada yang live ';
@@ -27,14 +27,17 @@ document.addEventListener("DOMContentLoaded", function () {
             card.style = `
               background-color: #2c2c2e; 
               border-radius: 10px; 
-              padding: 10px; 
+              padding-top: 10px; 
+              padding-bottom: 10px; 
+              padding-right: 10px; 
+              padding-left: 10px; 
               width: 150px; 
               position: relative;`;
 
             const img = document.createElement('img');
             img.src = member.img;
             img.alt = member.name;
-            img.style = 'width: 100%; height: 150px; border-radius: 10px;';
+            img.style = 'width: 100%; object-fit: cover; border-radius: 10px;';
             card.appendChild(img);
 
             const title = document.createElement('div');
@@ -49,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Tombol Nonton Sesuai Permintaan
             const cardBody = document.createElement('div');
-            cardBody.style = 'margin-top: 10px; display: flex; justify-content: center; gap: 10px;'
+            cardBody.style = 'margin-top: 50px; display: flex; justify-content: center; gap: 10px;'
 
             if (member.type === 'showroom') {
               const showroomUrl = 'https://www.showroom-live.com/r/';
