@@ -49,13 +49,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Tombol Nonton Sesuai Permintaan
             const cardBody = document.createElement('div');
-            cardBody.style = 'margin-top: 10px;';
+            cardBody.style = 'margin-top: 10px; display: flex; justify-content: center; gap: 10px;'
 
             if (member.type === 'showroom') {
               const showroomUrl = 'https://www.showroom-live.com/r/';
               const showroomLink = document.createElement('a');
-              showroomLink.classList.add('btn-live', 'btn-primary', 'mx-2');
-              showroomLink.textContent = '⭐ Open in Sr';
+              showroomLink.classList.add('btn-live-link', 'btn-primary', 'mx-2');
+              showroomLink.innerHTML = ' <span class="mdi mdi-arrow-top-right-thin-circle-outline"></span>';
               showroomLink.href = showroomUrl + member.url_key;
               showroomLink.target = '_blank';
               cardBody.appendChild(showroomLink);
@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (urlObj.label === 'original quality') {
                   const fullscreenBtn = document.createElement('a');
                   fullscreenBtn.classList.add('btn-live', 'btn-primary', 'mx-2');
-                  fullscreenBtn.textContent = '⭐ Fullscreen';
+                  fullscreenBtn.innerHTML = '<span class="mdi mdi-video"></span>';
                   fullscreenBtn.href = `showroom.html#${encodeURIComponent(urlObj.url)}`;
                   
                   cardBody.appendChild(fullscreenBtn);
@@ -72,8 +72,8 @@ document.addEventListener("DOMContentLoaded", function () {
               });
             } else if (member.type === 'idn') {
               const idnLink = document.createElement('a');
-              idnLink.classList.add('btn-live', 'btn-primary', 'mx-2');
-              idnLink.textContent = '⭐ Open in IDN';
+              idnLink.classList.add('btn-live-link', 'btn-primary', 'mx-2');
+              idnLink.innerHTML = '<span class="mdi mdi-arrow-top-right-thin-circle-outline"></span>';
               idnLink.href = `${idnUrl}${member.url_key}/live/${member.slug}`;
               
               cardBody.appendChild(idnLink);
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 const ProxyUrl = 'https://jkt48showroom-api.my.id/proxy?url=';
                 const fullscreenBtn = document.createElement('a');
                 fullscreenBtn.classList.add('btn-live', 'btn-primary', 'mx-2');
-                fullscreenBtn.textContent = '⭐ Fullscreen';
+                fullscreenBtn.innerHTML = '<span class="mdi mdi-video"></span>'
                 fullscreenBtn.href = `showroom.html#${ProxyUrl}${encodeURIComponent(urlObj.url)}`;
                 
                 cardBody.appendChild(fullscreenBtn);
