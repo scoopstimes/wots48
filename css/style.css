@@ -1547,52 +1547,8 @@ img {
 /* 48 group end*/
 
 /* next birtday start */
-.birthnext {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: start;
-	align-items: flex-start;
-	gap: 70px;
-	margin-left: 90px;
-}
-
-.birthnext .thumb .bdt p {
-	font-size: 16px;
-	color: #fff;
-	text-align: center;
-	font-weight: 600;
-	margin-right: 0px;
-}
 
 
-.item img {
-	width: 150px;
-	height: auto;
-	border-radius: 20px;
-	box-shadow: 0 10px 80px rgba(0, 0, 0, 0.103);
-	transition: all 0.3s ease;
-	margin-bottom: 4%;
-}
-
-.item img:hover {
-	transform: scale(1.1);
-	transition: transform 0.3s ease-in;
-}
-
-.item p {
-	text-align: center;
-	border-radius: 10px;
-	width: 150px;
-	padding: 4px;
-	margin-top: 10px;
-	background-color: #1F242A;
-	color: #ffffff;
-}
-
-.item p:hover {
-	background-color: #4F4F4F;
-	color: #fff;
-}
 
 /* next birtday end */
 
@@ -2101,11 +2057,8 @@ footer a:hover {
 	}
 
 	.birthnext {
-		margin-left: 0px;
-		display: flex;
-		width: 100%;
-		flex-wrap: wrap;
-		justify-content: center; align-items: center;
+	  justify-content: center;
+		width: 100%; display: flex; flex-wrap: wrap;  gap: 20px;
 	}
 
 
@@ -2285,5 +2238,47 @@ footer a:hover {
   .setlist-image {
     height: 250px;
   }
+.birthday-item {
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: transparent; /* Warna background opsional */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 20px;
+  padding-left: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
+.birthday-item img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 8px;
+}
+
+.birthday-info h3, .birthday-info h4, .birthday-info h5 {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.birthday-info h3 {
+  font-weight: bold;
+  color: #333;
+}
+
+.birthday-info h4 {
+  color: #777;
+  font-size: 12px;
+}
+
+.birthday-info h5 {
+  color: #f04e30;
+  font-size: 12px;
+}
 }

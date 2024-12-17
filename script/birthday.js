@@ -1,75 +1,110 @@
+// Fungsi untuk mengambil daftar ulang tahun mendatang
 async function getUpcomingBirthdays() {
   try {
-    const _0x504e72 = await fetch("https://api.crstlnz.my.id/api/next_birthday?group=jkt48");
-    const _0x8b7c5b = await _0x504e72.json();
-    const _0x327500 = _0x8b7c5b.slice(0, 10);
-    const _0x54a9e6 = _0x327500.map(({
-      name: _0x1539f5,
-      birthdate: _0x2b87e2,
-      img: _0x37d39b,
-      url_key: _0x43709d
-    }) => ({
-      'name': _0x1539f5,
-      'birthdate': _0x2b87e2,
-      'img': _0x37d39b,
-      'url_key': _0x43709d
+    const response = await fetch("https://api.crstlnz.my.id/api/next_birthday?group=jkt48");
+    const birthdays = await response.json();
+
+    // Ambil hanya 10 data teratas dan format ulang datanya
+    return birthdays.slice(0, 10).map(({ name, birthdate, img, url_key }) => ({
+      name,
+      birthdate,
+      img,
+      url_key
     }));
-    return _0x54a9e6;
-  } catch (_0x2be9e7) {
-    console.error("Error while fetching upcoming birthdays:", _0x2be9e7);
+  } catch (error) {
+    console.error("Error while fetching upcoming birthdays:", error);
     return [];
   }
 }
-async function displayUpcomingBirthdays() {
-  try {
-    const _0xa42d85 = await getUpcomingBirthdays();
-    const _0x1d2706 = document.querySelector(".birthnext");
-    if (_0xa42d85.length === 0) {
-      _0x1d2706.insertAdjacentHTML("beforeend", "\n                <div class=\"nobirthdaymessage\">\n                    <div class=\"thumb\">\n                        <div class=\"bdt\">\n                            <p>Tidak ada yang ulang tahun</br>😭😭😭</p>\n                        </div>\n                    </div>\n                </div>\n            ");
-    } else {
-      _0x1d2706.innerHTML = '';
-      _0xa42d85.forEach(_0x5c7ec4 => {
-        const {
-          name: _0x577958,
-          birthdate: _0x35763c,
-          img: _0x50fb1b,
-          url_key: _0x5bee7d
-        } = _0x5c7ec4;
-        const _0x454458 = "dmember.html?id=" + _0x5bee7d;
-        const _0x4d7c4d = new Date(_0x35763c).toLocaleDateString('id', {
-          'year': "numeric",
-          'month': "long",
-          'day': "numeric"
-        });
-        const _0x3323c6 = new Date();
-        const _0x38283e = new Date(_0x35763c);
-        _0x38283e.setFullYear(_0x3323c6.getFullYear());
-        let _0x584376;
-        if (_0x38283e < _0x3323c6) {
-          _0x38283e.setFullYear(_0x3323c6.getFullYear() + 1);
-          _0x584376 = 0;
-        } else {
-          const _0x1ec5ef = Math.abs(_0x38283e - _0x3323c6);
-          _0x584376 = Math.ceil(_0x1ec5ef / 86400000);
-        }
-        let _0x1af7c4 = '';
-        if (_0x584376 <= 1) {
-          if (_0x584376 === 1) {
-            _0x1af7c4 = "Besok";
-          } else {
-            _0x1af7c4 = "Hari Ini";
-          }
-        } else if (_0x584376 === 2) {
-          _0x1af7c4 = "2 Hari Lagi";
-        }
-        const _0x5ad9d4 = "\n                    <div class=\"item\">\n                        <a href=\"" + _0x454458 + "\">\n                            <img src=\"" + _0x50fb1b + "\" alt=\"" + _0x454458 + " Image\" class=\"postermem\" loading=\"lazy\">\n                            <div>\n                                <h3>🎂 " + _0x577958 + " JKT48</h3>\n                                <h4>🗓️ " + _0x4d7c4d + "</h4></br>\n                                " + (_0x1af7c4 ? "<h5>" + _0x1af7c4 + "</h5>" : '') + "\n                            </div>\n                        </a>\n                    </div>\n                ";
-        _0x1d2706.insertAdjacentHTML("beforeend", _0x5ad9d4);
-      });
-    }
-    console.log("Halaman next birthday diperbarui pada: " + new Date().toLocaleString());
-  } catch (_0x820adc) {
-    console.error("Error while displaying upcoming birthdays:", _0x820adc);
+
+// Fungsi untuk menghitung sisa waktu (bulan, hari, atau hari ini)
+function calculateRemainingTime(birthdate) {
+  const today = new Date();
+  const target = new Date(birthdate);
+  target.setFullYear(today.getFullYear());
+
+  // Jika ulang tahun sudah lewat tahun ini, atur ke tahun depan
+  if (target < today) {
+    target.setFullYear(today.getFullYear() + 1);
+  }
+
+  // Hitung selisih hari
+  const totalDays = Math.ceil((target - today) / (1000 * 60 * 60 * 24));
+
+  // Teks jika "Hari Ini"
+  if (totalDays === 0) return "Hari Ini";
+
+  // Hitung bulan dan sisa hari
+  const months = Math.floor(totalDays / 30); // Asumsi 1 bulan = 30 hari
+  const days = totalDays % 30;
+
+  if (months >= 1) {
+    return `${months} Bulan Lagi`;
+  } else {
+    return `${days} Hari Lagi`;
   }
 }
+
+// Fungsi untuk menampilkan daftar ulang tahun mendatang
+async function displayUpcomingBirthdays() {
+  try {
+    const birthdays = await getUpcomingBirthdays();
+    const container = document.querySelector(".birthnext");
+
+    // Jika tidak ada data ulang tahun
+    if (birthdays.length === 0) {
+      container.innerHTML = `
+        <div class="nobirthdaymessage">
+          <div class="thumb">
+            <div class="bdt">
+              <p>Tidak ada yang ulang tahun</br>😭😭😭</p>
+            </div>
+          </div>
+        </div>
+      `;
+      return;
+    }
+
+    // Bersihkan kontainer sebelum menambahkan data
+    container.innerHTML = '';
+
+    // Tampilkan setiap ulang tahun
+    birthdays.forEach(({ name, birthdate, img, url_key }) => {
+      const remainingTime = calculateRemainingTime(birthdate);
+
+      // Format tanggal ke bahasa Indonesia
+      const formattedDate = new Date(birthdate).toLocaleDateString('id', {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      });
+
+      // Buat elemen HTML
+      const birthdayHTML = `
+
+  <div class="birthday-item">
+    <img src="${img}" alt="${name} Image" class="postermem" loading="lazy">
+    <div class="birthday-info">
+      <h3><span class="mdi mdi-account-group">${name} JKT48</span></h3>
+      <h4>${formattedDate}</h4>
+      <h5>${remainingTime}</h5>
+    </div>
+
+  </div>
+</div>
+      `;
+
+      container.insertAdjacentHTML("beforeend", birthdayHTML);
+    });
+
+    console.log("Halaman next birthday diperbarui pada: " + new Date().toLocaleString());
+  } catch (error) {
+    console.error("Error while displaying upcoming birthdays:", error);
+  }
+}
+
+// Jalankan fungsi setiap 60 detik
 setInterval(displayUpcomingBirthdays, 60000);
+
+// Jalankan saat halaman dimuat
 displayUpcomingBirthdays();
