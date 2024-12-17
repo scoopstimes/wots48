@@ -601,17 +601,7 @@ a {
   transform: translate(-50%, -50%); /* Memastikan posisi tengah */
   animation: pulseEffect 1s infinite;
 }
-.buttongoweb{
 
-  background-color: transparent;
-
-  border: 0px solid transparent; /* Atur warna dan ukuran garis sesuai kebutuhan */
-  color: transparent; /* Atur warna teks sesuai kebutuhan */
-  padding: 0px 0px; /* Atur ukuran padding sesuai kebutuhan */
-  text-align: left;
-  margin: 0;
-  border-radius: 5px; /* Atur radius border sesuai kebutuhan */
-}
 @keyframes pulseEffect {
   0% {
     transform: translate(-50%, -50%) scale(1);
