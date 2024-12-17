@@ -57,7 +57,7 @@ async function displayUpcomingBirthdays() {
         <div class="nobirthdaymessage">
           <div class="thumb">
             <div class="bdt">
-              <p>Tidak ada yang ulang tahun</br>😭😭😭</p>
+              <p>Tidak ada yang ulang tahun</br></p>
             </div>
           </div>
         </div>

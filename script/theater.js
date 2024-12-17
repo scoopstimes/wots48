@@ -57,7 +57,7 @@ async function nextTheater() {
       const seitansai = theater.seitansai && theater.seitansai.length > 0
         ? theater.seitansai.map(member => member.name).join(", ")
         : '';
-      const seitansaiText = seitansai ? `<h3 style="font-size: 15px;width: 130%; ">🎂 ${seitansai}</h3>` : '';
+      const seitansaiText = seitansai ? `<h3 style="font-size: 15px;width: 130%; "><span style="color: pink; font-size: 17px;" class="mdi mdi-cake-variant"></span> ${seitansai}</h3>` : '';
 
       // Menentukan status event (Hari Ini, Besok, atau tanggal biasa)
       let eventStatus;
@@ -77,24 +77,30 @@ async function nextTheater() {
 
       // Buat elemen card untuk setiap theater
       const card = document.createElement('div');
-      card.classList.add('card-up');
+      card.classList.add('card-up-th');
       card.innerHTML = `
-      <div style="display: flex; width: 200px;margin-left: 20px;">
-        <a href="dtheater?id=${theater.id}" class="btnn">
-<div style="display: flex; justify-content: center; align-items: center; width: 100%; ">
-          <img src="${bannerImage}" ></div><br>
-          <div style="display: flex; flex-direction: column;><h2>${displayStatus}</h2></div>
-          <div style="display: flex; flex-direction: column; padding-bottom: 10px; ">
-
-          <h3 style="font-size: 15px;">🎪 ${theater.title}</h3>
-          <h3 style="font-size: 15px;">🗓️ ${formattedDate}</h3>
-          <h3 style="font-size: 15px;">⏰ ${formattedTime} WIB</h3>
-          <h3 style="font-size: 15px;">⭐ ${theater.member_count}</h3>
-          ${seitansaiText}
-          </div>
-          <br>
-        </a>
-        </div>
+  <a href="dtheater?id=${theater.id}" class="btnn">    <div style="width: 100%; display: flex; justify-content: center; align-items: center; flex-direction: column; gap: 20px;">
+ <div class="card-th">
+   <img  src="${bannerImage}" style="width: 500px; height: 200px; object-fit: cover;"/>
+   
+   <div class="card-th-content">
+   ${seitansaiText}
+<br>
+    <h2>
+      ${theater.title}
+    </h2>
+    <p>
+    ${formattedDate}
+    </p>
+    <div class="members-th">
+    ${theater.member_count} Member
+    
+    </div>
+    
+   </div>
+  </div>
+  </div>
+  </a>
       `;
       upcomingContainer.appendChild(card);
     }
