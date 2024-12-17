@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Tombol Nonton Sesuai Permintaan
             const cardBody = document.createElement('div');
-            cardBody.style = 'margin-top: 50px; display: flex; justify-content: center; gap: 10px;'
+            cardBody.style = ' display: flex; justify-content: center; gap: 10px;'
 
             if (member.type === 'showroom') {
               const showroomUrl = 'https://www.showroom-live.com/r/';
