@@ -41,17 +41,18 @@ function listLiveIdn(action) {
         const liveElement = document.createElement("div");
 
         liveElement.innerHTML = `
-          <br><hr><br>
+          <br><br>
           <a href="drecentlive.html?id=${live.id}&start=${live.live_info.date.start}&end=${live.live_info.date.end}&gift=${live.gift_rate}&view=${live.live_info.viewers.num}&nama=${live.member.nickname}&image=${live.member.img_alt}">
-            <div class="row-live">
-              <img src="${live.member.img_alt}" class="postermemlive" loading="lazy">
-              <div>
-                <h3>👥 Nama Member: ${live.member.nickname} JKT48</h3>
-                <h3>💻 Streaming di : ${live.type}</h3>
-                <h3>🗓️ Tanggal Live: ${formatDate(live.live_info.date.start)}</h3>
-                <h3>⏱️ Durasi: ${duration}</h3>
-                <h3>👀 Penonton: ${live.live_info.viewers ? live.live_info.viewers.num + " viewers" : "data tidak tersedia"}</h3>
-                <h3>🎁 Gift: ${live.gift_rate} G</h3>
+            <div class="row-live" style="background: #2F2F2F;border-radius: 10px; width: 100%;">
+              <img src="${live.member.img_alt}" style="width: 100px;
+		object-fit: cover; margin-top: 10px;"loading="lazy">
+              <div style="margin-top: 10px; display: flex; flex-direction: column;">
+                <h3 style="font-size: 20px;"> ${live.member.nickname} JKT48</h3>
+                <div style="margin-top: 10px; display: flex; flex-direction: column;">
+                <h3><span style="font-size: 17px" class="mdi  mdi-access-point-network"> ${live.type}</span></h3>
+                <h3><span style="font-size: 17px" class="mdi mdi-account-multiple"> ${formatDate(live.live_info.date.start)}</span></h3>
+                <h3><span style="font-size: 17px" class="mdi  mdi-access-point-network"> ${duration}</span></h3>
+                </div>
               </div>
             </div>
           </a>
@@ -84,17 +85,18 @@ function listLiveShowroom(action) {
         const liveElement = document.createElement("div");
 
         liveElement.innerHTML = `
-          <br><hr><br>
+          <br><br>
           <a href="drecentlive.html?id=${live.id}&start=${live.live_info.date.start}&end=${live.live_info.date.end}&gift=${live.gift_rate}&view=${live.live_info.viewers.num}&nama=${live.member.nickname}&image=${live.member.img_alt}">
-            <div class="row-live">
-              <img src="${live.member.img_alt}" class="postermemlive" loading="lazy">
-              <div>
-                <h3>👥 Nama Member: ${live.member.name}</h3>
-                <h3>💻 Streaming di : ${live.type}</h3>
-                <h3>🗓️ Tanggal Live: ${formatDate(live.live_info.date.start)}</h3>
-                <h3>⏱️ Durasi: ${duration}</h3>
-                <h3>👀 Penonton: ${live.live_info.viewers ? live.live_info.viewers.num + " viewers" : "data tidak tersedia"}</h3>
-                <h3>🎁 Gift: ${live.gift_rate} G</h3>
+            <div class="row-live" style="background: #2F2F2F;border-radius: 10px; width: 100%;">
+              <img src="${live.member.img_alt}" style="width: 100px;
+		object-fit: cover; margin-top: 10px;" loading="lazy">
+              <div style="margin-top: 10px; display: flex; flex-direction: column;">
+                <h3 style="font-size: 20px;"> ${live.member.name}</h3>
+                <div style="margin-top: 10px; display: flex; flex-direction: column;">
+                <h3><span style="font-size: 17px" class="mdi  mdi-access-point-network"> ${live.type}</span></h3>
+                <h3><span style="font-size: 17px" class="mdi mdi-account-multiple"> ${formatDate(live.live_info.date.start)}</span></h3>
+                <h3><span style="font-size: 17px" class="mdi  mdi-access-point-network"> ${duration}</span></h3>
+                </div>
               </div>
             </div>
           </a>

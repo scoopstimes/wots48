@@ -2120,7 +2120,8 @@ footer a:hover {
 	}
 
 	.postermemlive {
-		width: 95%;
+		width: 200px;
+		object-fit: cover;
 	}
 
 	.btn {
