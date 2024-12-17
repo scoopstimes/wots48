@@ -746,7 +746,7 @@ a {
 
 .card p {
 	width: 160px;
-	margin-left: 10px;
+	margin-left: 0px;
 	padding: 5px 10px;
 	color: #fff;
 }

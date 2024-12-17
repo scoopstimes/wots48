@@ -24,76 +24,94 @@ document.addEventListener("DOMContentLoaded", function () {
 
           liveMembers.slice(0, isLimit ? 100 : liveMembers.length).forEach(member => {
             const card = document.createElement('div');
-            card.style = `
-              background-color: #2c2c2e; 
-              border-radius: 10px; 
-              padding-top: 10px; 
-              padding-bottom: 10px; 
-              padding-right: 10px; 
-              padding-left: 10px; 
-              width: 150px; 
-              position: relative;`;
+card.style = `
+  background-color: #2c2c2e;
+  border-radius: 10px;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-bottom: 30px;
+  position: relative;
+  width: 150px;
+  text-align: center; /* Pusatkan teks di dalam kartu */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
 
-            const img = document.createElement('img');
-            img.src = member.img;
-            img.alt = member.name;
-            img.style = 'width: 200px; object-fit: cover; border-radius: 10px; height: 200px; aspect-ratio: 1/1;';
-            card.appendChild(img);
+const img = document.createElement('img');
+img.src = member.img;
+img.alt = member.name;
+img.style = `
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+  aspect-ratio: 1 / 1;
+`;
+card.appendChild(img);
 
-            const title = document.createElement('div');
-            title.textContent = member.name;
-            title.style = 'font-size: 16px; margin-top: 10px; font-weight: bold;';
-            card.appendChild(title);
+const title = document.createElement('div');
+title.textContent = member.name;
+title.style = `
+  font-size: 16px;
+  font-weight: bold;
+`;
+card.appendChild(title);
 
-            const optionsIcon = document.createElement('div');
-            optionsIcon.innerHTML = '<i class="fas fa-ellipsis-h"></i>';
-            optionsIcon.style = 'position: absolute; top: 10px; right: 10px; color: #b0b0b0;';
-            card.appendChild(optionsIcon);
+const liveType = document.createElement('p');
+liveType.textContent = `Live: ${member.type}`;
+liveType.style = `
+  font-size: 14px;
+  color: #b0b0b0;
+  margin-top: -5px;
+`;
+card.appendChild(liveType);
 
-            // Tombol Nonton Sesuai Permintaan
-            const cardBody = document.createElement('div');
-            cardBody.style = ' display: flex; justify-content: center; gap: 10px;'
+const cardBody = document.createElement('div');
+cardBody.style = `
+  display: flex;
+  justify-content: center; /* Rata tengah tombol */
+  gap: 10px;
+`;
 
-            if (member.type === 'showroom') {
-              const showroomUrl = 'https://www.showroom-live.com/r/';
-              const showroomLink = document.createElement('a');
-              showroomLink.classList.add('btn-live-link', 'btn-primary', 'mx-2');
-              showroomLink.innerHTML = ' <span class="mdi mdi-arrow-top-right-thin-circle-outline"></span>';
-              showroomLink.href = showroomUrl + member.url_key;
-              showroomLink.target = '_blank';
-              cardBody.appendChild(showroomLink);
+if (member.type === 'showroom') {
+  const showroomUrl = 'https://www.showroom-live.com/r/';
+  const showroomLink = document.createElement('a');
+  showroomLink.classList.add('btn-live-link', 'btn-primary');
+  showroomLink.innerHTML = '<span class="mdi mdi-arrow-top-right-thin-circle-outline"></span>';
+  showroomLink.href = showroomUrl + member.url_key;
+  showroomLink.target = '_blank';
+  cardBody.appendChild(showroomLink);
 
-              member.streaming_url_list.forEach(urlObj => {
-                if (urlObj.label === 'original quality') {
-                  const fullscreenBtn = document.createElement('a');
-                  fullscreenBtn.classList.add('btn-live', 'btn-primary', 'mx-2');
-                  fullscreenBtn.innerHTML = '<span class="mdi mdi-video"></span>';
-                  fullscreenBtn.href = `showroom.html#${encodeURIComponent(urlObj.url)}`;
-                  
-                  cardBody.appendChild(fullscreenBtn);
-                }
-              });
-            } else if (member.type === 'idn') {
-              const idnLink = document.createElement('a');
-              idnLink.classList.add('btn-live-link', 'btn-primary', 'mx-2');
-              idnLink.innerHTML = '<span class="mdi mdi-arrow-top-right-thin-circle-outline"></span>';
-              idnLink.href = `${idnUrl}${member.url_key}/live/${member.slug}`;
-              
-              cardBody.appendChild(idnLink);
+  member.streaming_url_list.forEach(urlObj => {
+    if (urlObj.label === 'original quality') {
+      const fullscreenBtn = document.createElement('a');
+      fullscreenBtn.classList.add('btn-live', 'btn-primary');
+      fullscreenBtn.innerHTML = '<span class="mdi mdi-video"></span>';
+      fullscreenBtn.href = `showroom.html#${encodeURIComponent(urlObj.url)}`;
+      cardBody.appendChild(fullscreenBtn);
+    }
+  });
+} else if (member.type === 'idn') {
+  const idnLink = document.createElement('a');
+  idnLink.classList.add('btn-live-link', 'btn-primary');
+  idnLink.innerHTML = '<span class="mdi mdi-arrow-top-right-thin-circle-outline"></span>';
+  idnLink.href = `${idnUrl}${member.url_key}/live/${member.slug}`;
+  cardBody.appendChild(idnLink);
 
-              member.streaming_url_list.forEach(urlObj => {
-                const ProxyUrl = 'https://jkt48showroom-api.my.id/proxy?url=';
-                const fullscreenBtn = document.createElement('a');
-                fullscreenBtn.classList.add('btn-live', 'btn-primary', 'mx-2');
-                fullscreenBtn.innerHTML = '<span class="mdi mdi-video"></span>'
-                fullscreenBtn.href = `showroom.html#${ProxyUrl}${encodeURIComponent(urlObj.url)}`;
-                
-                cardBody.appendChild(fullscreenBtn);
-              });
-            }
+  member.streaming_url_list.forEach(urlObj => {
+    const ProxyUrl = 'https://jkt48showroom-api.my.id/proxy?url=';
+    const fullscreenBtn = document.createElement('a');
+    fullscreenBtn.classList.add('btn-live', 'btn-primary');
+    fullscreenBtn.innerHTML = '<span class="mdi mdi-video"></span>';
+    fullscreenBtn.href = `showroom.html#${ProxyUrl}${encodeURIComponent(urlObj.url)}`;
+    cardBody.appendChild(fullscreenBtn);
+  });
+}
 
-            card.appendChild(cardBody);
-            container.appendChild(card);
+card.appendChild(cardBody);
+container.appendChild(card);
           });
         }
       })
