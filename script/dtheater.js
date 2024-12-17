@@ -106,11 +106,10 @@ function loadTheater(action) {
 function detailTheater() {
   const urlParams = new URLSearchParams(window.location.search);
   const theaterId = urlParams.get("id");
-  let apiUrl = "https://api.crstlnz.my.id/api/theater";
 
-  if (theaterId) {
-    apiUrl += `/${theaterId}`;
-  }
+  if (!theaterId) return;
+
+  const apiUrl = `https://api.crstlnz.my.id/api/theater/${theaterId}`;
 
   fetch(apiUrl)
     .then(response => response.json())
@@ -128,20 +127,21 @@ function detailTheater() {
 
             // Format tanggal dan waktu
             const showDate = new Date(show.date);
-            const dateOptions = { timeZone: "Asia/Jakarta", year: "numeric", month: "long", day: "numeric" };
-            const timeOptions = { timeZone: "Asia/Jakarta", hour: "numeric", minute: "numeric" };
-            const formattedDate = showDate.toLocaleString("id-ID", dateOptions);
-            const formattedTime = showDate.toLocaleString("id-ID", timeOptions);
+            const formattedDate = showDate.toLocaleDateString("id-ID", { year: "numeric", month: "long", day: "numeric" });
+            const formattedTime = showDate.toLocaleTimeString("id-ID", { hour: "numeric", minute: "numeric" });
 
             // Seitansai (jika ada)
-            const seitansaiMembers = show.seitansai
-              ? show.seitansai.map(member => member.name).join(", ")
-              : "";
-            const seitansaiHtml = seitansaiMembers
+            const seitansaiMembers = show.seitansai?.map(member => member.name).join(", ") || "Tidak ada";
+            const seitansaiHtml = show.seitansai
               ? `<h3>🎂 Seitansai: ${seitansaiMembers}</h3>`
               : "";
 
-            // Detail theater
+            // Daftar anggota yang tampil
+            const membersHtml = show.members
+              .map(member => `<li>${member.name}</li>`)
+              .join("");
+
+            // Tampilkan detail theater
             const showElement = document.createElement("div");
             showElement.innerHTML = `
               <h2 class="titleup">⭐ Setlist Theater ${show.title} ⭐</h2><br><hr><br>
@@ -152,6 +152,8 @@ function detailTheater() {
                   <h3>📅 Tanggal Show: ${formattedDate}</h3>
                   <h3>⏰ Waktu Show: ${formattedTime} WIB</h3>
                   ${seitansaiHtml}
+                  <h3>👥 Anggota yang Tampil:</h3>
+                  <ul>${membersHtml}</ul>
                 </div>
               </div><br><hr>
             `;
