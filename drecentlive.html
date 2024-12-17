@@ -3,16 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail Live Streaming</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>JEKATE48 fanmade Website</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="/assets/css/home.css" rel="stylesheet">
+    <link rel="icon" href="/assets/css/image/favlogo.png" />
+        <link rel="stylesheet" href="./css/style.css" />
+    <meta name="author" content="JEKATE48">
+    <meta property="og:title" content="JEKATE48">
+    <meta property="og:image:height" content="961">
+    <meta property="og:image:width" content="1905">
+    <meta property="og:type" content="website">
+    <meta property="og:image"
+        content="https://cdn.discordapp.com/attachments/989168672708919317/1312702801561784430/jekate.png?ex=674d7540&is=674c23c0&hm=9ea5ecf4eb8348721762f134b4a30affbb5adcf3020bbb79b46a830dc1266520&">
+    <meta property="og:title" content="JEKATE48">
+    <meta name="description" content="EXPERIENCE THE MAGIC OF JKT48, ANYTIME, ANYWHERE">
+    <meta property="og:description" content="EXPERIENCE THE MAGIC OF JKT48, ANYTIME, ANYWHERE">
+            <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Zen Maru Gothic' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Barlow Condensed' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.3.67/css/materialdesignicons.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #121212;
-            color: #fff;
-        }
+        
         .container {
             padding: 1rem;
         }
@@ -29,6 +41,7 @@
         .profile img {
             width: 80px;
             height: 80px;
+            object-fit: cover;
             border-radius: 50%;
             margin-right: 1rem;
         }
@@ -76,44 +89,74 @@
     </style>
 </head>
 <body>
-    <div class="container">
+          <nav>
+                <div class="navbar-container">
+
+                                 <button class="buttongoweb" onclick="goToLink('/home')">
+                                         <div class="navbar-box" ontouchstart="addOverlayNavbar(event)" ontouchend="removeOverlayNavbar(event)" ontouchcancel="removeOverlayNavbar(event)">
+                                                 <div class="overlay-navbar"></div>
+                                                 <span class="mdi mdi-home"></span>
+                                                 <h1>Home</h1>
+                                         </div>
+                                 </button>
+                       <div class="navbar-box" ontouchstart="addOverlayNavbar(event)" ontouchend="removeOverlayNavbar(event)" ontouchcancel="removeOverlayNavbar(event)">
+                          <div class="overlay-navbar"></div>
+                          <span class="mdi mdi-history active" style="color: #white;background: #6C6C6C80;
+                                border-radius: 50%;
+                                width: 25px;
+                                height: 25px;"></span>
+                          <h1>Recent</h1>
+
+                        </div>
+
+                       <button class="buttongoweb" onclick="goToLink('/member')"><div class="navbar-box"ontouchstart="addOverlayNavbar(event)" ontouchend="removeOverlayNavbar(event)" ontouchcancel="removeOverlayNavbar(event)">                                                        <div class="overlay-navbar"></div>
+                                <span class="mdi mdi-account-group"></span>
+                                <h1>Member</h1>
+                        </div>
+                       </button>
+                       <button class="buttongoweb" onclick="goToLink('/news')"><div class="navbar-box"ontouchstart="addOverlayNavbar(event)" ontouchend="removeOverlayNavbar(event)" ontouchcancel="removeOverlayNavbar(event)">                                                        <div class="overlay-navbar"></div>
+                                <span class="mdi mdi-newspaper-variant"></span>
+                                <h1>News</h1>
+                        </div>
+                       </button>
+
+
+                       <button class="buttongoweb" onclick="goToLink('/event')"><div class="navbar-box"ontouchstart="addOverlayNavbar(event)" ontouchend="removeOverlayNavbar(event)" ontouchcancel="removeOverlayNavbar(event)">                                                        <div class="overlay-navbar"></div>
+                                <span class="mdi mdi-clipboard-text-clock"></span>
+                                <h1>Theather</h1>
+                        </div>
+                        
+                </div>
+        </nav>
+<div  style="padding: 1rem;">
         <div class="header">
-            <img id="header-img" src="https://via.placeholder.com/800x200" alt="Header Image">
+            <img id="header-img" src="https://via.placeholder.com/800x200" alt="Header Image" style="width: 100%; height: auto; border-radius: 8px;">
         </div>
 
-        <div class="profile">
-            <img id="profile-img" src="https://via.placeholder.com/80" alt="Member Profile">
+        <div class="profile" style="display: flex; align-items: center; margin-top: 1rem;">
+            <img id="profile-img" src="https://via.placeholder.com/80" alt="Member Profile" style="width: 80px; height: 80px; object-fit: cover; border-radius: 50%; margin-right: 1rem;">
             <div>
-                <h1 id="member-name">Loading...</h1>
-                <span class="badge" id="badge">Loading...</span>
+                <h1 id="member-name" style="font-size: 1.5rem; margin: 0;">Loading...</h1>
+                <span class="badge" id="badge" style="background-color: #6a11cb; padding: 0.25rem 0.5rem; border-radius: 8px; color: #fff; font-size: 0.8rem;">Loading...</span>
                 <p id="member-status">Loading...</p>
             </div>
         </div>
 
-        <div class="duration">
-            <h2 id="live-date">Loading...</h2>
+        <div class="duration" style="margin-top: 1.5rem; background-color: #1e1e1e; padding: 1rem; border-radius: 8px;background: gray;">
+            <h2 id="live-date" style="font-size: 1.1rem; margin-bottom: 0.5rem;">Loading...</h2>
             <p id="live-time">Loading...</p>
-            <h2 id="live-duration">Loading...</h2>
+            <h2 id="live-duration" style="font-size: 1.1rem; margin-bottom: 0.5rem;">Loading...</h2>
         </div>
 
-        <div class="details">
-            <h2>🔍 Detail</h2>
-            <div class="stats">
-                <h3 id="gift">🎁 Gift: Loading...</h3>
-                <h3 id="excitement">🔥 Excitement Point: Loading...</h3>
-                <h3 id="viewers">👀 Viewer: Loading...</h3>
-                <h3 id="comments">💬 Comments: Loading...</h3>
+        <div class="details" style="margin-top: 1.5rem; background-color: #1e1e1e; padding: 1rem; border-radius: 8px;background: gray;">
+            <h2 style="font-size: 1.1rem; margin-bottom: 0.5rem;">🔍 Detail</h2>
+            <div class="stats" style="margin-top: 0.5rem;">
+                <h3 id="gift" style="margin: 0.5rem 0; font-size: 1rem;">🎁 Gift: Loading...</h3>
+
+                <h3 id="viewers" style="margin: 0.5rem 0; font-size: 1rem;">👀 Viewer: Loading...</h3>
+
             </div>
         </div>
-
-        <footer>
-            <a href="home.html">🏠 Home</a>
-            <a href="recent.html">⏳ Recent</a>
-            <a href="member.html">👤 Member</a>
-            <a href="event.html">📅 Event</a>
-            <a href="menu.html">📋 Menu</a>
-        </footer>
-    </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -121,22 +164,26 @@
             const liveId = urlParams.get("id");
             const liveStart = urlParams.get("start");
             const liveEnd = urlParams.get("end");
+            const gift = urlParams.get("gift");
+            const view = urlParams.get("view");
+            const nama = urlParams.get("nama");
+            const image = urlParams.get("image");
 
             // Fetch live details based on ID
             fetch(`https://api.crstlnz.my.id/api/live-details/${liveId}`)
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById("header-img").src = data.headerImage || "https://via.placeholder.com/800x200";
-                    document.getElementById("profile-img").src = data.profileImage || "https://via.placeholder.com/80";
-                    document.getElementById("member-name").textContent = data.memberName || "Unknown Member";
+                    document.getElementById("profile-img").src = `${image}` || "https://via.placeholder.com/80";
+                    document.getElementById("member-name").textContent = `${nama}`;
                     document.getElementById("badge").textContent = data.sousenkyo || "No Sousenkyo";
                     document.getElementById("member-status").textContent = data.status || "No Status";
                     document.getElementById("live-date").textContent = new Date(liveStart).toLocaleDateString("id-ID");
                     document.getElementById("live-time").textContent = `Mulai pada: ${new Date(liveStart).toLocaleTimeString("id-ID")}`;
                     document.getElementById("live-duration").textContent = `Durasi: ${calculateDuration(liveStart, liveEnd)}`;
-                    document.getElementById("gift").textContent = `🎁 Gift: ${data.gift} G`;
+                    document.getElementById("gift").textContent = `🎁 Gift: ${gift} G`;
                     document.getElementById("excitement").textContent = `🔥 Excitement: ${data.excitement}`;
-                    document.getElementById("viewers").textContent = `👀 Viewers: ${data.viewers} viewers`;
+                    document.getElementById("viewers").textContent = `👀 Viewers: ${view} viewers`;
                     document.getElementById("comments").textContent = `💬 Comments: ${data.comments}`;
                 })
                 .catch((error) => console.error("Error fetching live details:", error));

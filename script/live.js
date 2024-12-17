@@ -42,7 +42,7 @@ function listLiveIdn(action) {
 
         liveElement.innerHTML = `
           <br><hr><br>
-          <a href="drecentlive.html?id=${live.id}&start=${live.live_info.date.start}&end=${live.live_info.date.end}">
+          <a href="drecentlive.html?id=${live.id}&start=${live.live_info.date.start}&end=${live.live_info.date.end}&gift=${live.gift_rate}&view=${live.live_info.viewers.num}&nama=${live.member.nickname}&image=${live.member.img_alt}">
             <div class="row-live">
               <img src="${live.member.img_alt}" class="postermemlive" loading="lazy">
               <div>
@@ -85,7 +85,7 @@ function listLiveShowroom(action) {
 
         liveElement.innerHTML = `
           <br><hr><br>
-          <a href="drecentlive.html?id=${live.id}&start=${live.live_info.date.start}&end=${live.live_info.date.end}">
+          <a href="drecentlive.html?id=${live.id}&start=${live.live_info.date.start}&end=${live.live_info.date.end}&gift=${live.gift_rate}&view=${live.live_info.viewers.num}&nama=${live.member.nickname}&image=${live.member.img_alt}">
             <div class="row-live">
               <img src="${live.member.img_alt}" class="postermemlive" loading="lazy">
               <div>
