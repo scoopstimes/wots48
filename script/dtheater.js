@@ -1,189 +1,176 @@
 let currentPage = 1;
 
-// Fungsi untuk mengambil anggota event berdasarkan ID
+// Mengambil data anggota acara dari API
 async function getEventMembers(eventId) {
-  if (!eventId) return null;
+  if (!eventId) {
+    return null;
+  }
 
   const apiUrl = `https://api.crstlnz.my.id/api/theater/${eventId}`;
+
   try {
     const response = await fetch(apiUrl);
-    const data = await response.json();
+    const eventData = await response.json();
 
-    if (!data || !Array.isArray(data.shows) || data.shows.length === 0) {
-      console.error("Format data event tidak valid:", data);
+    // Validasi format data
+    if (!eventData || !Array.isArray(eventData.shows) || eventData.shows.length === 0) {
+      console.error("Data acara tidak valid:", eventData);
       return null;
     }
 
-    const memberList = data.shows.flatMap(show =>
-      show.members.map(member => member.name)
-    );
-    const seitansai = data.shows[0]?.seitansai || null;
+    // Mengambil daftar nama anggota dari setiap show
+    const memberList = eventData.shows.flatMap(show => show.members.map(member => member.name));
+    const seitansai = eventData.shows[0]?.seitansai || null;
 
-    return {
-      memberList,
-      seitansai
-    };
+    return { memberList, seitansai };
   } catch (error) {
-    console.error("Gagal mengambil data anggota event:", error);
+    console.error("Error saat mengambil data anggota acara:", error);
     return null;
   }
 }
 
-// Fungsi untuk memuat daftar teater berdasarkan halaman
-function loadTheater(action) {
-  // Menavigasi halaman
-  if (action === "prev" && currentPage > 1) {
+// Memuat daftar teater dari API
+function loadTheater(direction) {
+  if (direction === "prev" && currentPage > 1) {
     currentPage--;
-  } else if (action === "next") {
+  } else if (direction === "next") {
     currentPage++;
   }
 
-  fetch(`https://api.crstlnz.my.id/api/theater?page=${currentPage}`)
-    .then(response => response.json())
-    .then(theaterData => {
-      document.getElementById("theaterList").innerHTML = "";
+  const apiUrl = `https://api.crstlnz.my.id/api/theater?page=${currentPage}`;
 
+  fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+      const theaterList = data.theater;
+
+      // Menghapus konten lama dari daftar teater
+      document.getElementById("theaterList").innerHTML = '';
+
+      // Memuat gambar dan banner dari file JSON
       fetch("script/cdnpicture.json")
         .then(response => response.json())
-        .then(pictures => {
-          theaterData.theater.forEach(show => {
-            const picture = pictures.find(p => p.setlist === show.title);
-            const banner = picture ? picture.banner : "";
-            const showDate = new Date(show.date);
-            const formattedDate = showDate.toLocaleDateString("id-ID", {
-              year: "numeric",
-              month: "long",
-              day: "numeric"
-            });
-            const showTime = show.date.substring(11, 16);
-            const seitansaiMembers =
-              show.seitansai?.map(member => member.name).join(", ") || "";
-            const seitansaiHTML = seitansaiMembers
-              ? `<h1>🎂 Seitansai: ${seitansaiMembers}</h1>`
-              : "";
+        .then(pictureData => {
+          theaterList.forEach(theater => {
+            const picture = pictureData.find(p => p.setlist === theater.title);
+            const bannerImage = picture ? picture.banner : '';
 
-            const showElement = document.createElement("div");
-            showElement.innerHTML = `
+            const eventDate = new Date(theater.date);
+            const dateString = eventDate.toLocaleDateString("id-ID", { year: 'numeric', month: 'long', day: 'numeric' });
+
+            const seitansai = theater.seitansai ? theater.seitansai.map(s => s.name).join(", ") : '';
+            const seitansaiHtml = seitansai ? `<h1>🎂 Seintansai: ${seitansai}</h1>` : '';
+
+            const theaterCard = document.createElement('div');
+            theaterCard.innerHTML = `
               <br>
-              <a href="dtheater?id=${show.id}">
+              <a href="dtheater?id=${theater.id}">
                 <div class="row2">
                   <div>
-                    <img src="${banner}" class="poster" loading="lazy">
+                    <img src="${bannerImage}" class="poster" loading="lazy">
                   </div>
                   <div>
-                    <h1>🎪 Theater : ${show.title}</h1>
-                    <h1>👥 Total Member : ${show.member_count} Members</h1>
-                    <h1>⏰ Start Show: ${showTime} WIB</h1>
-                    <h1>🗓️ Tanggal Show : ${formattedDate}</h1>
-                    ${seitansaiHTML}
+                    <h1>🎪 Theater: ${theater.title}</h1>
+                    <h1>👥 Total Member: ${theater.member_count} Members</h1>
+                    <h1>⏰ Start Show: ${theater.date.substring(11, 16)} WIB</h1>
+                    <h1>🗓️ Tanggal Show: ${dateString}</h1>
+                    ${seitansaiHtml}
                   </div>
                 </div>
               </a>
               <br><hr>
             `;
-            document.getElementById("theaterList").appendChild(showElement);
+            document.getElementById("theaterList").appendChild(theaterCard);
           });
 
-          const totalPages =
-            theaterData.total_pages ||
-            Math.ceil(theaterData.total_count / 5);
-
+          const totalPages = data.total_pages || Math.ceil(data.total_count / 5);
           document.getElementById("prevButton").disabled = currentPage === 1;
-          document.getElementById("nextButton").disabled =
-            currentPage === totalPages;
+          document.getElementById('nextButton').disabled = currentPage === totalPages;
         })
-        .catch(error =>
-          console.error("Gagal mengambil data gambar dari cdnpicture:", error)
-        );
+        .catch(error => console.error("Error saat mengambil data gambar:", error));
     })
-    .catch(error => console.error("Gagal mengambil data teater:", error));
+    .catch(error => console.error("Error saat mengambil data teater:", error));
 }
 
-// Fungsi untuk memuat detail teater
+// Menampilkan detail teater berdasarkan ID
 function detailTheater() {
-  const params = new URLSearchParams(window.location.search);
-  const theaterId = params.get("id");
-
+  const urlParams = new URLSearchParams(window.location.search);
+  const theaterId = urlParams.get('id');
   let apiUrl = "https://api.crstlnz.my.id/api/theater";
+
   if (theaterId) {
     apiUrl += `/${theaterId}`;
   }
 
   fetch(apiUrl)
     .then(response => response.json())
-    .then(theaterDetails => {
-      document.getElementById("theaterDetail").innerHTML = "";
+    .then(data => {
+      document.getElementById('theaterDetail').innerHTML = '';
 
       fetch("script/cdnpicture.json")
         .then(response => response.json())
-        .then(pictures => {
-          theaterDetails.shows.forEach(show => {
-            const picture = pictures.find(p => p.setlist === show.title);
-            const banner = picture ? picture.banner : "";
-            const showDate = new Date(show.date).toLocaleDateString("id-ID", {
-              year: "numeric",
-              month: "long",
-              day: "numeric"
-            });
-            const showTime = new Date(show.date).toLocaleTimeString("id-ID", {
-              hour: "numeric",
-              minute: "numeric"
-            });
+        .then(pictureData => {
+          data.shows.forEach(show => {
+            const picture = pictureData.find(p => p.setlist === show.title);
+            const bannerImage = picture ? picture.banner : '';
 
-            const seitansaiMembers =
-              show.seitansai?.map(member => member.name).join(", ") || "";
-            const seitansaiHTML = seitansaiMembers
-              ? `<h3>🎂 Seitansai: ${seitansaiMembers}</h3>`
-              : "";
+            const showDate = new Date(show.date);
+            const dateString = showDate.toLocaleString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
+            const timeString = showDate.toLocaleString('id-ID', { hour: 'numeric', minute: 'numeric' });
 
-            const membersHTML =
-              show.members.length > 0
-                ? show.members
-                    .map(
-                      member => `
-                    <a href="${member.url_key ? `dmember.html?id=${member.url_key}` : "notfound.html"}">
-                      <img src="${member.img}" class="postermem2" loading="lazy">
-                      <h3>${member.name}</h3>
-                    </a>
-                  `
-                    )
-                    .join("")
-                : "Lineup belum tersedia 😭";
+            const seitansai = show.seitansai.length > 0 ? show.seitansai.map(s => s.name).join(", ") : '';
+            const seitansaiHtml = seitansai ? `<h3>🎂 Seintansai: ${seitansai}</h3>` : '';
 
-            const showElement = document.createElement("div");
-            showElement.innerHTML = `
-              <h2>⭐ Setlist Theater ${show.title} ⭐</h2>
-              <br><hr><br>
+            const memberCount = show.members.length;
+            const ticketUrl = `https://jkt48.com/theater/schedule/id/${show.id}`;
+            const onlineTicketButton = show.showroomTheater && show.showroomTheater.entrance_url
+              ? `<a href="${show.showroomTheater.entrance_url}" class="btnn-beli">
+                  <span class="icon"><i class="fas fa-ticket"></i></span>
+                  <span style="margin-right: 5px;"></span> 
+                  Beli tiket Online
+                </a>`
+              : '';
+
+            const theaterDetailCard = document.createElement("div");
+            theaterDetailCard.innerHTML = `
+              <h2 class="titleup">⭐ Setlist Theater ${show.title} ⭐</h2><br><hr><br>
               <div class="row2">
-                <img src="${banner}" style="max-width: 100%;">
+                <img src="${bannerImage}" style="max-width: 100%;">
                 <div>
-                  <h3>📒 Description: ${show.setlist.description}</h3>
-                  <h3>📅 Tanggal: ${showDate}</h3>
-                  <h3>⏰ Waktu: ${showTime} WIB</h3>
-                  ${seitansaiHTML}
+                  <h3>📒 Description Setlist: ${show.setlist.description}</h3><br>
+                  <h3>📅 Tanggal Show: ${dateString}</h3>
+                  <h3>⏰ Waktu Show: ${timeString} WIB</h3>
+                  ${seitansaiHtml}
                 </div>
-              </div>
-              <br><hr>
-              <h3>${show.members.length > 0 ? `Total ${show.members.length} Member Tampil` : "Lineup belum keluar 😭"}</h3>
+              </div><br><hr>
+              <h3 class="row2-up">${memberCount > 0 ? `Total ${memberCount} member yang akan tampil` : "Lineup belum keluar 😭"}</h3>
               <div class="row3">
-                ${membersHTML}
+                ${memberCount > 0 ? show.members.map(member => `
+                  <a href="${member.url_key ? `dmember.html?id=${member.url_key}` : 'notfound.html'}">
+                    <img src="${member.img}" class="postermem2" loading="lazy">
+                    <h3 class="titleup-detail">${member.name}</h3>
+                  </a>
+                `).join('') : ''}
+              </div><br><hr><br>
+              <div style="display: flex; justify-content: center;">
+                <a href="${ticketUrl}" class="btnn-beli">
+                  <span class="icon"><i class="fas fa-ticket"></i></span>
+                  <span style="margin-right: 5px;"></span> 
+                  Beli tiket Offline
+                </a>
+                ${onlineTicketButton}
               </div>
-              <br><hr><br>
             `;
-
-            document.getElementById("theaterDetail").appendChild(showElement);
+            document.getElementById('theaterDetail').appendChild(theaterDetailCard);
           });
         })
-        .catch(error => console.error("Gagal mengambil gambar cdnpicture:", error));
+        .catch(error => console.error("Error saat mengambil data gambar:", error));
     })
-    .catch(error => console.error("Gagal mengambil detail teater:", error));
+    .catch(error => console.error("Error saat mengambil data detail teater:", error));
 }
 
-// Event Listener untuk memuat data saat halaman dimuat
-document.addEventListener("DOMContentLoaded", () => {
-  if (document.getElementById("theaterList")) {
-    loadTheater();
-  } else if (document.getElementById("theaterDetail")) {
-    detailTheater();
-  }
+// Event listener untuk memuat teater setelah halaman dimuat
+document.addEventListener("DOMContentLoaded", function () {
+  loadTheater();
+  detailTheater();
 });
