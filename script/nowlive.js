@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const liveCount = liveMembers.length;
 
         // Menampilkan jumlah member yang sedang live
-        document.getElementById('liveCount').textContent = `Sedang live: ${liveCount} member`;
+        document.getElementById('liveCount').textContent = ` ${liveCount} member`;
 
         if (liveCount === 0) {
           document.getElementById('noLiveMessage').textContent = 'Tidak ada yang live 😭😭';

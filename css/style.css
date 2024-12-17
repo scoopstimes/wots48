@@ -574,6 +574,44 @@ a {
 	background-color: #FF2929;
 	cursor: pointer;
 }
+.live-indicator {
+  position: relative; /* Menjadi parent untuk absolute positioning */
+  width: 10px;
+  height: 10px;
+}
+
+.circle {
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  position: relative;
+  z-index: 2; /* Tetap di atas efek pulse */
+}
+
+.pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  z-index: 1;
+  transform: translate(-50%, -50%); /* Memastikan posisi tengah */
+  animation: pulseEffect 1s infinite;
+}
+
+@keyframes pulseEffect {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.5);
+    opacity: 0;
+  }
+}
 .btn-live-link {
 	display: flex;
 	padding: 5px 5px;
