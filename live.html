@@ -25,6 +25,18 @@
 </head>
 
 <body>
+  <style>
+.active-btn {
+    background-color: #4CAF50; /* Warna hijau untuk tombol aktif */
+    color: white;
+    border: none;
+}
+
+.inactive-btn {
+    background-color: #2F2F2F; /* Warna default sebelum dipilih */
+    color: white;
+}
+  </style>
         <nav>
                 <div class="navbar-container">
 
@@ -66,37 +78,115 @@
         </nav>
 
 
-    <div class="section">
-        <div class="container">
-            <div class="flex-container">
-                <div class="box-live" style="background: transparent;">
-                    <h2 class="titleup"><span class="icon"><i class="fa fa-history"></i></span> Recent Live Idn</h2>
-                    <div id="liveListIdn"></div>
-                    <br><hr><br>
-                    <button id="prevButtonIdn" onclick="listLiveIdn('prev', 'Idn')" class="btn">Previous</button>
-                    <button id="nextButtonIdn" onclick="listLiveIdn('next', 'Idn')" class="btn"style="margin-left: 10px;">Next</button>
+<div class="section">
+  <div style="display: flex; width: 100%; justify-content: center;gap: 5px">
+                <button class="buttongoweb inactive-btn" style="width: 120px; height: 50px; display: flex; justify-content: center; align-items: center; color: white;" onclick="toggleDisplay('all', this)"
+            class="active-btn"id="btnAll">All</button>
+
+            <!-- Tombol untuk menampilkan konten Live Showroom -->
+            <button class="buttongoweb inactive-btn" style="width: 120px; height: 50px; display: flex; justify-content: center; align-items: center; color: white;" onclick="toggleDisplay('liveListShowroom', this)" id="btnShowroom">Live Showroom</button>
+
+            <!-- Tombol untuk menampilkan konten Live IDN -->
+            <button class="buttongoweb inactive-btn" style="width: 120px; height: 50px; display: flex; justify-content: center; align-items: center; color: white;" onclick="toggleDisplay('liveListIdn', this)" id="btnIdn">Live IDN</button>
+
+  </div>
+    <div class="container">
+        <div class="flex-container">
+            <!-- Tombol untuk menampilkan semua konten -->
+
+            <!-- Box untuk Live IDN -->
+            <div class="box-live" id="box-idn" style="background: transparent;">
+                <h2 class="titleup"id="title-idn">
+
+                </h2><br>
+                <div id="liveListIdn" style="display:block;">
+                    <!-- Content for Live Idn -->
+
                 </div>
-                <div class="box-live"style="background: transparent;">
-                    <h2 class="titleup"><span class="icon"><i class="fa fa-history"></i></span> Recent Live Showroom</h2>
-                    <div id="liveListShowroom"></div>
-                    <br><hr><br>
-                    <button id="prevButtonShowroom" onclick="listLiveShowroom('prev', 'Showroom')" class="btn">Previous</button>
-                    <button id="nextButtonShowroom" onclick="listLiveShowroom('next', 'Showroom')" style="margin-left: 10px;" class="btn">Next</button>
+
+            </div>
+
+            <!-- Box untuk Live Showroom -->
+            <div class="box-live"  style="background: transparent;margin-top: -65px;">
+                <h2 class="titleup" id="title-sr">
+                </h2><br>
+                <div id="liveListShowroom" style="display:block;">
+                    <!-- Content for Live Showroom -->
+
                 </div>
+                <br><hr><br>
             </div>
         </div>
     </div>
-    
-    
-    <br>
-    <br>
-    <br>
-            <footer>
-                By <a style="text-decoration:none" href=""> Januar Adhi N</a>
+</div>
 
-                <br>
-            </footer>
 
+<br><br><br>
+
+<footer>
+    By <a style="text-decoration:none" href="">Januar Adhi N</a>
+    <br>
+</footer>
+<script>
+  function toggleDisplay(id, button) {
+    var idn = document.getElementById('liveListIdn');
+    var showroom = document.getElementById('liveListShowroom');
+    var all = document.getElementById('btnAll');
+    var btnShowroom = document.getElementById('btnShowroom');
+    var btnIdn = document.getElementById('btnIdn');
+    var boxIdn = document.getElementById('title-idn');
+    var boxShowroom = document.getElementById('title-sr');
+
+    // Menyembunyikan semua konten dan box
+    idn.style.display = "none";
+    showroom.style.display = "none";
+    boxIdn.style.display = "none";
+    boxShowroom.style.display = "none";
+
+    // Menghapus kelas aktif dari semua tombol dan menambahkan kelas non-aktif
+    var buttons = document.querySelectorAll('.buttongoweb');
+    buttons.forEach(function(btn) {
+        btn.classList.remove('active-btn');
+        btn.classList.add('inactive-btn');
+    });
+
+    // Jika "All" dipilih, tampilkan semua konten
+    if (id === 'all') {
+        idn.style.display = "block";
+        showroom.style.display = "block";
+        boxIdn.style.display = "block";
+        boxShowroom.style.display = "block";
+    } else {
+        // Menampilkan div yang sesuai dengan tombol yang ditekan
+        var element = document.getElementById(id);
+        element.style.display = "block";
+
+        // Menampilkan box terkait dengan id
+        if (id === 'liveListShowroom') {
+            boxShowroom.style.display = "block";
+        } else if (id === 'liveListIdn') {
+            boxIdn.style.display = "block";
+        }
+    }
+
+    // Menambahkan kelas aktif pada tombol yang ditekan dan mengubah warna menjadi hijau
+    button.classList.add('active-btn');
+    button.classList.remove('inactive-btn');
+}
+
+// Menjalankan fungsi untuk memastikan tombol "All" aktif saat halaman dimuat
+window.onload = function() {
+    var allButton = document.getElementById('btnAll');
+    allButton.classList.add('active-btn');
+    allButton.classList.remove('inactive-btn');
+
+    // Menampilkan semua konten (All)
+    document.getElementById('liveListIdn').style.display = "block";
+    document.getElementById('liveListShowroom').style.display = "block";
+    document.getElementById('box-idn').style.display = "block";
+    document.getElementById('box-sr').style.display = "block";
+}
+</script>
     <!--SCRIPT-->
     <script src="../script/main.js"></script>
     <script src="script/image.js"></script>

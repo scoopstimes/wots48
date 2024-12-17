@@ -29,7 +29,7 @@ function listLiveIdn(action) {
     currentPageIdn++;
   }
 
-  fetch(`https://api.crstlnz.my.id/api/recent?sort=date&page=${currentPageIdn}&filter=all&order=-1&group=jkt48&type=idn&perpage=3`)
+  fetch(`https://api.crstlnz.my.id/api/recent?sort=date&page=${currentPageIdn}&filter=all&order=-1&group=jkt48&type=idn&perpage=100`)
     .then((response) => response.json())
     .then((data) => {
       const liveList = data.recents.filter((item) => item.idn.username !== "ame-5xqz6mqgk4");
@@ -41,19 +41,20 @@ function listLiveIdn(action) {
         const liveElement = document.createElement("div");
 
         liveElement.innerHTML = `
-          <br><br>
+          <br>
           <a href="drecentlive.html?id=${live.id}&start=${live.live_info.date.start}&end=${live.live_info.date.end}&gift=${live.gift_rate}&view=${live.live_info.viewers.num}&nama=${live.member.nickname}&image=${live.member.img_alt}">
-            <div class="row-live" style="background: #2F2F2F;border-radius: 10px; width: 100%;">
+            <div class="row-live" style="width: 100%;background: #2F2F2F;border-radius: 10px; width: 100%;">
               <img src="${live.member.img_alt}" style="width: 100px;
 		object-fit: cover; margin-top: 10px;"loading="lazy">
               <div style="margin-top: 10px; display: flex; flex-direction: column;margin-left: -19px;">
-                <h3 style="font-size: 20px;"> ${live.member.nickname} JKT48</h3>
+                <h3 style="font-size: 17px; width: 150%;"> ${live.member.name}</h3>
                 <div style="margin-top: 10px; display: flex; flex-direction: column;">
                 <h3><span style="font-size: 17px" class="mdi  mdi-access-point-network"> ${live.type}</span></h3>
                 <h3><span style="font-size: 17px" class="mdi mdi-account-multiple"> ${formatDate(live.live_info.date.start)}</span></h3>
                 <h3><span style="font-size: 17px" class="mdi  mdi-access-point-network"> ${duration}</span></h3>
                 </div>
-              </div>
+              
+            </div>
             </div>
           </a>
         `;
@@ -74,7 +75,7 @@ function listLiveShowroom(action) {
     currentPageShowroom++;
   }
 
-  fetch(`https://api.crstlnz.my.id/api/recent?group=jkt48&page=${currentPageShowroom}&perpage=3`)
+  fetch(`https://api.crstlnz.my.id/api/recent?group=jkt48&page=${currentPageShowroom}&perpage=100`)
     .then((response) => response.json())
     .then((data) => {
       const container = document.getElementById("liveListShowroom");
@@ -85,9 +86,9 @@ function listLiveShowroom(action) {
         const liveElement = document.createElement("div");
 
         liveElement.innerHTML = `
-          <br><br>
+          <br>
           <a href="drecentlive.html?id=${live.id}&start=${live.live_info.date.start}&end=${live.live_info.date.end}&gift=${live.gift_rate}&view=${live.live_info.viewers.num}&nama=${live.member.nickname}&image=${live.member.img_alt}">
-            <div class="row-live" style="background: #2F2F2F;border-radius: 10px; width: 100%;">
+            <div class="row-live" style="background: #2F2F2F;border-radius: 10px;  width: 100%;">
               <img src="${live.member.img_alt}" style="width: 100px;
 		object-fit: cover; margin-top: 10px;" loading="lazy">
               <div style="margin-top: 10px; display: flex; flex-direction: column; margin-left: -19px;">
