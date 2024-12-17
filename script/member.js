@@ -1,88 +1,31 @@
-const membersDiv = document.getElementById("members");
-const paginationDiv = document.getElementById('pagination');
-let membersData = [];
-if (!membersDiv || !paginationDiv) {
-  console.error("Cannot find required DOM elements.");
-} else {
-  fetch("script/member.json").then(_0x52b6fe => _0x52b6fe.json()).then(_0x472c76 => {
-    membersData = _0x472c76;
-    function _0x502d63(_0xd2d1ae, _0x411f04) {
-      membersDiv.innerHTML = '';
-      const _0x840bf3 = (_0xd2d1ae - 0x1) * 0x5;
-      const _0x1a4984 = _0xd2d1ae * 0x5;
-      const _0x43ce5e = _0x411f04.slice(_0x840bf3, _0x1a4984);
-      _0x43ce5e.forEach(_0x2e6d18 => {
-        const _0x4e6b53 = document.createElement("div");
-        _0x4e6b53.innerHTML = "\n                        <br><hr><br>\n                        <a href=\"dmember?id=" + _0x2e6d18.url + "\">\n                            <div class=\"row6\">\n                                <img src=\"" + _0x2e6d18.img_alt + "\" class=\"postermemdetail\" loading=\"lazy\">\n                                <div>\n                                    <h1>📌 Nama : " + _0x2e6d18.name + "</h1>\n                                    <h1>⭐ Jiko : " + _0x2e6d18.jikosokai + "</h1>\n                                    <h1>🧬 Gen  : " + _0x2e6d18.generation + "</h1>\n                                    <h1>🎓 Status member: " + (_0x2e6d18.is_graduate ? 'Graduated' : 'Active') + "</h1>\n                                </div>\n                            </div>\n                        </a>\n                    ";
-        membersDiv.appendChild(_0x4e6b53);
-      });
-      _0x3fb19b(_0xd2d1ae, _0x411f04);
+async function fetchMembers() {
+  try {
+    const _0x2e4d86 = await fetch("https://intensprotectionexenew.vercel.app/api/member");
+    const _0xc330fc = await _0x2e4d86.json();
+    const _0x3ca2e1 = _0xc330fc.members?.["member"];
+    if (!Array.isArray(_0x3ca2e1)) {
+      throw new Error("Data is not in the expected format");
     }
-    function _0x3fb19b(_0x59421d, _0x74fc90) {
-      paginationDiv.innerHTML = '';
-      const _0x1150d3 = Math.ceil(_0x74fc90.length / 0x5);
-      for (let _0x3c8e20 = 0x1; _0x3c8e20 <= _0x1150d3; _0x3c8e20++) {
-        const _0x208e95 = document.createElement('a');
-        _0x208e95.textContent = _0x3c8e20;
-        _0x208e95.classList.toggle('active', _0x3c8e20 === _0x59421d);
-        _0x208e95.addEventListener('click', () => _0x502d63(_0x3c8e20, _0x74fc90));
-        paginationDiv.appendChild(_0x208e95);
+    const _0x10ac8b = await fetch("/data/member.json").then(_0xdcacd0 => _0xdcacd0.json());
+    document.getElementById("core-members").innerHTML = '';
+    document.getElementById("trainee-members").innerHTML = '';
+    _0x3ca2e1.forEach(_0x1d7aa1 => {
+      const _0x462ac2 = _0x10ac8b.find(_0x476a93 => _0x476a93.name === _0x1d7aa1.nama_member);
+      const _0x4345a8 = _0x462ac2 ? _0x462ac2.generation : "Unknown";
+      const _0x5c6986 = "\n                <div class=\"flex flex-col items-center text-center\">\n                    <div class=\"relative  max-w-sm  mb-2\">\n                        <img src=\"https://jkt48.com" + _0x1d7aa1.ava_member + "\" \n                            alt=\"" + _0x1d7aa1.nama_member + "\" \n                            onerror=\"this.src='/assets/img/default-avatar.jpg'\"\n                            class=\"w-full h-full object-cover rounded-lg shadow-lg\">\n                        <div class=\"absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent h-1/2 rounded-b-lg\"></div>\n                        <div class=\"absolute bottom-2 left-2 bg-gradient-to-r from-pink-300/85 via-purple-300/85 to-cyan-300/85 rounded-lg px-2 py-1 text-xs text-gray-900\">\n                            " + _0x4345a8 + "\n                        </div>\n                    </div>\n                    <div class=\"text-center w-full\">\n                        <a href=\"/member/" + _0x1d7aa1.id_member + "\" \n                            class=\"bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2 inline-block hover:bg-white/20 transition-all duration-200\">\n                            <h3 class=\"text-sm text-white\">" + _0x1d7aa1.nama_member + "</h3>\n                        </a>\n                    </div>\n                </div>\n            ";
+      if (_0x1d7aa1.kategori === "Anggota JKT48") {
+        document.getElementById("core-members").innerHTML += _0x5c6986;
+      } else if (_0x1d7aa1.kategori === "Trainee JKT48") {
+        document.getElementById("trainee-members").innerHTML += _0x5c6986;
       }
-    }
-    _0x502d63(0x1, membersData);
-    function _0x53d986() {
-      const _0x36890f = document.getElementById("searchMember").value.toLowerCase();
-      const _0x3256d9 = membersData.filter(_0x39887a => _0x39887a.name.toLowerCase().includes(_0x36890f) || _0x39887a.generation.toLowerCase().includes(_0x36890f));
-      _0x502d63(0x1, _0x3256d9);
-    }
-    document.getElementById("searchMember").addEventListener("keyup", _0x53d986);
-  })["catch"](_0x5e0d08 => {
-    console.error("Error fetching data:", _0x5e0d08);
-  });
-}
-function detailMember() {
-  const _0x55a513 = new URLSearchParams(window.location.search);
-  const _0x19ca44 = _0x55a513.get('id');
-  let _0x392cb9 = "https://api.crstlnz.my.id/api/member";
-  const _0x312d53 = document.getElementById("memberDetail");
-  if (_0x19ca44) {
-    _0x392cb9 += '/' + _0x19ca44;
+    });
+  } catch (_0x1902b6) {
+    console.error("Error fetching members:", _0x1902b6);
+    document.getElementById("core-members").innerHTML = "\n            <div class=\"col-span-full text-center text-gray-400\">\n                <i class=\"fas fa-exclamation-circle text-2xl mb-2\"></i>\n                <p>Failed to load data 😭</p>\n            </div>\n        ";
+    document.getElementById("trainee-members").innerHTML = "\n            <div class=\"col-span-full text-center text-gray-400\">\n                <i class=\"fas fa-exclamation-circle text-2xl mb-2\"></i>\n                <p>Failed to load data 😭</p>\n            </div>\n        ";
   }
-  Promise.all([fetch(_0x392cb9).then(_0x5475b4 => _0x5475b4.json()), fetch("script/cdnpicture.json").then(_0xe4b7cc => _0xe4b7cc.json()), fetch('script/member.json').then(_0x442291 => _0x442291.json())]).then(([_0x295568, _0x80186b, _0x32a927]) => {
-    _0x312d53.innerHTML = '';
-    const _0x311c6f = _0x32a927.find(_0x1808bd => _0x1808bd.name === _0x295568.name);
-    if (_0x311c6f) {
-      const _0x21b9c2 = {
-        'year': "numeric",
-        'month': 'long',
-        'day': "numeric"
-      };
-      const _0x4474c0 = Array.isArray(_0x311c6f.nicknames) ? _0x311c6f.nicknames.join(", ") : '';
-      const _0x20b562 = document.createElement("div");
-      _0x20b562.classList.add("member-details");
-      _0x20b562.innerHTML = "\n                    <h2 class=\"titleup\">⭐ " + _0x295568.name + " ⭐</h2><br><hr><br>\n                    <div class=\"rowdmember2\">\n                        <img src=\"" + _0x295568.img_alt + "\" loading=\"lazy\"><br>\n                        <div class=\"teks\">\n                            <h3>📌 Nama Panggilan : " + _0x4474c0 + "</h3>\n                            <br>\n                            <h3>🧬 Generation : " + _0x311c6f.generation + "</h3>\n                            <br>\n                            <h3>🗓️ Tanggal Lahir : " + new Date(_0x295568.birthdate).toLocaleDateString("id-ID", _0x21b9c2) + "</h3>\n                            <br>\n                            <h3>🩸 Golongan Darah : " + (_0x311c6f.bloodType || "Tidak ada data 😭") + "</h3>\n                            <br>\n                            <h3>📏 Tinggi Badan : " + (_0x311c6f.height || "Tidak ada data 😭") + "</h3>\n                            <br>\n                            <h3>⭐ Jikoshokai : " + _0x311c6f.jikosokai + "</h3>\n                            </div>\n                        </div>\n                    </div><br><hr><br>\n                ";
-      document.getElementById('memberDetail').appendChild(_0x20b562);
-      const _0x3d05b2 = _0x311c6f.socials.find(_0x475892 => _0x475892.title === "Twitter") || _0x311c6f.socials.find(_0x43dc37 => _0x43dc37.title === 'X');
-      const _0x188507 = _0x3d05b2 ? _0x3d05b2.url : null;
-      addTwitterTimeline(_0x295568.name, _0x188507);
-    } else {
-      console.error("No matching member found in member.json");
-    }
-  })["catch"](_0x93204d => {
-    console.error("Error fetching data:", _0x93204d);
-  });
 }
-function addTwitterTimeline(_0x209930, _0x19523a) {
-  const _0x29f007 = document.createElement('div');
-  let _0x33f1f5 = '';
-  if (_0x19523a) {
-    _0x33f1f5 = "\n            <h3 style=\"color: white; margin-bottom: 20px; font-size: 20px;\">⭐ Tweets by " + _0x209930 + "</h3>\n            <a class=\"twitter-timeline\" \n                data-width=\"100%\" \n                data-height=\"500\" \n                data-chrome=\"noheader nofooter\" \n                href=\"" + _0x19523a + "\">\n            </a> \n            <script async src=\"//platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>\n        ";
-  } else {
-    _0x33f1f5 = "<p style=\"color: white;\">Tidak ada data Twitter untuk " + _0x209930 + "</p>";
-  }
-  _0x29f007.innerHTML = _0x33f1f5;
-  document.getElementById('memberDetail').appendChild(_0x29f007);
-}
-document.addEventListener('DOMContentLoaded', function () {
-  detailMember();
-});
+const loadingSkeleton = "\n    <div class=\"animate-pulse flex flex-col items-center text-center\">\n        <div class=\"w-full h-40 sm:h-48 bg-gray-700 rounded-lg mb-4\"></div>\n        <div class=\"h-6 bg-gray-700/30 rounded-lg w-3/4 mb-2\"></div>\n        <div class=\"h-4 bg-gray-700/20 rounded-lg w-1/2\"></div>\n    </div>\n".repeat(4);
+document.getElementById("core-members").innerHTML = loadingSkeleton;
+document.getElementById("trainee-members").innerHTML = loadingSkeleton;
+fetchMembers();

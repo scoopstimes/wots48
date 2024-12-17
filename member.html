@@ -1,31 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>48Intens Official</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JEKATE48 fanmade Website</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="/assets/css/home.css" rel="stylesheet">
+    <link rel="icon" href="/assets/css/image/favlogo.png" />
     <link rel="stylesheet" href="./css/style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js"
-        crossorigin="anonymous"></script>
-        <meta name="author" content="48Intens Official" />
-    <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
+    <meta name="author" content="JEKATE48">
+    <meta property="og:title" content="JEKATE48">
+    <meta property="og:image:height" content="961">
+    <meta property="og:image:width" content="1905">
+    <meta property="og:type" content="website">
+    <meta property="og:image"
+        content="https://cdn.discordapp.com/attachments/989168672708919317/1312702801561784430/jekate.png?ex=674d7540&is=674c23c0&hm=9ea5ecf4eb8348721762f134b4a30affbb5adcf3020bbb79b46a830dc1266520&">
+    <meta property="og:title" content="JEKATE48">
+    <meta name="description" content="EXPERIENCE THE MAGIC OF JKT48, ANYTIME, ANYWHERE">
+    <meta property="og:description" content="EXPERIENCE THE MAGIC OF JKT48, ANYTIME, ANYWHERE">
+        <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Zen Maru Gothic' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Barlow Condensed' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.3.67/css/materialdesignicons.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-
-    <link rel="icon" href="/assets/icon.png" />
-
 </head>
 
-<body>
-        <nav>
+<body class="min-h- bg-gray-900 text-white">
+
+
+<nav>
                 <div class="navbar-container">
 
                                  <button class="buttongoweb" onclick="goToLink('/home')">
@@ -67,45 +71,54 @@
                 </div>
         </nav>
 
-<div class="section">
-    <div class="container">
-        <div class="box">
-            <div class="search-container">
-                <h2 class="titleup">
-                    <span class="icon"><i class="fas fa-user-friends"></i></span> Member/Trainee JKT48
+    <div class="container mx-auto p-4 md:p-8">
+        <h1 class="text-2xl md:text-4xl font-bold mb-8">JKT48 Members</h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+            <section class="bg-gray-800 p-4 md:p-6 rounded-lg">
+                <h2 class="text-xl md:text-2xl font-bold mb-4 md:mb-6 flex items-center">
+                    <i class="fas fa-user-circle mr-2"></i> Members
                 </h2>
-                <input type="text" id="searchMember" placeholder="Cari nama member..." onkeyup="searchMember()" />
-            </div>
-            <div id="members"></div>
-            <br>
-            <br>
-            <hr>
-            <div class="pagination" id="pagination"></div>
+                <div id="core-members" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-max">
+                    <div class="animate-pulse flex flex-col items-center">
+                        <div class="w-24 h-24 bg-gray-600 rounded-full mb-2"></div>
+                        <div class="h-4 bg-gray-600 rounded w-16 mb-2"></div>
+                        <div class="h-3 bg-gray-600 rounded w-12"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-gray-800 p-4 md:p-6 rounded-lg">
+                <h2 class="text-xl md:text-2xl font-bold mb-4 md:mb-6 flex items-center">
+                    <i class="fas fa-user-graduate mr-2"></i> Trainee Members
+                </h2>
+                <div id="trainee-members" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-max">
+                    <div class="animate-pulse flex flex-col items-center">
+                        <div class="w-24 h-24 bg-gray-600 rounded-full mb-2"></div>
+                        <div class="h-4 bg-gray-600 rounded w-16 mb-2"></div>
+                        <div class="h-3 bg-gray-600 rounded w-12"></div>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
-</div>
 
-   
-
-    <br>
-    <br>
-    <br>
-            <footer>
-                By <a style="text-decoration:none" href=""> Januar Adhi N</a>
-
-                <br>
-            </footer>
+<br>
+<br><br><br>
 
 
+    <script>
+        const hamburgerIcon = document.getElementById('hamburger-icon');
+        const mobileMenu = document.getElementById('mobile-menu');
 
-    <!--SCRIPT-->
-    <script src="script/image.js"></script>
-    <script src="script/member.js"></script>
-    <script src="script/event.js"></script>
-    <!-- <script src="script/news.js"></script> -->
-    <script src="/middleware/middleware.js"></script>
-    <script src="script/inject.js"></script>
+        hamburgerIcon.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+    </script>
+    <script src="../script/member.js"></script>
+    <script src="/progress.js"></script>
     <script src="../script/main.js"></script>
+    <script src="/security/typicalsleepingboy.js"></script>
 </body>
 
 </html>
