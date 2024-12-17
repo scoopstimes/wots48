@@ -992,8 +992,8 @@ span {
 	padding: 15px;
 	box-sizing: border-box;
 	margin-top: 10px;
-	width: 750px;
-	max-width: 800px;
+	width: 100%;
+	
 	border-radius: 25px;
 	display: block;
 }
