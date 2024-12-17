@@ -46,7 +46,7 @@ function listLiveIdn(action) {
             <div class="row-live" style="background: #2F2F2F;border-radius: 10px; width: 100%;">
               <img src="${live.member.img_alt}" style="width: 100px;
 		object-fit: cover; margin-top: 10px;"loading="lazy">
-              <div style="margin-top: 10px; display: flex; flex-direction: column;">
+              <div style="margin-top: 10px; display: flex; flex-direction: column;margin-left: -19px;">
                 <h3 style="font-size: 20px;"> ${live.member.nickname} JKT48</h3>
                 <div style="margin-top: 10px; display: flex; flex-direction: column;">
                 <h3><span style="font-size: 17px" class="mdi  mdi-access-point-network"> ${live.type}</span></h3>
@@ -90,7 +90,7 @@ function listLiveShowroom(action) {
             <div class="row-live" style="background: #2F2F2F;border-radius: 10px; width: 100%;">
               <img src="${live.member.img_alt}" style="width: 100px;
 		object-fit: cover; margin-top: 10px;" loading="lazy">
-              <div style="margin-top: 10px; display: flex; flex-direction: column;">
+              <div style="margin-top: 10px; display: flex; flex-direction: column; margin-left: -19px;">
                 <h3 style="font-size: 17px;"> ${live.member.name}</h3>
                 <div style="margin-top: 10px; display: flex; flex-direction: column;">
                 <h3><span style="font-size: 17px" class="mdi  mdi-access-point-network"> ${live.type}</span></h3>
