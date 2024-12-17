@@ -99,13 +99,22 @@
                 <h2 class="titleup"id="title-idn">
 
                 </h2><br>
+                <div id="liveList" style="display:block;">
+                    <!-- Content for Live Idn -->
+
+                </div>
+
+            </div>
+            <div class="box-live" id="box-idn" style="background: transparent;">
+                <h2 class="titleup"id="title-idn">
+
+                </h2><br>
                 <div id="liveListIdn" style="display:block;">
                     <!-- Content for Live Idn -->
 
                 </div>
 
             </div>
-
             <!-- Box untuk Live Showroom -->
             <div class="box-live"  style="background: transparent;margin-top: -65px;">
                 <h2 class="titleup" id="title-sr">
@@ -129,49 +138,47 @@
 </footer>
 <script>
   function toggleDisplay(id, button) {
-    var idn = document.getElementById('liveListIdn');
-    var showroom = document.getElementById('liveListShowroom');
-    var all = document.getElementById('btnAll');
-    var btnShowroom = document.getElementById('btnShowroom');
-    var btnIdn = document.getElementById('btnIdn');
-    var boxIdn = document.getElementById('title-idn');
-    var boxShowroom = document.getElementById('title-sr');
+  var idn = document.getElementById('liveListIdn');
+  var showroom = document.getElementById('liveListShowroom');
+  var all = document.getElementById('btnAll');
+  var btnShowroom = document.getElementById('btnShowroom');
+  var btnIdn = document.getElementById('btnIdn');
+  var boxIdn = document.getElementById('title-idn');
+  var boxShowroom = document.getElementById('title-sr');
 
-    // Menyembunyikan semua konten dan box
-    idn.style.display = "none";
-    showroom.style.display = "none";
-    boxIdn.style.display = "none";
-    boxShowroom.style.display = "none";
+  // Menyembunyikan semua konten dan box
+  idn.style.display = "none";
+  showroom.style.display = "none";
+  boxIdn.style.display = "none";
+  boxShowroom.style.display = "none";
 
-    // Menghapus kelas aktif dari semua tombol dan menambahkan kelas non-aktif
-    var buttons = document.querySelectorAll('.buttongoweb');
-    buttons.forEach(function(btn) {
-        btn.classList.remove('active-btn');
-        btn.classList.add('inactive-btn');
-    });
+  // Menghapus kelas aktif dari semua tombol dan menambahkan kelas non-aktif
+  var buttons = document.querySelectorAll('.buttongoweb');
+  buttons.forEach(function(btn) {
+    btn.classList.remove('active-btn');
+    btn.classList.add('inactive-btn');
+  });
 
-    // Jika "All" dipilih, tampilkan semua konten
-    if (id === 'all') {
-        idn.style.display = "block";
-        showroom.style.display = "block";
-        boxIdn.style.display = "block";
-        boxShowroom.style.display = "block";
-    } else {
-        // Menampilkan div yang sesuai dengan tombol yang ditekan
-        var element = document.getElementById(id);
-        element.style.display = "block";
+  // Jika "All" dipilih, tampilkan semua konten
+  if (id === 'all') {
+    idn.style.display = "block";
+    showroom.style.display = "block";
+    boxIdn.style.display = "block";
+    boxShowroom.style.display = "block";
+    listLive('all');
+  } else if (id === 'liveListShowroom') {
+    showroom.style.display = "block";
+    boxShowroom.style.display = "block";
+    listLive('showroom'); // Filter Showroom
+  } else if (id === 'liveListIdn') {
+    idn.style.display = "block";
+    boxIdn.style.display = "block";
+    listLive('idn'); // Filter IDN
+  }
 
-        // Menampilkan box terkait dengan id
-        if (id === 'liveListShowroom') {
-            boxShowroom.style.display = "block";
-        } else if (id === 'liveListIdn') {
-            boxIdn.style.display = "block";
-        }
-    }
-
-    // Menambahkan kelas aktif pada tombol yang ditekan dan mengubah warna menjadi hijau
-    button.classList.add('active-btn');
-    button.classList.remove('inactive-btn');
+  // Menambahkan kelas aktif pada tombol yang ditekan dan mengubah warna menjadi hijau
+  button.classList.add('active-btn');
+  button.classList.remove('inactive-btn');
 }
 
 // Menjalankan fungsi untuk memastikan tombol "All" aktif saat halaman dimuat
