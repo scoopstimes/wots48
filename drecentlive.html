@@ -182,9 +182,9 @@
                     document.getElementById("live-time").textContent = `Mulai pada: ${new Date(liveStart).toLocaleTimeString("id-ID")}`;
                     document.getElementById("live-duration").textContent = `Durasi: ${calculateDuration(liveStart, liveEnd)}`;
                     document.getElementById("gift").textContent = `🎁 Gift: ${gift} G`;
-                    document.getElementById("excitement").textContent = `🔥 Excitement: ${data.excitement}`;
+                    
                     document.getElementById("viewers").textContent = `👀 Viewers: ${view} viewers`;
-                    document.getElementById("comments").textContent = `💬 Comments: ${data.comments}`;
+                    
                 })
                 .catch((error) => console.error("Error fetching live details:", error));
 
