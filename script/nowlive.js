@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const img = document.createElement('img');
             img.src = member.img;
             img.alt = member.name;
-            img.style = 'width: 100%; object-fit: cover; border-radius: 10px;';
+            img.style = 'width: 200px; object-fit: cover; border-radius: 10px; height: 200px; aspect-ratio: 1/1;';
             card.appendChild(img);
 
             const title = document.createElement('div');
@@ -106,3 +106,4 @@ document.addEventListener("DOMContentLoaded", function () {
   // Fetch untuk SHOWROOM LIVE NO LIMIT
   fetchLiveData('.card-nowlive-container-up', false);
 });
+

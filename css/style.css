@@ -477,11 +477,7 @@ a {
 	transform: scale(1.05);
 }
 
-.card-nowlive-container {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: start;
-}
+
 
 .card-nowlive-container-up {
 	display: flex;
@@ -556,23 +552,39 @@ a {
 	text-wrap: wrap;
 }
 
+.card-nowlive-container > div {
+  background-color: #2c2c2e;
+  border-radius: 10px;
+  padding: 10px;
+  width: 150px; /* Ukuran tetap untuk card */
+  position: relative;
+  display: flex;
+  flex-direction: column;  /* Mengatur card agar konten disusun vertikal */
+  height: 250px;  /* Pastikan card memiliki tinggi penuh */
+  justify-content: space-between; /* Menyebarkan konten, tombol di bawah */
+}
+
 .btn-live {
-	display: flex;
-	padding: 5px 5px;
-	
-	margin-top: 15px;
-	text-align: center;
-	justify-content: center;
-	align-items: center;
-	
-	width: 70px;
-	text-decoration: none;
-	text-align: center;
-	margin-left: 0px;
-	border-radius: 15px;
-	color: #fff;
-	background-color: #FF2929;
-	cursor: pointer;
+  display: flex;
+  padding: 5px 5px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  text-decoration: none;
+  border-radius: 15px;
+  color: #fff;
+  background-color: #FF2929;
+  cursor: pointer;
+  margin-top: 10px; /* Memberikan jarak antar elemen di atas tombol */
+}
+
+.card-nowlive-container > div > .card-body {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+  flex-grow: 1;  /* Mengisi ruang yang tersisa sehingga tombol tetap di bawah */
 }
 .live-indicator {
   position: relative; /* Menjadi parent untuk absolute positioning */
