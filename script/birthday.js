@@ -85,9 +85,10 @@ async function displayUpcomingBirthdays() {
   <div class="birthday-item">
     <img src="${img}" alt="${name} Image" class="postermem" loading="lazy">
     <div class="birthday-info">
-      <h3><span class="mdi mdi-account-group">${name} JKT48</span></h3>
-      <h4>${formattedDate}</h4>
-      <h5>${remainingTime}</h5>
+      <h3><span class="mdi mdi-cake-variant"> ${name} JKT48</span></h3>
+      <h4><span style="color: white;
+  font-size: 12px;" class="mdi mdi-calendar-multiple"> ${formattedDate}</span></h4>
+      <h5 style="margin-top: 10px;">${remainingTime}</h5>
     </div>
 
   </div>
