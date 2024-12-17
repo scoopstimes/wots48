@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('liveCount').textContent = ` ${liveCount} member`;
 
         if (liveCount === 0) {
-          document.getElementById('noLiveMessage').textContent = 'Tidak ada yang live 😭😭';
+          document.getElementById('noLiveMessage').textContent = 'Tidak ada yang live ';
         } else {
           document.getElementById('noLiveMessage').textContent = '';
 
