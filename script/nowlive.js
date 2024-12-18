@@ -50,6 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
               display: flex;
               flex-direction: column;
               gap: 10px;
+              
             `;
 
             const img = document.createElement('img');
@@ -65,12 +66,12 @@ document.addEventListener("DOMContentLoaded", function () {
             card.appendChild(img);
 
             const title = document.createElement('div');
-            title.textContent = member.name;
-            title.style = `
-              font-size: 16px;
-              font-weight: bold;
-            `;
-            card.appendChild(title);
+title.textContent = member.name + (member.type === 'idn' ? ' JKT48' : '');
+title.style = `
+  font-size: 14px;
+  font-weight: bold;
+`;
+card.appendChild(title);
 
             const liveType = document.createElement('p');
             liveType.textContent = `Live: ${member.type}`;
