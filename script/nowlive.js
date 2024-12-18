@@ -68,16 +68,16 @@ document.addEventListener("DOMContentLoaded", function () {
           liveMembers.slice(0, isLimit ? 100 : liveMembers.length).forEach((member) => {
             console.log(member);
 
-            // Cek apakah member sudah dinotifikasi sebelumnya
-            const notifiedMembers = JSON.parse(localStorage.getItem('notifiedMembers')) || [];
+            // Cek apakah member sudah mendapat notifikasi sebelumnya
+            let notifiedMembers = JSON.parse(localStorage.getItem("notifiedMembers")) || [];
 
+            // Kirim notifikasi hanya untuk member baru yang live
             if (!notifiedMembers.includes(member.name)) {
-              // Kirim notifikasi hanya untuk member yang baru live
               sendNotification(member.name, member.type);
-              
-              // Simpan member yang sudah dinotifikasi
+
+              // Simpan member yang sudah diberi notifikasi
               notifiedMembers.push(member.name);
-              localStorage.setItem('notifiedMembers', JSON.stringify(notifiedMembers));
+              localStorage.setItem("notifiedMembers", JSON.stringify(notifiedMembers)); // Simpan ke localStorage
             }
 
             const card = document.createElement('div');
