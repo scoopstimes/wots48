@@ -10,14 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
         container.innerHTML = ''; // Bersihkan container
 
         const liveMembers = data.filter(member => member.started_at);
-        
-        // Gabungkan data live dari idn dan showroom
-        const allLiveMembers = liveMembers;
-
-        // Urutkan semua live members berdasarkan waktu mulai (latest first)
-        allLiveMembers.sort((a, b) => new Date(b.started_at) - new Date(a.started_at));
-
-        const liveCount = allLiveMembers.length;
+        const liveCount = liveMembers.length;
 
         // Menampilkan jumlah member yang sedang live
         document.getElementById('liveCount').textContent = ` ${liveCount} Member`;
@@ -41,8 +34,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (liveCount > 0) {
           const idnUrl = 'https://www.idn.app/';
-          // Menyusun data untuk ditampilkan
-          allLiveMembers.slice(0, isLimit ? 100 : allLiveMembers.length).forEach(member => {
+          liveMembers.slice(0, isLimit ? 100 : liveMembers.length).forEach(member => {
+            console.log(member);
             const card = document.createElement('div');
             card.style = `
               background-color: #2A3347;
@@ -57,6 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
               display: flex;
               flex-direction: column;
               gap: 10px;
+              
             `;
 
             const img = document.createElement('img');
@@ -72,12 +66,12 @@ document.addEventListener("DOMContentLoaded", function () {
             card.appendChild(img);
 
             const title = document.createElement('div');
-            title.textContent = member.name + (member.type === 'idn' ? ' JKT48' : '');
-            title.style = `
-              font-size: 14px;
-              font-weight: bold;
-            `;
-            card.appendChild(title);
+title.textContent = member.name + (member.type === 'idn' ? ' JKT48' : '');
+title.style = `
+  font-size: 14px;
+  font-weight: bold;
+`;
+card.appendChild(title);
 
             const liveType = document.createElement('p');
             liveType.textContent = `Live: ${member.type}`;
@@ -153,3 +147,4 @@ document.addEventListener("DOMContentLoaded", function () {
   // Fetch untuk SHOWROOM LIVE NO LIMIT
   fetchLiveData('.card-nowlive-container-up', false);
 });
+
