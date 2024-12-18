@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const notificationData = {
       app_id: appId,
       headings: { en: "Live Notification" },
-      contents: { en: `${memberName} is live on ${platform}` },
+      contents: { en: `${memberName} Sedang live di ${platform}` },
       included_segments: ["All"], // Kirim ke semua pengguna
       data: {
         member_name: memberName,
