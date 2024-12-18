@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch(sumber)
       .then(response => response.json())
       .then(data => {
-        
         const container = document.querySelector(containerSelector);
         container.innerHTML = ''; // Bersihkan container
 
@@ -36,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (liveCount > 0) {
           const idnUrl = 'https://www.idn.app/';
           liveMembers.slice(0, isLimit ? 100 : liveMembers.length).forEach(member => {
-            console.log(member); 
+            console.log(member);
             const card = document.createElement('div');
             card.style = `
               background-color: #2A3347;
@@ -105,8 +104,8 @@ document.addEventListener("DOMContentLoaded", function () {
                   fullscreenBtn.innerHTML = '<span class="mdi mdi-video"></span>';
 
                   const startDate = member.started_at ? encodeURIComponent(member.started_at) : 'Tidak diketahui';
-const viewers = member.viewers ? encodeURIComponent(member.viewers) : '0';
-fullscreenBtn.href = `showroom.html#url=${encodeURIComponent(urlObj.url)}&name=${encodeURIComponent(member.name)}&viewers=${viewers}&start_date=${startDate}&type=${encodeURIComponent(member.type)}`;
+                  const viewers = member.viewers ? encodeURIComponent(member.viewers) : '0';
+                  fullscreenBtn.href = `showroom.html#url=${encodeURIComponent(urlObj.url)}&name=${encodeURIComponent(member.name)}&viewers=${viewers}&start_date=${startDate}&type=${encodeURIComponent(member.type)}`;
                   cardBody.appendChild(fullscreenBtn);
                 }
               });
@@ -124,7 +123,7 @@ fullscreenBtn.href = `showroom.html#url=${encodeURIComponent(urlObj.url)}&name=$
                 fullscreenBtn.innerHTML = '<span class="mdi mdi-video"></span>';
 
                 const startDate = member.started_at ? encodeURIComponent(member.started_at) : 'Tidak diketahui';
-const viewers = member.viewers ? encodeURIComponent(member.viewers) : '0';
+                const viewers = member.viewers ? encodeURIComponent(member.viewers) : '0';
 
                 fullscreenBtn.href = `showroom.html#${ProxyUrl}${encodeURIComponent(urlObj.url)}&name=${encodeURIComponent(member.name)}&viewers=${viewers}&start_date=${startDate}&type=${encodeURIComponent(member.type)}`;
                 cardBody.appendChild(fullscreenBtn);
@@ -132,7 +131,9 @@ const viewers = member.viewers ? encodeURIComponent(member.viewers) : '0';
             }
 
             card.appendChild(cardBody);
-            container.appendChild(card);
+
+            // Tambahkan kartu di awal container
+            container.prepend(card);
           });
         }
       })
