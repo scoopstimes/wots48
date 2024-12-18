@@ -156,7 +156,19 @@ padding: 5px 10px;">${s.name}</h3>
 
             const theaterDetailCard = document.createElement("div");
             theaterDetailCard.innerHTML = `
-              <h2 class="titleup">${show.title} - ${dateString} </h2><br><br>
+         
+  <div class="header_app" style="height: 50px;background-color: #0F131DCF;">
+
+
+      <div class="header_logo">
+    <button class="buttongoweb" onclick="goToLink('event.html')"><span class="mdi mdi-chevron-left"></span>    </button>
+        <span style="font-size: 20px; font-weight: 700; font-family: 'Zen Maru Gothic';margin-left: 10px;" >${show.title} - ${dateString}</span>
+      </div>
+
+
+  </div>
+<br>
+              <br>
               <div class="row2" style="display: flex; flex-direction: column; width: 100%;">
               <div style="display: flex;width: 100%;justify-content: center; align-items: center;">
                 <img src="${bannerImage}" style="max-width: 100%;  ">
