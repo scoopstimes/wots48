@@ -86,10 +86,10 @@ async function nextTheater() {
    <div class="card-th-content">
    ${seitansaiText}
 <br>
-    <h2>
+    <h2 style="font-weight: 600;">
       ${theater.title}
     </h2>
-    <p>
+    <p style="font-weight: 400;">
     ${formattedDate}
     </p>
     <div class="members-th">
