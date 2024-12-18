@@ -69,21 +69,18 @@
     <div class="section">
         <div class="container">
             <div class="flex-container">
-            <div class="box">
+
                 <h2 class="titleup"><span class="icon"><i class="fas fa-newspaper"></i></span> News</h2><br>
-                <hr><br>
-                <div id="newsList"></div>
-                <br>
-                <button id="prevButton" onclick="loadNews('prev')" class="btn">Previous</button>
+
+                <div style="margin-top: -20px;"id="newsList"></div>
+                
+                <div style="display: flex; justify-content: center;gap: 10px;">
+                  
+                                  <button id="prevButton" onclick="loadNews('prev')" class="btn">Previous</button>
                 <button id="nextButton" onclick="loadNews('next')" class="btn">Next</button>
-            </div>
-            <div class="box">
-                <h1 class="titleup"><span class="icon"><i class="fas fa-calendar"></i></span> Event</h1>
-                <br />
-                <hr />
-                <div id="eventList-dir"></div>
-                <br />
-            </div>
+                </div>
+            
+
         </div>
     </div>
 
