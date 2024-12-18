@@ -10,6 +10,10 @@ document.addEventListener("DOMContentLoaded", function () {
         container.innerHTML = ''; // Bersihkan container
 
         const liveMembers = data.filter(member => member.started_at);
+        
+        // Urutkan berdasarkan waktu mulai (latest first)
+        liveMembers.sort((a, b) => new Date(b.started_at) - new Date(a.started_at));
+
         const liveCount = liveMembers.length;
 
         // Menampilkan jumlah member yang sedang live
@@ -34,8 +38,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (liveCount > 0) {
           const idnUrl = 'https://www.idn.app/';
-          liveMembers.slice(0, isLimit ? 100 : liveMembers.length).forEach(member => {
-            console.log(member);
+          // Menyusun data untuk ditampilkan, urutan live members diubah
+          let orderedMembers = [];
+          
+          liveMembers.forEach(member => {
+            if (member.type === 'idn') {
+              orderedMembers.push(member);
+            }
+          });
+
+          liveMembers.forEach(member => {
+            if (member.type === 'showroom') {
+              orderedMembers.push(member);
+            }
+          });
+
+          orderedMembers.slice(0, isLimit ? 100 : orderedMembers.length).forEach(member => {
             const card = document.createElement('div');
             card.style = `
               background-color: #2A3347;
@@ -50,7 +68,6 @@ document.addEventListener("DOMContentLoaded", function () {
               display: flex;
               flex-direction: column;
               gap: 10px;
-              
             `;
 
             const img = document.createElement('img');
@@ -66,12 +83,12 @@ document.addEventListener("DOMContentLoaded", function () {
             card.appendChild(img);
 
             const title = document.createElement('div');
-title.textContent = member.name + (member.type === 'idn' ? ' JKT48' : '');
-title.style = `
-  font-size: 14px;
-  font-weight: bold;
-`;
-card.appendChild(title);
+            title.textContent = member.name + (member.type === 'idn' ? ' JKT48' : '');
+            title.style = `
+              font-size: 14px;
+              font-weight: bold;
+            `;
+            card.appendChild(title);
 
             const liveType = document.createElement('p');
             liveType.textContent = `Live: ${member.type}`;
