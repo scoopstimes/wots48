@@ -82,19 +82,34 @@
 </head>
 
 <body class="text-center">
+  <div class="header_app" style="height: 50px;background-color: #0F131DCF;">
 
+
+      <div class="header_logo">
+    <button class="buttongoweb" onclick="goToLink('news.html')"><span class="mdi mdi-chevron-left"></span>    </button>
+        <span style="font-size: 20px; font-weight: 700; font-family: 'Zen Maru Gothic';margin-left: 10px;" id="liveMemberName" ></span>
+        <div style="width: 100%;">
+        <div style="background: #FF2408; border-radius: 10px; display: flex; justify-content: center; align-items: center;padding: 5px; width: 70px;margin-left: auto;margin-right: 10px;">
+    <div class="live-indicator" >
+      <div class="circle" style="background: white;"></div>
+      <div class="pulse" style="background: white;"></div>
+    </div>
+    <h1 style="font-size: 24px; margin-left: 10px;font-family: 'Zen Maru Gothic';">Live</h1>
+        </div>
+        </div>
+   
+      </div>
+
+
+  </div>
 <div class="section">
   <div class="container">
-    <h1 class="titleup"> <span id="liveMemberName"></span></h1>
+ <!-- Menambahkan elemen untuk menampilkan jenis live -->
 
-    <p id="startDate"></p>
-    <p id="startTime"></p>
-    <p id="liveType"></p> <!-- Menambahkan elemen untuk menampilkan jenis live -->
-    <br>
-    <hr><br>
     <div class="card">
-      <div style="background: transparent;width: 100%;" id="video-container">
+      <div style="background: transparent;width: 100%;margin-top: 25px;" id="video-container">
         <video id="video" class="card-img-top" style="max-width: 100%;" controls autoplay muted></video>
+
       </div>
     </div>
     <br>
@@ -102,6 +117,21 @@
   </div>
 </div>
 
+        <div style="display: flex; flex-direction: column; width: 90%; background: gray; padding: 20px;display: none;">
+          <div class="display: flex;">
+            
+                          <h1 class="titleup"> <span id="liveMemberName"></span></h1>
+          </div>
+          <div class="display: flex;">
+    <p id="startDate"></p>
+    </div>
+    <div class="display: flex;">
+    <p id="startTime"></p>
+    </div>
+    <div class="display: flex;">
+    <p id="liveType"></p>
+    </div>
+        </div>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
       
@@ -123,7 +153,7 @@
   }
 
   // Menampilkan informasi tambahan seperti nama member, jumlah viewers, dll.
-  document.getElementById('liveMemberName').textContent = memberName || 'Nama Tidak Ditemukan';
+  document.getElementById('liveMemberName').textContent = memberName + 'JKT48' || 'Nama Tidak Ditemukan';
   
 
   if (startDate) {
@@ -143,15 +173,15 @@
     });
 
     // Menampilkan Tanggal dan Jam secara terpisah
-    document.getElementById('startDate').textContent = `Dimulai pada Tanggal: ${formattedDate}`;
-    document.getElementById('startTime').textContent = `Dimulai pada jam: ${formattedTime}`;
+    document.getElementById('startDate').innerHTML = `<span class="mdi mdi-account-group"></span>${formattedDate}`;
+    document.getElementById('startTime').innerHTML = `<span class="mdi mdi-account-group"></span>${formattedTime}`;
   } else {
-    document.getElementById('startDate').textContent = 'Tanggal tidak diketahui';
-    document.getElementById('startTime').textContent = 'Jam tidak diketahui';
+    document.getElementById('startDate').textContent = '';
+    document.getElementById('startTime').textContent = '';
   }
 
   // Menampilkan jenis live (IDN atau Showroom)
-  document.getElementById('liveType').textContent = `Platform Live: ${liveType ? liveType.charAt(0).toUpperCase() + liveType.slice(1) : 'Tidak Diketahui'}`;
+  document.getElementById('liveType').innerHTML = `<span class="mdi mdi-account-group"></span> ${liveType ? liveType.charAt(0).toUpperCase() + liveType.slice(1) : 'Tidak Diketahui'}`;
 });
 </script>
     <br>
@@ -167,11 +197,12 @@
         integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/hls.js"></script>
     <script src="https://48streams.vercel.app/player/mousetrap.min.js" charset="utf-8"></script>
-    <script src="script/nowlive.js"></script>
+    <script src="../script/nowlive.js"></script>
     <script src="/middleware/middleware.js"></script>
     <script src="script/player.js"></script>
     <script src="script/inject.js"></script>
     <script src="../script/main.js"></script>
+
 </body>
 
 </html>
