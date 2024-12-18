@@ -197,7 +197,7 @@ padding: 5px 10px;">${s.name}</h3>
                      </div>
               <div style="display: flex; justify-content: left; margin-left: 15px; align-items: center; width: 95%; gap: 10px;margin-top: 20px;">
               <span style="font-size: 30px;" class="mdi mdi-account-group"></span>
-              <h3 style="font-size: 27px;font-weight: 400; font-family: 'Zen Maru Gothic';">${memberCount > 0 ? ` Daftar Member` : "Lineup belum keluar 😭"}</h3>
+              <h3 style="font-size: 27px;font-weight: 400; font-family: 'Zen Maru Gothic';">${memberCount > 0 ? ` Daftar Member` : "Lineup segera"}</h3>
               </div>
               <div class="row3">
                 ${memberCount > 0 ? show.members.map(member => `
