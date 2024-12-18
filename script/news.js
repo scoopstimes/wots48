@@ -124,10 +124,11 @@ function detailNews() {
       const newsDiv = document.createElement("div");
 
       newsDiv.innerHTML = `
-        <br><h1 class="titleup"> ${data.title}</h1><br><hr><br>
+        <br>
+        <div style="display: flex; flex-direction: column; width: 95%;"<h1 class="titleup"> ${data.title}</h1><br><hr><br>
         <div class="content">${data.content}</div>
         <hr>
-        <br><a href="${detailLink}" class="btn">🌐 Lihat di web JKT48</a><br><br>
+        <br><a href="${detailLink}" class="btn">🌐 Lihat di web JKT48</a></div><br><br>
       `;
 
       // Penyesuaian gaya
