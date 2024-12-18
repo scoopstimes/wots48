@@ -2,7 +2,7 @@ let currentPage = 1; // Halaman saat ini
 
 // Fungsi untuk membatasi jumlah berita yang ditampilkan
 function limitNews() {
-  fetch(`https://api.crstlnz.my.id/api/news?page=${currentPage}&perpage=6`)
+  fetch(`https://api.crstlnz.my.id/api/news?page=${currentPage}&perpage=100`)
     .then(response => response.json())
     .then(data => {
       const newsContainer = document.getElementById("newsLimit");
@@ -32,7 +32,7 @@ function limitNews() {
 
 // Fungsi untuk membatasi berita member
 function limitNewsmember() {
-  fetch(`https://api.crstlnz.my.id/api/news?page=${currentPage}&perpage=6`)
+  fetch(`https://api.crstlnz.my.id/api/news?page=${currentPage}&perpage=100`)
     .then(response => response.json())
     .then(data => {
       const newsContainer = document.getElementById("newsLimimember");
@@ -68,7 +68,7 @@ function loadNews(action) {
     currentPage++; // Maju satu halaman
   }
 
-  fetch(`https://api.crstlnz.my.id/api/news?page=${currentPage}`)
+  fetch(`https://api.crstlnz.my.id/api/news?page=${currentPage}&perpage=50`)
     .then(response => response.json())
     .then(data => {
       const newsList = document.getElementById("newsList");
@@ -84,7 +84,7 @@ function loadNews(action) {
         newsDiv.innerHTML = `
           <a href="dnews.html?id=${newsItem.id}"><br>
           <div style="display: flex; width: 100%; flex-direction: column; justify-content: center; align-items: center;">
-          <div style="width: 90%; margin-left: 0px;display: flex; background: #1F202B; flex-direction: column;padding: 15px;border-radius: 10px;">
+          <div style="width: 90%; margin-left: 0px;display: flex; background: #2A3347; flex-direction: column;padding: 15px;border-radius: 10px;">
             <div class="row1">
               <img style="border-radius: 10px;" src="https://res.cloudinary.com/haymzm4wp/image/upload/assets/jkt48${newsItem.label}" alt="Category Icon">
 
