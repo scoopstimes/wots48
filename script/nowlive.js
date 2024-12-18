@@ -70,14 +70,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Cek apakah member sudah mendapat notifikasi sebelumnya
             let notifiedMembers = JSON.parse(localStorage.getItem("notifiedMembers")) || [];
+            let lastLiveTimestamp = localStorage.getItem("lastLiveTimestamp");
 
-            // Kirim notifikasi hanya untuk member baru yang live
-            if (!notifiedMembers.includes(member.name)) {
+            // Cek timestamp live member
+            const memberLiveTime = new Date(member.started_at).getTime();
+            const isNewLiveMember = memberLiveTime > lastLiveTimestamp;
+
+            // Kirim notifikasi hanya untuk member baru yang live atau jika timestampnya lebih baru
+            if (!notifiedMembers.includes(member.name) && isNewLiveMember) {
               sendNotification(member.name, member.type);
 
-              // Simpan member yang sudah diberi notifikasi
+              // Simpan member yang sudah diberi notifikasi dan timestamp
               notifiedMembers.push(member.name);
               localStorage.setItem("notifiedMembers", JSON.stringify(notifiedMembers)); // Simpan ke localStorage
+              localStorage.setItem("lastLiveTimestamp", memberLiveTime); // Simpan timestamp live terakhir
             }
 
             const card = document.createElement('div');
