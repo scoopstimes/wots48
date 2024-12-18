@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Set interval untuk memantau live data setiap 1 menit (60000 ms)
-  setInterval(fetchLiveData, 60000);
+  setInterval(fetchLiveData, 20000);
   
   // Initial fetch on load
   fetchLiveData();
