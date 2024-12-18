@@ -136,7 +136,7 @@ function detailNews() {
             <h1 class="titleup" style="text-align: left;">${data.title}</h1>
             
             <!-- Bagian tanggal dengan gambar -->
-            <div style="display: flex; align-items: center; text-align: center; width: 100%;margin-top: 10px; gap: 10px;">
+            <div style="display: flex; align-items: center; text-align: center; width: 100%;margin-top: 0px; gap: 10px;">
               <img src="https://res.cloudinary.com/haymzm4wp/image/upload/assets/jkt48${data.label}" alt="Icon Calendar" style="margin-top: 10px;" >
               <p style="font-weight: 400; ">${formattedDate}</p>
             </div>
