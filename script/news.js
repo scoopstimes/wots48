@@ -131,44 +131,57 @@ function detailNews() {
 
       newsDiv.innerHTML = `
         <br>
-        <div style="display: flex; flex-direction: column; width: 100%; justify-content: center;">
-          <div style="width: 95%; justify-content: center;">
-            <h1 class="titleup" style="text-align: left;">${data.title}</h1>
-            
-            <!-- Bagian tanggal dengan gambar -->
-            <div style="display: flex; align-items: center; text-align: center; width: 100%;margin-top: 0px; gap: 10px;">
-              <img src="https://res.cloudinary.com/haymzm4wp/image/upload/assets/jkt48${data.label}" alt="Icon Calendar" style="margin-top: 10px;" >
-              <p style="font-weight: 400; ">${formattedDate}</p>
-            </div>
-            
-            <br><br>
-            <div class="content" style="width: 95%;display: flex; flex-direction: column; justify-content: center; font-weight: 400;">${data.content}</div>
-            <br>
-            <div>
-            <a href="${detailLink}" class="btn">
-
-<div style="display: flex; align-items: center; text-align: center; justify-content: center; gap: 10px;">
-           <span class="mdi mdi-web"style="font-size: 20px;"></span>
-            <p>Lihat di web JKT48<p>
-            </div>
-            
-            </a>
-            
-            </div>
-          </div>
+<div style="display: flex; flex-direction: column; width: 100%; justify-content: center;">
+  <div style="width: 95%; justify-content: center;">
+    <h1 class="titleup" style="text-align: left;">${data.title}</h1>
+    
+    <!-- Bagian tanggal dengan gambar -->
+    <div style="display: flex; align-items: center; text-align: center; width: 100%; margin-top: 0px; gap: 10px;">
+      <img src="https://res.cloudinary.com/haymzm4wp/image/upload/assets/jkt48${data.label}" alt="Icon Calendar" style="margin-top: 10px;" >
+      <p style="font-weight: 400;">${formattedDate}</p>
+    </div>
+    
+    <br><br>
+    <!-- Modifikasi bagian konten -->
+    <div class="content" style="
+      width: 90%;
+      display: flex;
+      margin-top: -15px;
+      flex-direction: column;
+      justify-content: center;
+      font-weight: 400;
+      word-wrap: break-word; /* Memastikan kata panjang terputus */
+      word-break: break-word; /* Memastikan kata panjang terpotong */
+      overflow: hidden; /* Menyembunyikan bagian yang keluar */
+    ">
+      ${data.content}
+    </div>
+    <br>
+    <div>
+      <a href="${detailLink}" class="btn">
+        <div style="display: flex; align-items: center; text-align: center; justify-content: center; gap: 10px;">
+          <span class="mdi mdi-web" style="font-size: 20px;"></span>
+          <p>Lihat di web JKT48</p>
         </div>
-        <br><br>
+      </a>
+    </div>
+  </div>
+</div>
+<br><br>
       `;
 
       // Penyesuaian gaya
       const contentElement = newsDiv.querySelector(".content");
       contentElement.style.fontSize = "13px";
-      contentElement.style.lineHeight = "1";
+      contentElement.style.lineHeight = "1.5";
       
       contentElement.style.marginBottom = "20px";
+      
+      
       contentElement.querySelectorAll("span").forEach(span => {
         span.style.color = "white";
         span.style.fontWeight = "400";
+        
       });
 
       newsDetailContainer.appendChild(newsDiv);
