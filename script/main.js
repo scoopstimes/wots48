@@ -11,3 +11,5 @@ function goToLink(websiteURL) {
       window.location.href = websiteURL;
 //alert("Server sedang diperbaiki, mohon menunggu.");
     }
+    
+   

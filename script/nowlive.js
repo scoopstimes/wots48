@@ -1,46 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
   const sumber = 'https://api.crstlnz.my.id/api/now_live?group=jkt48';
 
-  // Fungsi untuk mengirim notifikasi menggunakan OneSignal
-  function sendNotification(memberName, platform) {
-    const oneSignalUrl = "https://onesignal.com/api/v1/notifications";
-    const apiKey = "os_v2_app_dxhckkbierahpoxitpgpvugliohijlkxgwauvdeb5y7l4akxayhbkme7v736to2tajc7itkis4ppw3zxsonafftkmds62m73i2dahsa"; // Ganti dengan API Key Anda
-    const appId = "1dce2528-2824-4077-bae8-9bccfad0cb43";   // Ganti dengan App ID Anda
-
-    const notificationData = {
-      app_id: appId,
-      headings: { en: "Live Notification" },
-      contents: { en: `${memberName} is live on ${platform}` },
-      included_segments: ["All"], // Kirim ke semua pengguna
-      data: {
-        member_name: memberName,
-        platform: platform,
-      },
-      url: `https://median.co/app/${memberName}`, // Opsional: URL ke aplikasi Median
-    };
-
-    fetch(oneSignalUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Basic ${apiKey}`,
-      },
-      body: JSON.stringify(notificationData),
-    })
-      .then((response) => response.json())
-      .then((data) => console.log("Notification sent:", data))
-      .catch((error) => console.error("Error sending notification:", error));
-  }
-
   // Fungsi utama untuk mengambil dan menampilkan data live
   function fetchLiveData(containerSelector, isLimit = true) {
     fetch(sumber)
-      .then((response) => response.json())
-      .then((data) => {
+      .then(response => response.json())
+      .then(data => {
         const container = document.querySelector(containerSelector);
         container.innerHTML = ''; // Bersihkan container
 
-        const liveMembers = data.filter((member) => member.started_at);
+        const liveMembers = data.filter(member => member.started_at);
         const liveCount = liveMembers.length;
 
         // Menampilkan jumlah member yang sedang live
@@ -65,38 +34,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (liveCount > 0) {
           const idnUrl = 'https://www.idn.app/';
-          liveMembers.slice(0, isLimit ? 100 : liveMembers.length).forEach((member) => {
+          liveMembers.slice(0, isLimit ? 100 : liveMembers.length).forEach(member => {
             console.log(member);
-
-            // Cek apakah member sudah mendapat notifikasi sebelumnya
-            let notifiedMembers = JSON.parse(localStorage.getItem("notifiedMembers")) || [];
-            let lastLiveTimestamp = localStorage.getItem("lastLiveTimestamp");
-
-            // Cek timestamp live member
-            const memberLiveTime = new Date(member.started_at).getTime();
-            const isNewLiveMember = memberLiveTime > lastLiveTimestamp;
-
-            // Kirim notifikasi hanya untuk member baru yang live atau jika timestampnya lebih baru
-            if (!notifiedMembers.includes(member.name) && isNewLiveMember) {
-              sendNotification(member.name, member.type);
-
-              // Simpan member yang sudah diberi notifikasi dan timestamp
-              notifiedMembers.push(member.name);
-              localStorage.setItem("notifiedMembers", JSON.stringify(notifiedMembers)); // Simpan ke localStorage
-              localStorage.setItem("lastLiveTimestamp", memberLiveTime); // Simpan timestamp live terakhir
-            }
-
             const card = document.createElement('div');
             card.style = `
               background-color: #2A3347;
               border-radius: 10px;
-              padding: 10px;
+              padding-top:10px;
+              padding-bottom:20px;
+              padding-right:10px;
+              padding-left:10px;
               position: relative;
               width: 150px;
               text-align: center;
               display: flex;
               flex-direction: column;
               gap: 10px;
+              
             `;
 
             const img = document.createElement('img');
@@ -112,12 +66,12 @@ document.addEventListener("DOMContentLoaded", function () {
             card.appendChild(img);
 
             const title = document.createElement('div');
-            title.textContent = member.name + (member.type === 'idn' ? ' JKT48' : '');
-            title.style = `
-              font-size: 14px;
-              font-weight: bold;
-            `;
-            card.appendChild(title);
+title.textContent = member.name + (member.type === 'idn' ? ' JKT48' : '');
+title.style = `
+  font-size: 14px;
+  font-weight: bold;
+`;
+card.appendChild(title);
 
             const liveType = document.createElement('p');
             liveType.textContent = `Live: ${member.type}`;
@@ -144,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
               showroomLink.target = '_blank';
               cardBody.appendChild(showroomLink);
 
-              member.streaming_url_list.forEach((urlObj) => {
+              member.streaming_url_list.forEach(urlObj => {
                 if (urlObj.label === 'original quality') {
                   const fullscreenBtn = document.createElement('a');
                   fullscreenBtn.classList.add('btn-live', 'btn-primary');
@@ -163,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
               idnLink.href = `${idnUrl}${member.url_key}/live/${member.slug}`;
               cardBody.appendChild(idnLink);
 
-              member.streaming_url_list.forEach((urlObj) => {
+              member.streaming_url_list.forEach(urlObj => {
                 const ProxyUrl = 'https://jkt48showroom-api.my.id/proxy?url=';
                 const fullscreenBtn = document.createElement('a');
                 fullscreenBtn.classList.add('btn-live', 'btn-primary');
@@ -178,11 +132,13 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             card.appendChild(cardBody);
+
+            // Tambahkan kartu di awal container
             container.prepend(card);
           });
         }
       })
-      .catch((error) => console.error('Error fetching NOW LIVE:', error));
+      .catch(error => console.error('Error fetching NOW LIVE:', error));
   }
 
   // Fetch untuk SHOWROOM LIVE LIMIT
