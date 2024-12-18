@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // Fungsi untuk mengambil dan menggabungkan data live dari IDN dan Showroom
 function listLive() {
   // Ambil data live IDN
-  fetch(`https://api.crstlnz.my.id/api/recent?sort=date&page=${currentPageIdn}&filter=all&order=-1&group=jkt48&type=idn&perpage=100`)
+  fetch(`https://api.crstlnz.my.id/api/recent?sort=date&page=${currentPageIdn}&filter=all&order=-1&group=jkt48&type=idn&perpage=10`)
     .then((response) => response.json())
     .then((dataIdn) => {
       // Ambil data live Showroom
