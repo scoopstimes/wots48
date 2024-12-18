@@ -123,7 +123,7 @@ function detailTheater() {
   `
     <div style="display: flex; flex-direction: column; gap: 20px; margin-top: 20px;">
       <h3 style="font-size: 25px; font-weight: 500; font-family: 'Zen Maru Gothic';"><i style="font-size: 25px; color: pink;" class="fas fa-birthday-cake"></i> Seintansai</h3>
-      <div style="display: flex; gap: 5px; flex-wrap: wrap;">
+      <div style="display: flex; gap: 0px; flex-wrap: wrap;margin-left: -15px;">
         ${show.seitansai.map(s => `
 
           <div style="display: flex; flex-direction: column; align-items: center; gap: 0px;">
