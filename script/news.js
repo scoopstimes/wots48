@@ -144,7 +144,7 @@ function detailNews() {
     <br><br>
     <!-- Modifikasi bagian konten -->
     <div class="content" style="
-      width: 90%;
+      width: 95%;
       display: flex;
       margin-top: -15px;
       flex-direction: column;
