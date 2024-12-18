@@ -173,9 +173,13 @@ padding: 5px 10px;">${s.name}</h3>
               <div style="display: flex;width: 100%;justify-content: center; align-items: center;">
                 <img src="${bannerImage}" style="max-width: 100%;  ">
                 </div>
-                <div style="display: flex; justify-content: left; width: 95%;margin-top: -50px;">
+                <div style="display: flex; justify-content: left; align-items: center ;width: 95%;margin-top: -50px;">
                     <h2 class="titleup" style="margin-left: 0px; font-size: 27px;font-family: 'Zen Maru Gothic';">${show.title}</h2>
+
                                      </div>
+                <div style="display: flex; justify-content: left; align-items: center ;width: 95%;margin-top: 5px;">
+<h1 class="animated-gradient" style="font-size: 14px; font-family: 'Zen Maru Gothic';">Show Theater</h1>
+                                   </div>
                                      <br>
                                      
                 <div style="display: flex; flex-direction: column; width: 95%;justify-content: center;">
