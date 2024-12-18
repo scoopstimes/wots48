@@ -183,7 +183,7 @@ padding: 5px 10px;">${s.name}</h3>
                   ${seitansaiHtml}
                 </div>
               </div><br>
-              <div style="display: flex; flex-direction: column; gap: 20px; margin-top: 20px; margin-left: 15px;">
+              <div style="display: flex; flex-direction: column; gap: 20px; margin-top: 10px; margin-left: 15px;">
               <h3 style="font-size: 20px; font-weight: 600; font-family: 'Zen Maru Gothic';"><i style="font-size: 20px; color: yellow;" class="fas fa-ticket"></i> Tiket Theater</h3>
               </div>
                 <div style="display: flex; justify-content: center;width: 100%; align-items: center;gap: 10px;flex-direction: column; margin-top: 10px;">
