@@ -24,7 +24,43 @@
 </head>
 
 <body>
+        <nav>
+                <div class="navbar-container">
 
+                                 <button class="buttongoweb" onclick="goToLink('/home')">
+                                         <div class="navbar-box" ontouchstart="addOverlayNavbar(event)" ontouchend="removeOverlayNavbar(event)" ontouchcancel="removeOverlayNavbar(event)">
+                                                 <div class="overlay-navbar"></div>
+                                                 <span class="mdi mdi-home"></span>
+                                                 <h1>Home</h1>
+                                         </div>
+                                 </button>
+                       <button class="buttongoweb" onclick="goToLink('/live')"><div class="navbar-box"ontouchstart="addOverlayNavbar(event)" ontouchend="removeOverlayNavbar(event)" ontouchcancel="removeOverlayNavbar(event)">                                                        <div class="overlay-navbar"></div>
+                                <span class="mdi mdi-history"></span>
+                                <h1>Recent</h1>
+                        </div>
+                       </button>
+                       <button class="buttongoweb" onclick="goToLink('/member')"><div class="navbar-box"ontouchstart="addOverlayNavbar(event)" ontouchend="removeOverlayNavbar(event)" ontouchcancel="removeOverlayNavbar(event)">                                                        <div class="overlay-navbar"></div>
+                                <span class="mdi mdi-account-group"></span>
+                                <h1>Member</h1>
+                        </div>
+                       </button>
+                                               <div class="navbar-box" ontouchstart="addOverlayNavbar(event)" ontouchend="removeOverlayNavbar(event)" ontouchcancel="removeOverlayNavbar(event)">
+                          <div class="overlay-navbar"></div>
+                          <span class="mdi mdi-newspaper-variant active" style="color: #white;background: #6C6C6C80;
+                                border-radius: 50%;
+                                width: 25px;
+                                height: 25px;"></span>
+                          <h1>News</h1>
+
+                        </div>
+
+                       <button class="buttongoweb" onclick="goToLink('/event')"><div class="navbar-box"ontouchstart="addOverlayNavbar(event)" ontouchend="removeOverlayNavbar(event)" ontouchcancel="removeOverlayNavbar(event)">                                                        <div class="overlay-navbar"></div>
+                                <span class="mdi mdi-clipboard-text-clock"></span>
+                                <h1>Theather</h1>
+                        </div>
+                        
+                </div>
+        </nav>
 
     <div class="section">
         <div class="container">
