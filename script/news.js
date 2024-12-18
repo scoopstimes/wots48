@@ -125,7 +125,7 @@ function detailNews() {
 
       newsDiv.innerHTML = `
         <br>
-        <div style="display: flex; flex-direction: column; width: 95%;"<h1 class="titleup"> ${data.title}</h1><br><hr><br>
+        <div style="display: flex; flex-direction: column; width: 95%;"<h1 class="titleup"> ${data.title}</h1><p style="font-weight: 400;">${data.date}</p><br><hr><br>
         <div class="content">${data.content}</div>
         <hr>
         <br><a href="${detailLink}" class="btn">🌐 Lihat di web JKT48</a></div><br><br>
