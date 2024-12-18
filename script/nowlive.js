@@ -11,10 +11,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const liveMembers = data.filter(member => member.started_at);
         
-        // Urutkan berdasarkan waktu mulai (latest first)
-        liveMembers.sort((a, b) => new Date(b.started_at) - new Date(a.started_at));
+        // Gabungkan data live dari idn dan showroom
+        const allLiveMembers = liveMembers;
 
-        const liveCount = liveMembers.length;
+        // Urutkan semua live members berdasarkan waktu mulai (latest first)
+        allLiveMembers.sort((a, b) => new Date(b.started_at) - new Date(a.started_at));
+
+        const liveCount = allLiveMembers.length;
 
         // Menampilkan jumlah member yang sedang live
         document.getElementById('liveCount').textContent = ` ${liveCount} Member`;
@@ -38,22 +41,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (liveCount > 0) {
           const idnUrl = 'https://www.idn.app/';
-          // Menyusun data untuk ditampilkan, urutan live members diubah
-          let orderedMembers = [];
-          
-          liveMembers.forEach(member => {
-            if (member.type === 'idn') {
-              orderedMembers.push(member);
-            }
-          });
-
-          liveMembers.forEach(member => {
-            if (member.type === 'showroom') {
-              orderedMembers.push(member);
-            }
-          });
-
-          orderedMembers.slice(0, isLimit ? 100 : orderedMembers.length).forEach(member => {
+          // Menyusun data untuk ditampilkan
+          allLiveMembers.slice(0, isLimit ? 100 : allLiveMembers.length).forEach(member => {
             const card = document.createElement('div');
             card.style = `
               background-color: #2A3347;
