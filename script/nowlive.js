@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
   const sumber = 'https://api.crstlnz.my.id/api/now_live?group=jkt48';
 
-  // Set untuk menyimpan nama member yang sudah dinotifikasi
-  let notifiedMembers = new Set();
+  // Set untuk menyimpan nama member yang sudah dikirim notifikasi
+  const notifiedMembers = new Set();
 
   // Fungsi untuk mengirim notifikasi menggunakan OneSignal
   function sendNotification(memberName, platform) {
@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const notificationData = {
       app_id: appId,
       headings: { en: "Live Notification" },
-      contents: { en: `${memberName} Sedang live di ${platform}` },
+      contents: { en: `${memberName} is live on ${platform}` },
       included_segments: ["All"], // Kirim ke semua pengguna
       data: {
         member_name: memberName,
@@ -71,10 +71,10 @@ document.addEventListener("DOMContentLoaded", function () {
           liveMembers.slice(0, isLimit ? 100 : liveMembers.length).forEach((member) => {
             console.log(member);
 
-            // Kirim notifikasi hanya untuk member baru yang live
+            // Kirim notifikasi hanya untuk member yang baru live
             if (!notifiedMembers.has(member.name)) {
               sendNotification(member.name, member.type);
-              notifiedMembers.add(member.name); // Tambahkan ke Set setelah dinotifikasi
+              notifiedMembers.add(member.name); // Tandai member sudah dikirim notifikasi
             }
 
             const card = document.createElement('div');
@@ -134,38 +134,12 @@ document.addEventListener("DOMContentLoaded", function () {
               showroomLink.href = showroomUrl + member.url_key;
               showroomLink.target = '_blank';
               cardBody.appendChild(showroomLink);
-
-              member.streaming_url_list.forEach((urlObj) => {
-                if (urlObj.label === 'original quality') {
-                  const fullscreenBtn = document.createElement('a');
-                  fullscreenBtn.classList.add('btn-live', 'btn-primary');
-                  fullscreenBtn.innerHTML = '<span class="mdi mdi-video"></span>';
-
-                  const startDate = member.started_at ? encodeURIComponent(member.started_at) : 'Tidak diketahui';
-                  const viewers = member.viewers ? encodeURIComponent(member.viewers) : '0';
-                  fullscreenBtn.href = `showroom.html#url=${encodeURIComponent(urlObj.url)}&name=${encodeURIComponent(member.name)}&viewers=${viewers}&start_date=${startDate}&type=${encodeURIComponent(member.type)}`;
-                  cardBody.appendChild(fullscreenBtn);
-                }
-              });
             } else if (member.type === 'idn') {
               const idnLink = document.createElement('a');
               idnLink.classList.add('btn-live-link', 'btn-primary');
               idnLink.innerHTML = '<span class="mdi mdi-arrow-top-right-thin-circle-outline"></span>';
               idnLink.href = `${idnUrl}${member.url_key}/live/${member.slug}`;
               cardBody.appendChild(idnLink);
-
-              member.streaming_url_list.forEach((urlObj) => {
-                const ProxyUrl = 'https://jkt48showroom-api.my.id/proxy?url=';
-                const fullscreenBtn = document.createElement('a');
-                fullscreenBtn.classList.add('btn-live', 'btn-primary');
-                fullscreenBtn.innerHTML = '<span class="mdi mdi-video"></span>';
-
-                const startDate = member.started_at ? encodeURIComponent(member.started_at) : 'Tidak diketahui';
-                const viewers = member.viewers ? encodeURIComponent(member.viewers) : '0';
-
-                fullscreenBtn.href = `idn.html#${ProxyUrl}${encodeURIComponent(urlObj.url)}&name=${encodeURIComponent(member.name)}&viewers=${viewers}&start_date=${startDate}&type=${encodeURIComponent(member.type)}`;
-                cardBody.appendChild(fullscreenBtn);
-              });
             }
 
             card.appendChild(cardBody);
