@@ -184,11 +184,14 @@ padding: 5px 10px;">${s.name}</h3>
                   <div style="display: flex; width: 100%; justify-content: left; flex-direction:column;gap: 10px;margin-top: 10px;">
 <div style="display: flex; gap: 18px;align-items: center;">
 <p style="font-weight: 400; color: white; opacity: 0.7;">Total Member</p>
-                  <h3 style="font-weight: 400;">${memberCount}</h3>
+<div style="display: flex; margin-left: 20px;">
+                  <h3 style="font-weight: 400;  ">${memberCount}</h3>
+                  </div>
                   </div>
                   <div style="display: flex; gap: 18px;align-items: center;">
                   <p style="font-weight: 400; color: white; opacity: 0.7;">Tanggal Show</p>
-                  <h3 style="font-weight: 400;">${dateString}  -  ${timeString}</h3>
+                  <div style="display: flex; margin-left: 18px;">
+                  <h3 style="font-weight: 400;">${dateString}  -  ${timeString}</h3></div>
                   </div>
 
                   </div>
