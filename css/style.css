@@ -586,7 +586,8 @@ a {
   margin-top: 10px;
   flex-grow: 1;  /* Mengisi ruang yang tersisa sehingga tombol tetap di bawah */
 }
-.live-indicator {
+/* Default indikator */
+.live-indicator, .nolive-indicator {
   position: relative; /* Menjadi parent untuk absolute positioning */
   width: 10px;
   height: 10px;
@@ -595,7 +596,7 @@ a {
 .circle {
   width: 10px;
   height: 10px;
-  background-color: red;
+  background-color: gray; /* Warna default abu-abu */
   border-radius: 50%;
   position: relative;
   z-index: 2; /* Tetap di atas efek pulse */
@@ -607,20 +608,37 @@ a {
   left: 50%;
   width: 10px;
   height: 10px;
-  background-color: red;
+  background-color: gray; /* Warna default abu-abu */
   border-radius: 50%;
   z-index: 1;
   transform: translate(-50%, -50%); /* Memastikan posisi tengah */
+}
+
+/* Animasi hanya aktif jika live */
+.live-indicator .circle {
+  background-color: red;
+}
+
+.live-indicator .pulse {
+  background-color: red;
   animation: pulseEffect 1s infinite;
 }
 
+/* Tidak ada animasi jika tidak live */
+.nolive-indicator .circle, 
+.nolive-indicator .pulse {
+  background-color: gray;
+  animation: none; /* Tidak ada animasi */
+}
+
+/* Keyframes untuk efek animasi pulse */
 @keyframes pulseEffect {
   0% {
     transform: translate(-50%, -50%) scale(1);
-    opacity: 0.8;
+    opacity: 1;
   }
   100% {
-    transform: translate(-50%, -50%) scale(2.5);
+    transform: translate(-50%, -50%) scale(2);
     opacity: 0;
   }
 }
