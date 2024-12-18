@@ -195,5 +195,5 @@ document.addEventListener("DOMContentLoaded", function () {
   setInterval(() => {
     fetchLiveData('.card-nowlive-container', true);
     fetchLiveData('.card-nowlive-container-up', false);
-  }, 30000); // 30 detik
+  }, 10000); // 30 detik
 });
