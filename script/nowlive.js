@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
   const sumber = 'https://api.crstlnz.my.id/api/now_live?group=jkt48';
 
+  // Set untuk menyimpan nama member yang sudah dinotifikasi
+  let notifiedMembers = new Set();
+
   // Fungsi untuk mengirim notifikasi menggunakan OneSignal
   function sendNotification(memberName, platform) {
     const oneSignalUrl = "https://onesignal.com/api/v1/notifications";
@@ -10,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const notificationData = {
       app_id: appId,
       headings: { en: "Live Notification" },
-      contents: { en: `${memberName} is live on ${platform}` },
+      contents: { en: `${memberName} Sedang live di ${platform}` },
       included_segments: ["All"], // Kirim ke semua pengguna
       data: {
         member_name: memberName,
@@ -68,8 +71,11 @@ document.addEventListener("DOMContentLoaded", function () {
           liveMembers.slice(0, isLimit ? 100 : liveMembers.length).forEach((member) => {
             console.log(member);
 
-            // Kirim notifikasi ke aplikasi Android
-            sendNotification(member.name, member.type);
+            // Kirim notifikasi hanya untuk member baru yang live
+            if (!notifiedMembers.has(member.name)) {
+              sendNotification(member.name, member.type);
+              notifiedMembers.add(member.name); // Tambahkan ke Set setelah dinotifikasi
+            }
 
             const card = document.createElement('div');
             card.style = `
