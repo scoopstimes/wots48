@@ -76,8 +76,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const memberLiveTime = new Date(member.started_at).getTime();
             const isNewLiveMember = memberLiveTime > lastLiveTimestamp;
 
-            // Kirim notifikasi hanya untuk member baru yang live atau jika timestampnya lebih baru
-            if (!notifiedMembers.includes(member.name) && isNewLiveMember) {
+            // Jika member sebelumnya tidak live dan sekarang live, kirim notifikasi
+            if (!notifiedMembers.includes(member.name) || memberLiveTime > lastLiveTimestamp) {
               sendNotification(member.name, member.type);
 
               // Simpan member yang sudah diberi notifikasi dan timestamp
@@ -190,5 +190,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Fetch untuk SHOWROOM LIVE NO LIMIT
   fetchLiveData('.card-nowlive-container-up', false);
-});
 
+  // Set interval untuk otomatis refresh setiap 30 detik
+  setInterval(() => {
+    fetchLiveData('.card-nowlive-container', true);
+    fetchLiveData('.card-nowlive-container-up', false);
+  }, 30000); // 30 detik
+});
