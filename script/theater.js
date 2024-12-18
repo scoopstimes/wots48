@@ -79,7 +79,7 @@ async function nextTheater() {
       const card = document.createElement('div');
       card.classList.add('card-up-th');
       card.innerHTML = `
-  <a href="dtheater?id=${theater.id}" class="btnn">    <div style="width: 100%; display: flex; justify-content: center; align-items: center; flex-direction: column; gap: 20px;">
+  <a href="dtheater.html?id=${theater.id}" class="btnn">    <div style="width: 100%; display: flex; justify-content: center; align-items: center; flex-direction: column; gap: 20px;">
  <div class="card-th">
    <img  src="${bannerImage}" style="width: 500px; height: 200px; object-fit: cover;"/>
    
