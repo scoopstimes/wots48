@@ -37,9 +37,12 @@ document.addEventListener("DOMContentLoaded", function () {
           liveMembers.slice(0, isLimit ? 100 : liveMembers.length).forEach(member => {
             const card = document.createElement('div');
             card.style = `
-              background-color: #2c2c2e;
+              background-color: #2A3347;
               border-radius: 10px;
-              padding: 10px;
+              padding-top:10px;
+              padding-bottom:20px;
+              padding-right:10px;
+              padding-left:10px;
               position: relative;
               width: 150px;
               text-align: center;

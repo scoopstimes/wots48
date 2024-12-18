@@ -596,7 +596,7 @@ a {
 
 .btn-live {
   display: flex;
-  padding: 5px 5px;
+  padding: 5px 1px;
   text-align: center;
   justify-content: center;
   align-items: center;
@@ -1030,7 +1030,7 @@ span {
 }
 
 .box {
-	background-color: #333c5c;
+	background-color: #2A3347;
 	padding: 15px;
 	box-shadow: 0 10px 80px rgba(0, 0, 0, 0.103);
 	box-sizing: border-box;
@@ -2027,7 +2027,7 @@ footer a:hover {
 
 	.box {
 		width: 95%;
-		background: #2F2F2F;
+		background: #2A3347;
 	}
 
 	.icon i {
