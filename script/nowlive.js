@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 const startDate = member.started_at ? encodeURIComponent(member.started_at) : 'Tidak diketahui';
                 const viewers = member.viewers ? encodeURIComponent(member.viewers) : '0';
 
-                fullscreenBtn.href = `showroom.html#${ProxyUrl}${encodeURIComponent(urlObj.url)}&name=${encodeURIComponent(member.name)}&viewers=${viewers}&start_date=${startDate}&type=${encodeURIComponent(member.type)}`;
+                fullscreenBtn.href = `idn.html#${ProxyUrl}${encodeURIComponent(urlObj.url)}&name=${encodeURIComponent(member.name)}&viewers=${viewers}&start_date=${startDate}&type=${encodeURIComponent(member.type)}`;
                 cardBody.appendChild(fullscreenBtn);
               });
             }
