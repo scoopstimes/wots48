@@ -94,7 +94,7 @@
       <div class="circle" style="background: white;"></div>
       <div class="pulse" style="background: white;"></div>
     </div>
-    <h1 style="font-size: 24px; margin-left: 10px;font-family: 'Zen Maru Gothic';">Live</h1>
+    <h1 style="font-size: 24px; margin-left: 10px;font-family: 'Zen Maru Gothic';"id="liveType"></h1>
         </div>
         </div>
    
@@ -129,7 +129,7 @@
     <p id="startTime"></p>
     </div>
     <div class="display: flex;">
-    <p id="liveType"></p>
+
     </div>
         </div>
 <script>
@@ -181,7 +181,7 @@
   }
 
   // Menampilkan jenis live (IDN atau Showroom)
-  document.getElementById('liveType').innerHTML = `<span class="mdi mdi-account-group"></span> ${liveType ? liveType.charAt(0).toUpperCase() + liveType.slice(1) : 'Tidak Diketahui'}`;
+  document.getElementById('liveType').innerHTML = `${liveType ? liveType.charAt(0).toUpperCase() + liveType.slice(1) : 'Tidak Diketahui'}`;
 });
 </script>
     <br>
