@@ -49,7 +49,7 @@ function listLive() {
             liveElement.innerHTML = `
               <br>
               <a href="drecentlive.html?id=${live.id}&start=${live.live_info.date.start}&end=${live.live_info.date.end}&gift=${live.gift_rate}&view=${live.live_info.viewers.num}&nama=${live.member.nickname}&image=${live.member.img_alt}">
-                <div class="row-live" style="width: 100%;background: #1F202B;border-radius: 10px; width: 100%;">
+                <div class="row-live" style="width: 100%;background: #2A3347;border-radius: 10px; width: 100%;">
                   <img src="${live.member.img_alt}" style="width: 100px;
                   object-fit: cover; margin-top: 10px;" loading="lazy">
                   <div style="margin-top: 10px; display: flex; flex-direction: column;margin-left: -19px;">
