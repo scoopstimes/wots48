@@ -133,60 +133,71 @@
     </div>
         </div>
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      
-  // Ambil parameter URL dari hash
-  const urlParams = new URLSearchParams(window.location.hash.substring(1));
-  const videoUrl = urlParams.get('url');
-  const memberName = urlParams.get('name');
- 
-  const startDate = urlParams.get('start_date');
-  const liveType = urlParams.get('type'); // Menambahkan parameter untuk tipe live (IDN atau Showroom)
+  document.addEventListener("DOMContentLoaded", function () {
+    // Ambil parameter URL dari hash
+    const urlParams = new URLSearchParams(window.location.hash.substring(1));
+    const videoUrl = urlParams.get('url');
+    const memberName = urlParams.get('name');
+    const startDate = urlParams.get('start_date');
+    const liveType = urlParams.get('type'); // Menambahkan parameter untuk tipe live (IDN atau Showroom)
 
-  // Periksa apakah videoUrl sudah terisi dengan benar
-  if (videoUrl) {
+    // Periksa apakah videoUrl sudah terisi dengan benar
     const videoElement = document.getElementById('video');
-    videoElement.src = videoUrl;  // Set video URL
-    videoElement.style.display = 'block';  // Tampilkan video
-  } else {
-    console.error('Video URL tidak ditemukan!');
-  }
+    if (videoUrl && videoElement) {
+      videoElement.src = videoUrl; // Set video URL
+      videoElement.style.display = 'block'; // Tampilkan video
+    } else {
+      console.error('Video URL tidak ditemukan!');
+    }
 
-  // Menampilkan informasi tambahan seperti nama member, jumlah viewers, dll.
-  if (memberName) {
-  // Jika nama sudah mengandung "JKT48", gunakan nama seperti apa adanya
-  document.getElementById('liveMemberName').innerHTML = memberName.includes('JKT48') ? memberName : memberName + ' JKT48';
-} else {
-  // Jika nama tidak ditemukan
-  document.getElementById('liveMemberName').textContent = 'Nama Tidak Ditemukan';
-}
-  if (startDate) {
-    const date = new Date(decodeURIComponent(startDate));
+    // Menampilkan informasi tambahan seperti nama member, jumlah viewers, dll.
+    const memberNameElement = document.getElementById('liveMemberName');
+    if (memberName && memberNameElement) {
+      // Jika nama sudah mengandung "JKT48", gunakan nama seperti apa adanya
+      memberNameElement.innerHTML = memberName.includes('JKT48') ? memberName : `${memberName} JKT48`;
+    } else if (memberNameElement) {
+      memberNameElement.textContent = 'Nama Tidak Ditemukan';
+    }
 
-    // Format Tanggal
-    const formattedDate = date.toLocaleDateString('id-ID', { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
-    });
+    // Menampilkan tanggal dan waktu
+    if (startDate) {
+      const date = new Date(decodeURIComponent(startDate));
 
-    // Format Jam
-    const formattedTime = date.toLocaleTimeString('id-ID', { 
-      hour: '2-digit', 
-      minute: '2-digit' 
-    });
+      // Format Tanggal
+      const formattedDate = date.toLocaleDateString('id-ID', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      });
 
-    // Menampilkan Tanggal dan Jam secara terpisah
-    document.getElementById('startDate').innerHTML = `<span class="mdi mdi-account-group"></span>${formattedDate}`;
-    document.getElementById('startTime').innerHTML = `<span class="mdi mdi-account-group"></span>${formattedTime}`;
-  } else {
-    document.getElementById('startDate').textContent = '';
-    document.getElementById('startTime').textContent = '';
-  }
+      // Format Jam
+      const formattedTime = date.toLocaleTimeString('id-ID', {
+        hour: '2-digit',
+        minute: '2-digit',
+      });
 
-  // Menampilkan jenis live (IDN atau Showroom)
-  document.getElementById('liveType').innerHTML = `${liveType ? liveType.charAt(0).toUpperCase() + liveType.slice(1) : 'Tidak Diketahui'}`;
-});
+      // Menampilkan Tanggal dan Jam secara terpisah
+      const startDateElement = document.getElementById('startDate');
+      const startTimeElement = document.getElementById('startTime');
+      if (startDateElement) {
+        startDateElement.innerHTML = `<span class="mdi mdi-calendar"></span> ${formattedDate}`;
+      }
+      if (startTimeElement) {
+        startTimeElement.innerHTML = `<span class="mdi mdi-clock"></span> ${formattedTime}`;
+      }
+    }
+
+    // Menampilkan jenis live (IDN atau Showroom)
+    const liveTypeElement = document.getElementById('liveType');
+    if (liveTypeElement) {
+      liveTypeElement.innerHTML =
+        liveType === 'idn'
+          ? 'IDN'
+          : liveType === 'showroom'
+          ? 'Showroom'
+          : 'Tidak Diketahui';
+    }
+  });
 </script>
     <br>
     <br>
