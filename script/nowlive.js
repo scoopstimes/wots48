@@ -66,7 +66,8 @@ document.addEventListener("DOMContentLoaded", function () {
             card.appendChild(img);
 
             const title = document.createElement('div');
-title.textContent = member.name + (member.type === 'idn' ? ' JKT48' : '');
+// Tambahkan pengecekan jika nama sudah "JKT48", tidak perlu menambahkannya lagi
+title.textContent = member.name + (member.type === 'idn' && member.name !== 'JKT48' ? ' JKT48' : '');
 title.style = `
   font-size: 14px;
   font-weight: bold;
