@@ -49,9 +49,25 @@ body {
   border: 0px solid transparent; /* Atur warna dan ukuran garis sesuai kebutuhan */
   color: transparent; /* Atur warna teks sesuai kebutuhan */
   padding: 0px 0px; /* Atur ukuran padding sesuai kebutuhan */
+  outline: none !important;
+  box-shadow: none !important;
   text-align: left;
   margin: 0;
   border-radius: 5px; /* Atur radius border sesuai kebutuhan */
+}
+button.gotoweb {
+  -webkit-tap-highlight-color: transparent; /* Hilangkan highlight di perangkat sentuh */
+  outline: none; 
+  /* Hilangkan garis fokus */
+  border: 0px solid transparent; 
+  box-shadow: none;
+}
+
+button.gotoweb:focus,
+button.gotoweb:active {
+  outline: none;
+  box-shadow: none;
+  background-color: inherit; /* Opsional untuk mempertahankan warna */
 }
         .navbar-box{
                 color: white;
@@ -246,6 +262,11 @@ body {
 	padding: 20px 20px;
 	color: #ffffff;
 	text-decoration: none;
+	  -webkit-tap-highlight-color: transparent; /* Hilangkan highlight di perangkat sentuh */
+  outline: none; 
+  /* Hilangkan garis fokus */
+  border: 0px solid transparent; 
+  box-shadow: none;
 	border-radius: 5px;
 	display: inline-block;
 	transition: background-color 0.3s ease;
@@ -395,6 +416,11 @@ a {
 	background-color: #2A3347;
 	border-radius: 10px;
 	color: #fff;
+	  -webkit-tap-highlight-color: transparent; /* Hilangkan highlight di perangkat sentuh */
+  outline: none; 
+  /* Hilangkan garis fokus */
+  border: 0px solid transparent; 
+  box-shadow: none;
 	border: none;
 	cursor: pointer;
 	
@@ -1213,9 +1239,10 @@ img {
 
 .row-live {
 	display: flex;
-	margin-right: 15px;
+	
 	width: 100%;
 	color: #fff;
+	flex-wrap: nowrap;
 	
 }
 
@@ -1903,8 +1930,13 @@ footer a:hover {
 		color: #fff;
 		border: none;
 		font-size: 10px;
+		  -webkit-tap-highlight-color: transparent; /* Hilangkan highlight di perangkat sentuh */
+  outline: none; 
+  /* Hilangkan garis fokus */
+  border: 0px solid transparent; 
+  box-shadow: none;
 		cursor: pointer;
-		width: 200px;
+		width: 300px;
 		margin: 4px;
 	}
 

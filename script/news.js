@@ -82,21 +82,23 @@ function loadNews(action) {
         const formattedDate = new Date(newsItem.date).toLocaleDateString("id-ID", dateOptions);
 
         newsDiv.innerHTML = `
-          <a href="dnews.html?id=${newsItem.id}"><br>
+<br>
           <div style="display: flex; width: 100%; flex-direction: column; justify-content: center; align-items: center;">
-          <div style="width: 90%; margin-left: 0px;display: flex; background: #2A3347; flex-direction: column;padding: 15px;border-radius: 10px;">
+          <div style="width: 86%; margin-left: 0px;display: flex; background: #2A3347; flex-direction: column;padding: 15px;border-radius: 10px;">
             <div class="row1">
               <img style="border-radius: 10px;" src="https://res.cloudinary.com/haymzm4wp/image/upload/assets/jkt48${newsItem.label}" alt="Category Icon">
 
             </div>
-            <h2 style="font-weight: 400; font-size: 17px; margin-top: -5px;">${newsItem.title}</h2>
+            <button class="buttongoweb" onclick="goToLink('dnews.html?id=${newsItem.id}')">
+            <h2 style="font-weight: 400; font-size: 17px; margin-top: -5px; width:100%;">${newsItem.title}</h2></button>
             <div style="display: flex; margin-left: auto; width: 100%; margin-top: 15px;">
+            
             <p style="font-weight: 400;">${formattedDate}</p>
             </div>
             </div>
             
             </div>
-          </a>
+       
         `;
         newsList.appendChild(newsDiv);
       });
@@ -158,12 +160,12 @@ function detailNews() {
     </div>
     <br>
     <div>
-      <a href="${detailLink}" class="btn">
+      <button onclick="goToLink('${detailLink}')" class="btn">
         <div style="display: flex; align-items: center; text-align: center; justify-content: center; gap: 10px;">
           <span class="mdi mdi-web" style="font-size: 20px;"></span>
           <p>Lihat di web JKT48</p>
         </div>
-      </a>
+      </button>
     </div>
   </div>
 </div>

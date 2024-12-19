@@ -49,11 +49,12 @@ function listLive() {
 
             liveElement.innerHTML = `
               <br>
-              <a href="drecentlive.html?id=${live.id}&start=${live.live_info.date.start}&end=${live.live_info.date.end}&gift=${live.gift_rate}&view=${live.live_info.viewers.num}&nama=${live.member.nickname}&image=${live.member.img_alt}">
-                <div class="row-live" style="width: 100%;background: #2A3347;border-radius: 10px; width: 100%;">
+                <div style="display: flex; flex-direction: column;margin-right: auto; width: 100%;">
+                <div class="row-live" style="width: 100%;background: #2A3347;border-radius: 10px; width: 110%;margin-left: -18px;">
                   <img src="${live.member.img_alt}" style="width: 100px;
                   object-fit: cover; margin-top: 10px;" loading="lazy">
-                  <div style="margin-top: 10px; display: flex; flex-direction: column;margin-left: -19px;">
+                  <button class="buttongoweb" onclick="goToLink('drecentlive.html?id=${live.id}&start=${live.live_info.date.start}&end=${live.live_info.date.end}&gift=${live.gift_rate}&view=${live.live_info.viewers.num}&nama=${live.member.nickname}&image=${live.member.img_alt}')">
+                  <div style="margin-top: -10px; display: flex; flex-direction: column;margin-left: -19px;">
                     <h3 style="font-size: 17px; width: 150%;"> ${live.member.name}</h3>
                     <div style="margin-top: 10px; display: flex; flex-direction: column;">
                       <h3><span style="font-size: 17px" class="mdi mdi-access-point-network"> ${live.type}</span></h3>
@@ -61,8 +62,10 @@ function listLive() {
                       <h3><span style="font-size: 17px" class="mdi mdi-access-point-network"> ${duration}</span></h3>
                     </div>
                   </div>
+                  </button>
                 </div>
-              </a>
+                </div>
+
             `;
             container.appendChild(liveElement);
           });

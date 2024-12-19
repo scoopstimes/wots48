@@ -147,11 +147,11 @@ padding: 5px 10px;">${s.name}</h3>
             const memberCount = show.members.length;
             const ticketUrl = `https://jkt48.com/theater/schedule/id/${show.id}`;
             const onlineTicketButton = show.showroomTheater && show.showroomTheater.entrance_url
-              ? `<a href="${show.showroomTheater.entrance_url}" style="width: 86%;display: flex; gap: 10px; justify-content: center;align-items: center;height: 5vh;" class="btnn-beli">
+              ? `<button onclick="goToLink('${show.showroomTheater.entrance_url}')" style="width: 95%;display: flex; gap: 10px; justify-content: center;align-items: center;height: 7vh;" class="btnn-beli">
                   <span class="icon"><i class="fas fa-ticket"></i></span>
                   <span style="margin-right: 5px;">Beli tiket Online</span> 
                   
-                </a>`
+                </button>`
               : '';
 
             const theaterDetailCard = document.createElement("div");
@@ -206,11 +206,11 @@ padding: 5px 10px;">${s.name}</h3>
               <h3 style="font-size: 20px; font-weight: 600; font-family: 'Zen Maru Gothic';"><i style="font-size: 20px; color: yellow;" class="mdi mdi-ticket"></i> Tiket Theater</h3>
               </div>
                 <div style="display: flex; justify-content: center;width: 100%; align-items: center;gap: 10px;flex-direction: column; margin-top: 10px;">
-                <a href="${ticketUrl}" class="btnn-beli" style="width: 86%;display: flex; gap: 10px; justify-content: center;align-items: center;height: 5vh;">
+                <button onclick="goToLink('${ticketUrl}')" class="btnn-beli" style="width: 95%;display: flex; gap: 10px; justify-content: center;align-items: center;height: 7vh;">
 
                   <span class="icon"><i class="fas fa-ticket"></i></span>
                   <span style="margin-right: 5px;">Beli tiket Offline</span> 
-                  </a>
+                  </button>
 
                 ${onlineTicketButton}
                      </div>

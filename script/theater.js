@@ -87,7 +87,7 @@ for (const theater of eventData.theater.upcoming) {
   const card = document.createElement('div');
   card.classList.add('card-up-th');
   card.innerHTML = `
-<a href="dtheater.html?id=${theater.id}" class="btnn">
+<button class="buttongoweb" onclick="goToLink('dtheater.html?id=${theater.id}')" class="btnn">
   <div style="width: 100%; display: flex; justify-content: center; align-items: center; flex-direction: column; gap: 20px;">
     <div class="card-th">
       <img src="${bannerImage}" style="width: 500px; height: 200px; object-fit: cover;"/>
@@ -110,7 +110,7 @@ for (const theater of eventData.theater.upcoming) {
       </div>
     </div>
   </div>
-</a>
+</button>
   `;
   upcomingContainer.appendChild(card);
 }

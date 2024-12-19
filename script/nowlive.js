@@ -92,8 +92,8 @@ card.appendChild(liveType);
 
             if (member.type === 'showroom') {
               const showroomUrl = 'https://www.showroom-live.com/r/';
-              const showroomLink = document.createElement('a');
-              showroomLink.classList.add('btn-live-link', 'btn-primary');
+              const showroomLink = document.createElement('button');
+showroomLink.classList.add('gotoweb', 'btn-live', 'btn-primary');
               showroomLink.innerHTML = '<span class="mdi mdi-arrow-top-right-thin-circle-outline"></span>';
               showroomLink.href = showroomUrl + member.url_key;
               showroomLink.target = '_blank';
@@ -101,8 +101,8 @@ card.appendChild(liveType);
 
               member.streaming_url_list.forEach(urlObj => {
                 if (urlObj.label === 'original quality') {
-                  const fullscreenBtn = document.createElement('a');
-                  fullscreenBtn.classList.add('btn-live', 'btn-primary');
+                  const fullscreenBtn = document.createElement('button');
+fullscreenBtn.classList.add('gotoweb', 'btn-live', 'btn-primary');
                   fullscreenBtn.innerHTML = '<span class="mdi mdi-video"></span>';
 
                   const startDate = member.started_at ? encodeURIComponent(member.started_at) : 'Tidak diketahui';
@@ -112,23 +112,25 @@ card.appendChild(liveType);
                 }
               });
             } else if (member.type === 'idn') {
-              const idnLink = document.createElement('a');
-              idnLink.classList.add('btn-live-link', 'btn-primary');
+              const idnLink = document.createElement('button');
+idnLink.classList.add('gotoweb', 'btn-live', 'btn-primary');
               idnLink.innerHTML = '<span class="mdi mdi-arrow-top-right-thin-circle-outline"></span>';
               idnLink.href = `${idnUrl}${member.url_key}/live/${member.slug}`;
               cardBody.appendChild(idnLink);
 
               member.streaming_url_list.forEach(urlObj => {
                 const ProxyUrl = 'https://jkt48showroom-api.my.id/proxy?url=';
-                const fullscreenBtn = document.createElement('a');
-                fullscreenBtn.classList.add('btn-live', 'btn-primary');
-                fullscreenBtn.innerHTML = '<span class="mdi mdi-video"></span>';
+                const fullscreenBtn = document.createElement('button');
+fullscreenBtn.classList.add('gotoweb', 'btn-live', 'btn-primary');
+fullscreenBtn.innerHTML = '<span class="mdi mdi-video"></span>';
 
-                const startDate = member.started_at ? encodeURIComponent(member.started_at) : 'Tidak diketahui';
-                const viewers = member.viewers ? encodeURIComponent(member.viewers) : '0';
+const startDate = member.started_at ? encodeURIComponent(member.started_at) : 'Tidak diketahui';
+const viewers = member.viewers ? encodeURIComponent(member.viewers) : '0';
 
-                fullscreenBtn.href = `idn.html#${ProxyUrl}${encodeURIComponent(urlObj.url)}&name=${encodeURIComponent(member.name)}&viewers=${viewers}&start_date=${startDate}&type=${encodeURIComponent(member.type)}`;
-                cardBody.appendChild(fullscreenBtn);
+const link = `idn.html#${ProxyUrl}${encodeURIComponent(urlObj.url)}&name=${encodeURIComponent(member.name)}&viewers=${viewers}&start_date=${startDate}&type=${encodeURIComponent(member.type)}`;
+fullscreenBtn.setAttribute('onclick', `goToLink('${link}')`);
+
+cardBody.appendChild(fullscreenBtn);
               });
             }
 
