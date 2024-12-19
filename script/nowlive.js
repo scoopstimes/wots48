@@ -75,13 +75,13 @@ title.style = `
 card.appendChild(title);
 
             const liveType = document.createElement('p');
-            liveType.textContent = `Live: ${member.type}`;
-            liveType.style = `
-              font-size: 14px;
-              color: #b0b0b0;
-              margin-top: -5px;
-            `;
-            card.appendChild(liveType);
+liveType.textContent = `Live: ${member.type === 'idn' ? 'IDN' : 'Showroom'}`;
+liveType.style = `
+  font-size: 14px;
+  color: #b0b0b0;
+  margin-top: -5px;
+`;
+card.appendChild(liveType);
 
             const cardBody = document.createElement('div');
             cardBody.style = `
