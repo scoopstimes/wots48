@@ -216,6 +216,6 @@ function fetchLiveData(containerSelector, isLimit = true) {
   setInterval(() => {
     fetchLiveData('.card-nowlive-container', true);
     fetchLiveData('.card-nowlive-container-up', false);
-  }, 10000); // 30 detik
+  }, 60000); // 30 detik
 });
 
