@@ -2400,12 +2400,12 @@ footer a:hover {
   }
 }
 .status-th-box {
-  background-color: #FFB91D;
+  background-color: #FFB000;
   color: #ffffff;
   border-radius: 20px;
   padding: 5px 10px;
   display: inline-block;
-  font-size: 1em;
+  font-size: 1.1em;
   position: absolute;
   top: 15px; /* Geser ke atas */
   left: 12%;  /* Posisikan di tengah secara horizontal */
