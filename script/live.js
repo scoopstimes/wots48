@@ -29,6 +29,7 @@ function listLive() {
       fetch(`https://api.crstlnz.my.id/api/recent?group=jkt48&page=${currentPageShowroom}&perpage=100`)
         .then((response) => response.json())
         .then((dataShowroom) => {
+         
           // Gabungkan kedua data
           const combinedData = [
             ...dataIdn.recents.filter((item) => item.idn.username !== "ame-5xqz6mqgk4"),

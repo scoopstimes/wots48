@@ -4,9 +4,8 @@ document.addEventListener("DOMContentLoaded", function () {
   // Fungsi untuk mengirim notifikasi menggunakan OneSignal
   // Fungsi untuk menghapus angka-angka di belakang judul live
 function cleanLiveTitle(title) {
-  return title.replace(/-\d+$/, ''); // Menghapus angka-angka yang muncul setelah tanda "-"
+    return title.replace(/[-\d]+$/, '').replace(/-/, ' ').trim(); 
 }
-
 // Fungsi untuk mengirim notifikasi menggunakan OneSignal
 function sendNotification(memberName, platform, imageUrl, liveTitle, type) {
   const oneSignalUrl = "https://onesignal.com/api/v1/notifications";
