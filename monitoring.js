@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Jika member sebelumnya tidak live dan sekarang live, kirim notifikasi
             if (!notifiedMembers.includes(member.name) || memberLiveTime > lastLiveTimestamp) {
-              sendNotification(member.name, member.type);
+  sendNotification(member.name, member.type, member.img); // Tambahkan member.img
 
               // Simpan member yang sudah diberi notifikasi dan timestamp
               notifiedMembers.push(member.name);
