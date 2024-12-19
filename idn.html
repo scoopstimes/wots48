@@ -153,9 +153,13 @@
   }
 
   // Menampilkan informasi tambahan seperti nama member, jumlah viewers, dll.
-  document.getElementById('liveMemberName').textContent = memberName + 'JKT48' || 'Nama Tidak Ditemukan';
-  
-
+  if (memberName) {
+  // Jika nama sudah mengandung "JKT48", gunakan nama seperti apa adanya
+  document.getElementById('liveMemberName').textContent = memberName.includes('JKT48') ? memberName : memberName + ' JKT48';
+} else {
+  // Jika nama tidak ditemukan
+  document.getElementById('liveMemberName').textContent = 'Nama Tidak Ditemukan';
+}
   if (startDate) {
     const date = new Date(decodeURIComponent(startDate));
 
