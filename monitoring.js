@@ -2,46 +2,46 @@ document.addEventListener("DOMContentLoaded", function () {
   const sumber = 'https://api.crstlnz.my.id/api/now_live?group=jkt48';
 
   // Fungsi untuk mengirim notifikasi menggunakan OneSignal
-  function sendNotification(memberName, platform, liveTitle) {
-    const oneSignalUrl = "https://onesignal.com/api/v1/notifications";
-    const apiKey = "os_v2_app_dxhckkbierahpoxitpgpvugliohijlkxgwauvdeb5y7l4akxayhbkme7v736to2tajc7itkis4ppw3zxsonafftkmds62m73i2dahsa"; // Ganti dengan API Key Anda
-    const appId = "1dce2528-2824-4077-bae8-9bccfad0cb43"; // Ganti dengan App ID Anda
+  function sendNotification(memberName, platform, imageUrl) {
+  const oneSignalUrl = "https://onesignal.com/api/v1/notifications";
+  const apiKey = "os_v2_app_dxhckkbierahpoxitpgpvugliohijlkxgwauvdeb5y7l4akxayhbkme7v736to2tajc7itkis4ppw3zxsonafftkmds62m73i2dahsa"; // Ganti dengan API Key Anda
+  const appId = "1dce2528-2824-4077-bae8-9bccfad0cb43";   // Ganti dengan App ID Anda
 
-    // Heading teks berbeda untuk IDN dan Showroom
-    const headingText = platform.toLowerCase() === 'idn' 
-      ? `IDN Live: ${liveTitle}` 
-      : "Live Notification";
-
-    const contentText = platform.toLowerCase() === 'idn' 
-      ? `${memberName} sedang live di platform nih!` 
-      : `${memberName} sedang live di Showroom nih!`;
-
-    const notificationData = {
-      app_id: appId,
-      headings: { en: headingText },
-      contents: { en: contentText },
-      included_segments: ["All"], // Kirim ke semua pengguna
-      data: {
-        member_name: memberName,
-        platform,
-        live_title: liveTitle,
-      },
-      url: `https://median.co/app/${memberName}`, // Opsional: URL ke aplikasi Median
-    };
-
-    fetch(oneSignalUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Basic ${apiKey}`,
-      },
-      body: JSON.stringify(notificationData),
-    })
-      .then((response) => response.json())
-      .then((data) => console.log("Notification sent:", data))
-      .catch((error) => console.error("Error sending notification:", error));
+  // Fungsi untuk memformat tipe platform
+  function formatPlatformText(platform) {
+    if (platform.toLowerCase() === 'idn') {
+      return 'IDN';
+    } else if (platform.toLowerCase() === 'showroom') {
+      return 'Showroom';
+    }
+    return platform;
   }
 
+  const notificationData = {
+    app_id: appId,
+    headings: { en: "Live Notification" },
+    contents: { en: `${memberName} sedang live di ${formatPlatformText(platform)} nih!` },
+    included_segments: ["All"],
+    big_picture: imageUrl, // Tambahkan gambar live di sini
+    data: {
+      member_name: memberName,
+      platform: formatPlatformText(platform),
+    },
+    url: `https://median.co/app/${memberName}`, // Opsional: URL ke aplikasi Median
+  };
+
+  fetch(oneSignalUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Basic ${apiKey}`,
+    },
+    body: JSON.stringify(notificationData),
+  })
+    .then((response) => response.json())
+    .then((data) => console.log("Notification sent:", data))
+    .catch((error) => console.error("Error sending notification:", error));
+}
   // Fungsi utama untuk mengambil dan menampilkan data live
   function fetchLiveData(containerSelector, isLimit = true) {
     fetch(sumber)
@@ -56,15 +56,17 @@ document.addEventListener("DOMContentLoaded", function () {
         // Menampilkan jumlah member yang sedang live
         document.getElementById('liveCount').textContent = ` ${liveCount} Member`;
 
-        // Update indikator live
+        // Ambil indikator live
         const liveIndicator = document.querySelector('.live-indicator') || document.querySelector('.nolive-indicator');
 
         if (liveIndicator) {
           if (liveCount === 0) {
+            // Jika tidak ada yang live
             document.getElementById('noLiveMessage').textContent = 'Tidak ada yang live ';
             liveIndicator.classList.remove('live-indicator');
             liveIndicator.classList.add('nolive-indicator');
           } else {
+            // Jika ada yang live
             document.getElementById('noLiveMessage').textContent = '';
             liveIndicator.classList.remove('nolive-indicator');
             liveIndicator.classList.add('live-indicator');
@@ -72,16 +74,26 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         if (liveCount > 0) {
+          const idnUrl = 'https://www.idn.app/';
           liveMembers.slice(0, isLimit ? 100 : liveMembers.length).forEach((member) => {
+            console.log(member);
+
+            // Cek apakah member sudah mendapat notifikasi sebelumnya
             let notifiedMembers = JSON.parse(localStorage.getItem("notifiedMembers")) || [];
             let lastLiveTimestamp = localStorage.getItem("lastLiveTimestamp");
-            const memberLiveTime = new Date(member.started_at).getTime();
 
+            // Cek timestamp live member
+            const memberLiveTime = new Date(member.started_at).getTime();
+            const isNewLiveMember = memberLiveTime > lastLiveTimestamp;
+
+            // Jika member sebelumnya tidak live dan sekarang live, kirim notifikasi
             if (!notifiedMembers.includes(member.name) || memberLiveTime > lastLiveTimestamp) {
-              sendNotification(member.name, member.type, member.title || 'Live');
+              sendNotification(member.name, member.type);
+
+              // Simpan member yang sudah diberi notifikasi dan timestamp
               notifiedMembers.push(member.name);
-              localStorage.setItem("notifiedMembers", JSON.stringify(notifiedMembers));
-              localStorage.setItem("lastLiveTimestamp", memberLiveTime);
+              localStorage.setItem("notifiedMembers", JSON.stringify(notifiedMembers)); // Simpan ke localStorage
+              localStorage.setItem("lastLiveTimestamp", memberLiveTime); // Simpan timestamp live terakhir
             }
 
             const card = document.createElement('div');
@@ -118,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
             card.appendChild(title);
 
             const liveType = document.createElement('p');
-            liveType.textContent = `Live: ${member.type.toUpperCase()}`;
+            liveType.textContent = `Live: ${member.type}`;
             liveType.style = `
               font-size: 14px;
               color: #b0b0b0;
@@ -141,12 +153,38 @@ document.addEventListener("DOMContentLoaded", function () {
               showroomLink.href = showroomUrl + member.url_key;
               showroomLink.target = '_blank';
               cardBody.appendChild(showroomLink);
+
+              member.streaming_url_list.forEach((urlObj) => {
+                if (urlObj.label === 'original quality') {
+                  const fullscreenBtn = document.createElement('a');
+                  fullscreenBtn.classList.add('btn-live', 'btn-primary');
+                  fullscreenBtn.innerHTML = '<span class="mdi mdi-video"></span>';
+
+                  const startDate = member.started_at ? encodeURIComponent(member.started_at) : 'Tidak diketahui';
+                  const viewers = member.viewers ? encodeURIComponent(member.viewers) : '0';
+                  fullscreenBtn.href = `showroom.html#url=${encodeURIComponent(urlObj.url)}&name=${encodeURIComponent(member.name)}&viewers=${viewers}&start_date=${startDate}&type=${encodeURIComponent(member.type)}`;
+                  cardBody.appendChild(fullscreenBtn);
+                }
+              });
             } else if (member.type === 'idn') {
               const idnLink = document.createElement('a');
               idnLink.classList.add('btn-live-link', 'btn-primary');
               idnLink.innerHTML = '<span class="mdi mdi-arrow-top-right-thin-circle-outline"></span>';
-              idnLink.href = `https://www.idn.app/${member.url_key}/live/${member.slug}`;
+              idnLink.href = `${idnUrl}${member.url_key}/live/${member.slug}`;
               cardBody.appendChild(idnLink);
+
+              member.streaming_url_list.forEach((urlObj) => {
+                const ProxyUrl = 'https://jkt48showroom-api.my.id/proxy?url=';
+                const fullscreenBtn = document.createElement('a');
+                fullscreenBtn.classList.add('btn-live', 'btn-primary');
+                fullscreenBtn.innerHTML = '<span class="mdi mdi-video"></span>';
+
+                const startDate = member.started_at ? encodeURIComponent(member.started_at) : 'Tidak diketahui';
+                const viewers = member.viewers ? encodeURIComponent(member.viewers) : '0';
+
+                fullscreenBtn.href = `idn.html#${ProxyUrl}${encodeURIComponent(urlObj.url)}&name=${encodeURIComponent(member.name)}&viewers=${viewers}&start_date=${startDate}&type=${encodeURIComponent(member.type)}`;
+                cardBody.appendChild(fullscreenBtn);
+              });
             }
 
             card.appendChild(cardBody);
@@ -157,11 +195,16 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch((error) => console.error('Error fetching NOW LIVE:', error));
   }
 
+  // Fetch untuk SHOWROOM LIVE LIMIT
   fetchLiveData('.card-nowlive-container', true);
+
+  // Fetch untuk SHOWROOM LIVE NO LIMIT
   fetchLiveData('.card-nowlive-container-up', false);
 
+  // Set interval untuk otomatis refresh setiap 30 detik
   setInterval(() => {
     fetchLiveData('.card-nowlive-container', true);
     fetchLiveData('.card-nowlive-container-up', false);
-  }, 30000); // 30 detik
+  }, 10000); // 30 detik
 });
+
