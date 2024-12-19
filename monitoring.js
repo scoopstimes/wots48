@@ -2,10 +2,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const sumber = 'https://api.crstlnz.my.id/api/now_live?group=jkt48';
 
   // Fungsi untuk mengirim notifikasi menggunakan OneSignal
-  function sendNotification(memberName, platform, imageUrl) {
+  function sendNotification(memberName, platform, imageUrl, liveTitle) {
   const oneSignalUrl = "https://onesignal.com/api/v1/notifications";
   const apiKey = "os_v2_app_dxhckkbierahpoxitpgpvugliohijlkxgwauvdeb5y7l4akxayhbkme7v736to2tajc7itkis4ppw3zxsonafftkmds62m73i2dahsa"; // Ganti dengan API Key Anda
-  const appId = "1dce2528-2824-4077-bae8-9bccfad0cb43";   // Ganti dengan App ID Anda
+  const appId = "1dce2528-2824-4077-bae8-9bccfad0cb43"; // Ganti dengan App ID Anda
 
   // Fungsi untuk memformat tipe platform
   function formatPlatformText(platform) {
@@ -17,9 +17,12 @@ document.addEventListener("DOMContentLoaded", function () {
     return platform;
   }
 
+  // Tentukan heading berdasarkan platform
+  const headingText = platform.toLowerCase() === 'idn' ? `IDN Live: ${liveTitle}` : "Live Notification";
+
   const notificationData = {
     app_id: appId,
-    headings: { en: "Live Notification" },
+    headings: { en: headingText }, // Gunakan heading dinamis sesuai platform
     contents: { en: `${memberName} sedang live di ${formatPlatformText(platform)} nih!` },
     included_segments: ["All"],
     big_picture: imageUrl, // Tambahkan gambar live di sini
@@ -27,17 +30,17 @@ document.addEventListener("DOMContentLoaded", function () {
       member_name: memberName,
       platform: formatPlatformText(platform),
     },
-    url: ``,// Opsional: URL ke aplikasi Median
+    url: ``, // Opsional: URL ke aplikasi Median
   };
 
   fetch(oneSignalUrl, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Basic ${apiKey}`,
-    },
-    body: JSON.stringify(notificationData),
-  })
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Basic ${apiKey}`,
+      },
+      body: JSON.stringify(notificationData),
+    })
     .then((response) => response.json())
     .then((data) => console.log("Notification sent:", data))
     .catch((error) => console.error("Error sending notification:", error));
@@ -88,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Jika member sebelumnya tidak live dan sekarang live, kirim notifikasi
             if (!notifiedMembers.includes(member.name) || memberLiveTime > lastLiveTimestamp) {
-  sendNotification(member.name, member.type, member.img); // Tambahkan member.img
+  sendNotification(member.name, member.type, member.img, member.title); // Tambahkan member.img
 
               // Simpan member yang sudah diberi notifikasi dan timestamp
               notifiedMembers.push(member.name);
