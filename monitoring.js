@@ -7,14 +7,24 @@ document.addEventListener("DOMContentLoaded", function () {
     const apiKey = "os_v2_app_dxhckkbierahpoxitpgpvugliohijlkxgwauvdeb5y7l4akxayhbkme7v736to2tajc7itkis4ppw3zxsonafftkmds62m73i2dahsa"; // Ganti dengan API Key Anda
     const appId = "1dce2528-2824-4077-bae8-9bccfad0cb43";   // Ganti dengan App ID Anda
 
+    // Fungsi untuk memformat tipe platform
+    function formatPlatformText(platform) {
+      if (platform.toLowerCase() === 'idn') {
+        return 'IDN';
+      } else if (platform.toLowerCase() === 'showroom') {
+        return 'Showroom';
+      }
+      return platform;
+    }
+
     const notificationData = {
       app_id: appId,
       headings: { en: "Live Notification" },
-      contents: { en: `${memberName} sedang live di ${platform} nih!` },
+      contents: { en: `${memberName} sedang live di ${formatPlatformText(platform)} nih!` }, // Format platform
       included_segments: ["All"], // Kirim ke semua pengguna
       data: {
         member_name: memberName,
-        platform: platform,
+        platform: formatPlatformText(platform), // Format data platform
       },
       url: `https://median.co/app/${memberName}`, // Opsional: URL ke aplikasi Median
     };
