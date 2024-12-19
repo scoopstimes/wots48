@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
       member_name: memberName,
       platform: formatPlatformText(platform),
     },
-    // Opsional: URL ke aplikasi Median
+    url: ``,// Opsional: URL ke aplikasi Median
   };
 
   fetch(oneSignalUrl, {
