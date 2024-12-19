@@ -1,3 +1,12 @@
+document.addEventListener("DOMContentLoaded", function () {
+  const sumber = 'https://api.crstlnz.my.id/api/now_live?group=jkt48';
+
+  // Fungsi untuk mengirim notifikasi menggunakan OneSignal
+  // Fungsi untuk menghapus angka-angka di belakang judul live
+function cleanLiveTitle(title) {
+  return title.replace(/-\d+$/, ''); // Menghapus angka-angka yang muncul setelah tanda "-"
+}
+
 // Fungsi untuk mengirim notifikasi menggunakan OneSignal
 function sendNotification(memberName, platform, imageUrl, liveTitle, type) {
   const oneSignalUrl = "https://onesignal.com/api/v1/notifications";
@@ -17,7 +26,7 @@ function sendNotification(memberName, platform, imageUrl, liveTitle, type) {
   const notificationData = {
     app_id: appId,
     headings: {
-      en: type === 'idn' ? `IDN Live: ${liveTitle}` : 'Live Notification'
+      en: type === 'idn' ? `IDN Live: ${cleanLiveTitle(liveTitle)}` : 'Live Notification'
     }, // Gunakan slug sebagai judul live atau default 'Live Notification' untuk showroom
     contents: { en: `${memberName} sedang live di ${formatPlatformText(platform)} nih!` },
     included_segments: ["All"],
@@ -88,10 +97,11 @@ function fetchLiveData(containerSelector, isLimit = true) {
 
           // Ambil slug sebagai judul live
           const liveTitle = member.slug || 'No Title'; // Gunakan slug sebagai judul live
+          const cleanedLiveTitle = cleanLiveTitle(liveTitle); // Bersihkan judul live
 
           // Jika member sebelumnya tidak live dan sekarang live, kirim notifikasi
           if (!notifiedMembers.includes(member.name) || memberLiveTime > lastLiveTimestamp) {
-            sendNotification(member.name, member.type, member.img, liveTitle, member.type); // Kirim notifikasi dengan judul live
+            sendNotification(member.name, member.type, member.img, cleanedLiveTitle, member.type); // Kirim notifikasi dengan judul live yang sudah dibersihkan
 
             // Simpan member yang sudah diberi notifikasi dan timestamp
             notifiedMembers.push(member.name);
@@ -197,3 +207,16 @@ function fetchLiveData(containerSelector, isLimit = true) {
     })
     .catch((error) => console.error('Error fetching NOW LIVE:', error));
 }
+  // Fetch untuk SHOWROOM LIVE LIMIT
+  fetchLiveData('.card-nowlive-container', true);
+
+  // Fetch untuk SHOWROOM LIVE NO LIMIT
+  fetchLiveData('.card-nowlive-container-up', false);
+
+  // Set interval untuk otomatis refresh setiap 30 detik
+  setInterval(() => {
+    fetchLiveData('.card-nowlive-container', true);
+    fetchLiveData('.card-nowlive-container-up', false);
+  }, 10000); // 30 detik
+});
+
