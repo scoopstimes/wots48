@@ -2,33 +2,34 @@ document.addEventListener("DOMContentLoaded", function () {
   const sumber = 'https://api.crstlnz.my.id/api/now_live?group=jkt48';
 
   // Fungsi untuk mengirim notifikasi menggunakan OneSignal
-  function sendNotification(memberName, platform, liveTitle, memberImg) {
+  function sendNotification(memberName, platform, liveTitle, imgUrl) {
     const oneSignalUrl = "https://onesignal.com/api/v1/notifications";
     const apiKey = "os_v2_app_dxhckkbierahpoxitpgpvugliohijlkxgwauvdeb5y7l4akxayhbkme7v736to2tajc7itkis4ppw3zxsonafftkmds62m73i2dahsa"; // Ganti dengan API Key Anda
     const appId = "1dce2528-2824-4077-bae8-9bccfad0cb43";   // Ganti dengan App ID Anda
 
-    // Format teks platform dan isi notifikasi
-    function formatNotificationText(platform, liveTitle) {
-      if (platform.toLowerCase() === 'idn') {
-        return `IDN Live: ${liveTitle}`;
-      } else if (platform.toLowerCase() === 'showroom') {
-        return `${memberName} sedang live di Showroom nih!`;
-      }
-      return `${memberName} sedang live di ${platform}!`;
+    // Fungsi untuk memformat teks platform dan heading
+    function formatPlatformText(platform) {
+      return platform.toLowerCase() === 'idn' ? 'IDN' : 'Showroom';
     }
+
+    const headingText = platform.toLowerCase() === 'idn' 
+      ? `IDN Live: ${liveTitle}` 
+      : "Live Notification";
+
+    const contentText = `${memberName} sedang live di ${formatPlatformText(platform)} nih!`;
 
     const notificationData = {
       app_id: appId,
-      headings: { en: "Live Notification" },
-      contents: { en: formatNotificationText(platform, liveTitle) },
+      headings: { en: headingText },
+      contents: { en: contentText },
       included_segments: ["All"], // Kirim ke semua pengguna
       data: {
         member_name: memberName,
-        platform,
+        platform: formatPlatformText(platform),
         live_title: liveTitle,
       },
-      big_picture: memberImg, // Gambar untuk notifikasi
-       
+      url: `https://median.co/app/${memberName}`,
+      big_picture: imgUrl, // Tambahkan gambar ke notifikasi
     };
 
     fetch(oneSignalUrl, {
@@ -57,96 +58,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
         document.getElementById('liveCount').textContent = ` ${liveCount} Member`;
 
-        const liveIndicator = document.querySelector('.live-indicator') || document.querySelector('.nolive-indicator');
+        liveMembers.slice(0, isLimit ? 100 : liveMembers.length).forEach((member) => {
+          const memberLiveTime = new Date(member.started_at).getTime();
+          const liveTitle = member.title || "Live Streaming"; // Gunakan judul live atau default
+          const imgUrl = member.img || "https://default-image-url.com"; // Gambar default jika tidak ada
 
-        if (liveIndicator) {
-          if (liveCount === 0) {
-            document.getElementById('noLiveMessage').textContent = 'Tidak ada yang live ';
-            liveIndicator.classList.remove('live-indicator');
-            liveIndicator.classList.add('nolive-indicator');
-          } else {
-            document.getElementById('noLiveMessage').textContent = '';
-            liveIndicator.classList.remove('nolive-indicator');
-            liveIndicator.classList.add('live-indicator');
+          // Kirim notifikasi jika belum pernah dikirim sebelumnya
+          let notifiedMembers = JSON.parse(localStorage.getItem("notifiedMembers")) || [];
+          if (!notifiedMembers.includes(member.name) || memberLiveTime > localStorage.getItem("lastLiveTimestamp")) {
+            sendNotification(member.name, member.type, liveTitle, imgUrl);
+
+            // Simpan notifikasi
+            notifiedMembers.push(member.name);
+            localStorage.setItem("notifiedMembers", JSON.stringify(notifiedMembers));
+            localStorage.setItem("lastLiveTimestamp", memberLiveTime);
           }
-        }
-
-        if (liveCount > 0) {
-          liveMembers.slice(0, isLimit ? 100 : liveMembers.length).forEach((member) => {
-            let notifiedMembers = JSON.parse(localStorage.getItem("notifiedMembers")) || [];
-            let lastLiveTimestamp = localStorage.getItem("lastLiveTimestamp");
-            const memberLiveTime = new Date(member.started_at).getTime();
-
-            const isNewLiveMember = memberLiveTime > lastLiveTimestamp;
-
-            if (!notifiedMembers.includes(member.name) || isNewLiveMember) {
-              sendNotification(member.name, member.type, member.title || "Live", member.img);
-
-              notifiedMembers.push(member.name);
-              localStorage.setItem("notifiedMembers", JSON.stringify(notifiedMembers));
-              localStorage.setItem("lastLiveTimestamp", memberLiveTime);
-            }
-
-            const card = document.createElement('div');
-            card.style = `
-              background-color: #2A3347;
-              border-radius: 10px;
-              padding: 10px;
-              position: relative;
-              width: 150px;
-              text-align: center;
-              display: flex;
-              flex-direction: column;
-              gap: 10px;
-            `;
-
-            const img = document.createElement('img');
-            img.src = member.img;
-            img.alt = member.name;
-            img.style = `
-              width: 100%;
-              height: auto;
-              object-fit: cover;
-              border-radius: 10px;
-              aspect-ratio: 1 / 1;
-            `;
-            card.appendChild(img);
-
-            const title = document.createElement('div');
-            title.textContent = member.name + (member.type === 'idn' ? ' JKT48' : '');
-            title.style = `
-              font-size: 14px;
-              font-weight: bold;
-            `;
-            card.appendChild(title);
-
-            const liveType = document.createElement('p');
-            liveType.textContent = `Live: ${member.type}`;
-            liveType.style = `
-              font-size: 14px;
-              color: #b0b0b0;
-              margin-top: -5px;
-            `;
-            card.appendChild(liveType);
-
-            const cardBody = document.createElement('div');
-            cardBody.style = `
-              display: flex;
-              justify-content: center;
-              gap: 10px;
-            `;
-
-            card.appendChild(cardBody);
-            container.prepend(card);
-          });
-        }
+        });
       })
       .catch((error) => console.error('Error fetching NOW LIVE:', error));
   }
 
+  // Fetch untuk SHOWROOM LIVE LIMIT
   fetchLiveData('.card-nowlive-container', true);
+
+  // Fetch untuk SHOWROOM LIVE NO LIMIT
   fetchLiveData('.card-nowlive-container-up', false);
 
+  // Set interval untuk otomatis refresh setiap 30 detik
   setInterval(() => {
     fetchLiveData('.card-nowlive-container', true);
     fetchLiveData('.card-nowlive-container-up', false);
