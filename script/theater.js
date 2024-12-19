@@ -62,8 +62,15 @@ for (const theater of eventData.theater.upcoming) {
 
   // Menentukan status event (Hari Ini, Besok, atau tanggal biasa)
   let eventStatus;
+  let statusClass = ''; // Kelas CSS untuk status "Hari ini"
   if (eventDate.toDateString() === today.toDateString()) {
-    eventStatus = eventDate <= new Date() ? "Sedang Berlangsung" : "Hari ini";
+    if (eventDate <= new Date()) {
+      eventStatus = "Sedang Berlangsung";
+      statusClass = 'status-hari-ini'; // Kelas untuk "Sedang Berlangsung"
+    } else {
+      eventStatus = "Hari ini";
+      statusClass = 'status-hari-ini'; // Kelas untuk "Hari ini"
+    }
   } else if (eventDate.toDateString() === tomorrow.toDateString()) {
     eventStatus = "Besok";
   } else {
@@ -94,7 +101,8 @@ for (const theater of eventData.theater.upcoming) {
           ${formattedDate}
         </p>
         <div class="status-th">
-          ${eventStatus === "Besok" ? `<div class="status-th-box" font-weight: bold;">Besok</div>` : ""}
+          ${eventStatus === "Besok" ? `<div class="status-th-box">${eventStatus}</div>` : ""}
+          ${eventStatus === "Hari ini" || isOngoing ? `<div class="status-th-box ${statusClass}">${displayStatus}</div>` : ""}
         </div>
         <div class="members-th">
           ${theater.member_count} Member
