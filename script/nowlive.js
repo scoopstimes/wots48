@@ -75,7 +75,7 @@ title.style = `
 card.appendChild(title);
 
             const liveType = document.createElement('p');
-liveType.textContent = `Live: ${member.type === 'idn' ? 'IDN' : 'Showroom'}`;
+liveType.textContent = `${member.type === 'idn' ? 'IDN Live' : 'Showroom'}`;
 liveType.style = `
   font-size: 14px;
   color: #b0b0b0;
