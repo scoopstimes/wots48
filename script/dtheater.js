@@ -190,14 +190,16 @@ padding: 5px 10px;">${s.name}</h3>
 
 const idnLiveTicketButton = show.idnTheater && show.idnTheater.slug
   ? `<button onclick="goToLink('https://idn.app/${show.idnTheater.username}/live/preview/${show.idnTheater.slug}')" style="width: 95%;display: flex; gap: 10px; justify-content: center;align-items: center;height: 7vh;" class="btnn-beli">
-      <span class="icon"><i class="fas fa-ticket"></i></span>
+      <span class="icon"><i style="background: linear-gradient(90deg, #FF3C3C, #ff4d4d, #FF3C3C);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;" class="fas fa-ticket"></i></span>
       <span style="margin-right: 5px;">Beli tiket IDN Live</span> 
     </button>`
   : '';
 
 // Tambahkan tombol ke dalam bagian tiket
 const ticketSection = `
-  <div style="display: flex; justify-content: center;width: 100%; align-items: center;gap: 10px;flex-direction: column; margin-top: 10px;">
+  <div style="display: flex; justify-content: center;width: 100%; align-items: center;gap: 5px;flex-direction: column; margin-top: 10px;">
     <button onclick="goToLink('${ticketUrl}')" class="btnn-beli" style="width: 95%;display: flex; gap: 10px; justify-content: center;align-items: center;height: 7vh;">
       <span class="icon"><i class="fas fa-ticket"></i></span>
       <span style="margin-right: 5px;">Beli tiket Offline</span> 
@@ -261,7 +263,7 @@ const ticketSection = `
               <div style="display: flex; flex-direction: column; gap: 20px; margin-top: 10px; margin-left: 15px;">
               <h3 style="font-size: 20px; font-weight: 600; font-family: 'Zen Maru Gothic';"><i style="font-size: 20px; color: yellow;" class="mdi mdi-ticket"></i> Tiket Theater</h3>
               </div>
-                <div style="display: flex; justify-content: center;width: 100%; align-items: center;gap: 10px;flex-direction: column; margin-top: 10px;">
+                <div style="display: flex; justify-content: center;width: 100%; align-items: center;gap:0px;flex-direction: column; margin-top: 10px;">
 
                 ${ticketSection}
                      </div>
