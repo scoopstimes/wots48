@@ -93,7 +93,7 @@ card.appendChild(liveType);
             if (member.type === 'showroom') {
               const showroomUrl = 'https://www.showroom-live.com/r/';
               const showroomLink = document.createElement('button');
-showroomLink.classList.add('gotoweb', 'btn-live', 'btn-primary');
+showroomLink.classList.add('gotoweb', 'btn-live-link', 'btn-primary');
               showroomLink.innerHTML = '<span class="mdi mdi-arrow-top-right-thin-circle-outline"></span>';
               showroomLink.href = showroomUrl + member.url_key;
               showroomLink.target = '_blank';
@@ -113,7 +113,7 @@ fullscreenBtn.classList.add('gotoweb', 'btn-live', 'btn-primary');
               });
             } else if (member.type === 'idn') {
               const idnLink = document.createElement('button');
-idnLink.classList.add('gotoweb', 'btn-live', 'btn-primary');
+idnLink.classList.add('gotoweb', 'btn-live-link', 'btn-primary');
               idnLink.innerHTML = '<span class="mdi mdi-arrow-top-right-thin-circle-outline"></span>';
               idnLink.href = `${idnUrl}${member.url_key}/live/${member.slug}`;
               cardBody.appendChild(idnLink);
