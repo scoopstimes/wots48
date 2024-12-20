@@ -66,7 +66,7 @@ for (const theater of eventData.theater.upcoming) {
   if (eventDate.toDateString() === today.toDateString()) {
     if (eventDate <= new Date()) {
       eventStatus = "Sedang Berlangsung";
-      statusClass = 'status-hari-ini'; // Kelas untuk "Sedang Berlangsung"
+      statusClass = 'status-sedang-berlangsung'; // Kelas untuk "Sedang Berlangsung"
     } else {
       eventStatus = "Hari ini";
       statusClass = 'status-hari-ini'; // Kelas untuk "Hari ini"
