@@ -109,8 +109,9 @@ fullscreenBtn.classList.add('gotoweb', 'btn-live', 'btn-primary');
 
                   const startDate = member.started_at ? encodeURIComponent(member.started_at) : 'Tidak diketahui';
                   const viewers = member.viewers ? encodeURIComponent(member.viewers) : '0';
-                  fullscreenBtn.href = `showroom.html#url=${encodeURIComponent(urlObj.url)}&name=${encodeURIComponent(member.name)}&viewers=${viewers}&start_date=${startDate}&type=${encodeURIComponent(member.type)}`;
+               const link = `showroom.html#url=${encodeURIComponent(urlObj.url)}&name=${encodeURIComponent(member.name)}&viewers=${viewers}&start_date=${startDate}&type=${encodeURIComponent(member.type)}`;
                   cardBody.appendChild(fullscreenBtn);
+                  fullscreenBtn.setAttribute('onclick', `goToLink('${link}')`);
                 }
               });
             } else if (member.type === 'idn') {
