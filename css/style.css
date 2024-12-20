@@ -2454,7 +2454,7 @@ footer a:hover {
   color: #ffffff;
   border-radius: 20px;
   padding: 5px 10px;
-  display: inline-block;
+  display: flex;
   font-size: 1.1em;
   position: absolute;
   top: 15px; /* Geser ke atas */
@@ -2474,7 +2474,7 @@ footer a:hover {
   transform: translateX(-50%);
 }
 .status-sedang-berlangsung {
-  background: linear-gradient(90deg, blue, #FF1493, red); /* Deep pink (#FF1493) */
+  background: linear-gradient(90deg, red, #FF1493, blue); /* Deep pink (#FF1493) */
   background-size: 200% 100%;
   animation: gradient-random 3s ease-in-out infinite;
   color: #ffffff;

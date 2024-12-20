@@ -100,7 +100,7 @@ for (const theater of eventData.theater.upcoming) {
         <p style="font-weight: 400;">
           ${formattedDate}
         </p>
-        <div class="status-th">
+       <div class="status-th">
           ${eventStatus === "Besok" ? `<div class="status-th-box">${eventStatus}</div>` : ""}
           ${eventStatus === "Hari ini" || isOngoing ? `<div class="status-th-box ${statusClass}">${displayStatus}</div>` : ""}
         </div>
