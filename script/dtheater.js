@@ -1,6 +1,7 @@
 let currentPage = 1;
 
 // Mengambil data anggota acara dari API
+// Mengambil data anggota acara dari API
 async function getEventMembers(eventId) {
   if (!eventId) {
     return null;
@@ -11,6 +12,7 @@ async function getEventMembers(eventId) {
   try {
     const response = await fetch(apiUrl);
     const eventData = await response.json();
+    console.log("Data Event Members:", eventData); // Log data API
 
     // Validasi format data
     if (!eventData || !Array.isArray(eventData.shows) || eventData.shows.length === 0) {
@@ -42,6 +44,7 @@ function loadTheater(direction) {
   fetch(apiUrl)
     .then(response => response.json())
     .then(data => {
+      console.log("Data Theater:", data); // Log data API
       const theaterList = data.theater;
 
       // Menghapus konten lama dari daftar teater
@@ -51,6 +54,7 @@ function loadTheater(direction) {
       fetch("script/cdnpicture.json")
         .then(response => response.json())
         .then(pictureData => {
+          console.log("Data Picture JSON:", pictureData); // Log data gambar JSON
           theaterList.forEach(theater => {
             const picture = pictureData.find(p => p.setlist === theater.title);
             const bannerImage = picture ? picture.banner : '';
@@ -90,6 +94,37 @@ function loadTheater(direction) {
         .catch(error => console.error("Error saat mengambil data gambar:", error));
     })
     .catch(error => console.error("Error saat mengambil data teater:", error));
+}
+
+// Menampilkan detail teater berdasarkan ID
+function detailTheater() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const theaterId = urlParams.get('id');
+  let apiUrl = "https://api.crstlnz.my.id/api/theater";
+
+  if (theaterId) {
+    apiUrl += `/${theaterId}`;
+  }
+
+  fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+      console.log("Data Theater Detail:", data); // Log data detail teater
+      document.getElementById('theaterDetail').innerHTML = '';
+
+      fetch("script/cdnpicture.json")
+        .then(response => response.json())
+        .then(pictureData => {
+          console.log("Data Picture JSON Detail:", pictureData); // Log data gambar JSON untuk detail
+          data.shows.forEach(show => {
+            const picture = pictureData.find(p => p.setlist === show.title);
+            const bannerImage = picture ? picture.banner : '';
+            // ... (rest of the code for detail rendering)
+          });
+        })
+        .catch(error => console.error("Error saat mengambil data gambar:", error));
+    })
+    .catch(error => console.error("Error saat mengambil data detail teater:", error));
 }
 
 // Menampilkan detail teater berdasarkan ID
@@ -147,12 +182,33 @@ padding: 5px 10px;">${s.name}</h3>
             const memberCount = show.members.length;
             const ticketUrl = `https://jkt48.com/theater/schedule/id/${show.id}`;
             const onlineTicketButton = show.showroomTheater && show.showroomTheater.entrance_url
-              ? `<button onclick="goToLink('${show.showroomTheater.entrance_url}')" style="width: 95%;display: flex; gap: 10px; justify-content: center;align-items: center;height: 7vh;" class="btnn-beli">
-                  <span class="icon"><i class="fas fa-ticket"></i></span>
-                  <span style="margin-right: 5px;">Beli tiket Online</span> 
-                  
-                </button>`
-              : '';
+  ? `<button onclick="goToLink('${show.showroomTheater.entrance_url}')" style="width: 95%;display: flex; gap: 10px; justify-content: center;align-items: center;height: 7vh;" class="btnn-beli">
+      <span class="icon"><i class="fas fa-ticket"></i></span>
+      <span style="margin-right: 5px;">Beli tiket Showroom</span> 
+    </button>`
+  : '';
+
+const idnLiveTicketButton = show.idnTheater && show.idnTheater.slug
+  ? `<button onclick="goToLink('https://idn.app/${show.idnTheater.username}/live/preview/${show.idnTheater.slug}')" style="width: 95%;display: flex; gap: 10px; justify-content: center;align-items: center;height: 7vh;" class="btnn-beli">
+      <span class="icon"><i class="fas fa-ticket"></i></span>
+      <span style="margin-right: 5px;">Beli tiket IDN Live</span> 
+    </button>`
+  : '';
+
+// Tambahkan tombol ke dalam bagian tiket
+const ticketSection = `
+  <div style="display: flex; justify-content: center;width: 100%; align-items: center;gap: 10px;flex-direction: column; margin-top: 10px;">
+    <button onclick="goToLink('${ticketUrl}')" class="btnn-beli" style="width: 95%;display: flex; gap: 10px; justify-content: center;align-items: center;height: 7vh;">
+      <span class="icon"><i class="fas fa-ticket"></i></span>
+      <span style="margin-right: 5px;">Beli tiket Offline</span> 
+    </button>
+    ${onlineTicketButton}
+    ${idnLiveTicketButton}
+  </div>
+`;
+
+// Masukkan ke dalam template detail
+
 
             const theaterDetailCard = document.createElement("div");
             theaterDetailCard.innerHTML = `
@@ -206,13 +262,8 @@ padding: 5px 10px;">${s.name}</h3>
               <h3 style="font-size: 20px; font-weight: 600; font-family: 'Zen Maru Gothic';"><i style="font-size: 20px; color: yellow;" class="mdi mdi-ticket"></i> Tiket Theater</h3>
               </div>
                 <div style="display: flex; justify-content: center;width: 100%; align-items: center;gap: 10px;flex-direction: column; margin-top: 10px;">
-                <button onclick="goToLink('${ticketUrl}')" class="btnn-beli" style="width: 95%;display: flex; gap: 10px; justify-content: center;align-items: center;height: 7vh;">
 
-                  <span class="icon"><i class="fas fa-ticket"></i></span>
-                  <span style="margin-right: 5px;">Beli tiket Offline</span> 
-                  </button>
-
-                ${onlineTicketButton}
+                ${ticketSection}
                      </div>
               <div style="display: flex; justify-content: left; margin-left: 15px; align-items: center; width: 95%; gap: 10px;margin-top: 20px;">
               <span style="font-size: 30px;" class="mdi mdi-account-group"></span>
