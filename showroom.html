@@ -94,7 +94,7 @@
       <div class="circle" style="background: white;"></div>
       <div class="pulse" style="background: white;"></div>
     </div>
-    <h1 style="font-size: 24px; margin-left: 10px;font-family: 'Zen Maru Gothic';">SR</h1>
+    <h1 style="font-size: 18px; margin-left: 10px;font-family: 'Zen Maru Gothic';">SR</h1>
         </div>
         </div>
    
@@ -112,20 +112,50 @@
 
       </div>
     </div>
-                <div style="padding: 0px; width: 91%;">
-          <div style="display: flex; align-items: center; padding: 10px 0;">
-            <div class="live-indicator">
-              <div class="circle"></div>
-              <div class="pulse"></div>
-            </div>
-            <h1 style="font-size: 20px; margin-left: 10px;">Room Live</h1>
-            <div style="margin-left: auto; font-size: 14px; color: #b0b0b0;font-weight: 500;" id="liveCount">0 Member</div>
-          </div>
-          <div id="noLiveMessage" style="text-align: center; color: #b0b0b0;font-weight: 500;"></div>
-          <div style="display: flex;   overflow-x: auto; gap: 10px; margin-top: 20px; width: 100%;" class="card-nowlive-container"></div>
+        <div style="width: 100%; display: flex; flex-direction: column;justify-content:center;margin-top: 20px; align-items: center; gap: 10px;">
 
-        </div>
+    <div style="display: flex; width: 95%;gap: 5px;">
+    <div style="display: flex; width: 87%;border-radius: 15px; background: #323D54; gap: 10px; padding: 15px;justify-content: left; align-items: center;box-shadow: 1px black;">
+      <span style="font-size: 30px;" class="mdi mdi-calendar"></span>
+      <div style="width: 100%; display: flex; flex-direction: column; justify-content: left;">
+        <span style="font-family: 'Zen Maru Gothic';font-size: 12px; opacity: 0.8;">Tanggal</span>
+                  <h1 style="font-size: 15px;" id="startDate"></h1>
+      </div>
+
     </div>
+        <div style="display: flex; width: 87%;border-radius: 15px; background: #323D54; gap: 10px; padding: 15px;justify-content: left; align-items: center;box-shadow: 1px black;">
+      <span style="font-size: 30px;" class="mdi mdi-clock"></span>
+      <div style="width: 100%; display: flex; flex-direction: column; justify-content: left;">
+        <span style="font-family: 'Zen Maru Gothic';font-size: 12px; opacity: 0.8;">Jam</span>
+                  <h1 style="font-size: 15px;" id="startTime"></h1>
+      </div>
+
+    </div>
+    
+    </div>
+    <button id="showroomapp" class="buttongoweb" style="display: flex; width: 95%;border-radius: 15px; background: #2A3347; gap: 10px; padding: 10px;justify-content: center; align-items: center;box-shadow: 1px black;">
+
+          <span style="font-size: 30px;" class="mdi mdi-link"></span>
+
+          <h1 style="font-size: 14px;font-family: 'Zen Maru Gothic';">Tonton di Showroom</h1>
+
+
+        
+    </button>
+                <div style="padding: 0px; width: 91%;">
+              <div style="display: flex; align-items: center; padding: 10px 0;">
+                <div class="live-indicator">
+                  <div class="circle"></div>
+                  <div class="pulse"></div>
+                </div>
+                <h1 style="font-size: 20px; margin-left: 10px;">Room Live</h1>
+                <div style="margin-left: auto; font-size: 14px; color: #b0b0b0;font-weight: 500;" id="liveCount">0 Member</div>
+              </div>
+              <div id="noLiveMessage" style="text-align: center; color: #b0b0b0;font-weight: 500;"></div>
+              <div style="display: flex;   overflow-x: auto; gap: 10px; margin-top: 20px; width: 100%;" class="card-nowlive-container"></div>
+
+            </div>
+            </div>
     <br>
     <hr><br>
   </div>
@@ -155,7 +185,11 @@
   const memberName = urlParams.get('name');
  
   const startDate = urlParams.get('start_date');
-  const liveType = urlParams.get('type'); // Menambahkan parameter untuk tipe live (IDN atau Showroom)
+  const liveType = urlParams.get('type'); 
+  const link = urlParams.get('link') // Ambil slug dari URL
+document.getElementById('showroomapp').addEventListener('click', () => {
+  window.open(link, '_blank')
+})// Menambahkan parameter untuk tipe live (IDN atau Showroom)
 
   // Periksa apakah videoUrl sudah terisi dengan benar
   if (videoUrl) {
@@ -187,8 +221,8 @@
     });
 
     // Menampilkan Tanggal dan Jam secara terpisah
-    document.getElementById('startDate').innerHTML = `<span class="mdi mdi-account-group"></span>${formattedDate}`;
-    document.getElementById('startTime').innerHTML = `<span class="mdi mdi-account-group"></span>${formattedTime}`;
+    document.getElementById('startDate').innerHTML = `${formattedDate}`;
+    document.getElementById('startTime').innerHTML = `${formattedTime} WIB`;
   } else {
     document.getElementById('startDate').textContent = '';
     document.getElementById('startTime').textContent = '';
@@ -214,7 +248,7 @@
         integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/hls.js"></script>
     <script src="https://48streams.vercel.app/player/mousetrap.min.js" charset="utf-8"></script>
-    <script src="../script/nowlive.js"></script>
+    <script src="nowlive.js"></script>
     <script src="/middleware/middleware.js"></script>
     <script src="script/player.js"></script>
     <script src="script/inject.js"></script>
