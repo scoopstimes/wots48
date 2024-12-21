@@ -2,6 +2,16 @@ document.addEventListener("DOMContentLoaded", function () {
   const sumber = 'https://api.crstlnz.my.id/api/now_live?group=jkt48';
 
   // Fungsi utama untuk mengambil dan menampilkan data live
+  
+function cleanLiveTitle(title) {
+  // Menghapus tanda '-' yang ada di tengah kalimat, dan angka yang ada di akhir kalimat
+  const cleanedTitle = title.replace(/-\s?/g, ' ') // 
+                             .replace(/-\d+$/, '') // Menghapus angka setelah tanda '-' di akhir judul
+                             .replace(/\d+$/, '') // Menghapus angka yang ada di akhir judul
+                             .trim(); // Menghapus spasi yang tidak perlu
+
+  return cleanedTitle.charAt(0).toUpperCase() + cleanedTitle.slice(1); // Huruf pertama menjadi kapital
+}
   function fetchLiveData(containerSelector, isLimit = true) {
     fetch(sumber)
       .then(response => response.json())
@@ -11,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const liveMembers = data.filter(member => member.started_at);
         const liveCount = liveMembers.length;
+
 
         // Menampilkan jumlah member yang sedang live
         document.getElementById('liveCount').textContent = ` ${liveCount} Member`;
@@ -91,60 +102,64 @@ card.appendChild(liveType);
             `;
 
             if (member.type === 'showroom') {
-              const showroomUrl = 'https://www.showroom-live.com/r/';
-const showroomLink = document.createElement('button');
-showroomLink.classList.add('gotoweb', 'btn-live-link', 'btn-primary');
-showroomLink.innerHTML = '<span class="mdi mdi-arrow-top-right-thin-circle-outline"></span>';
+  const showroomUrl = 'https://www.showroom-live.com/r/';
+  const showroomLink = document.createElement('button');
+  showroomLink.classList.add('gotoweb', 'btn-live-link', 'btn-primary');
+  showroomLink.innerHTML = '<span class="mdi mdi-arrow-top-right-thin-circle-outline"></span>';
 
-// URL tujuan
-const url = showroomUrl + member.url_key;
-showroomLink.setAttribute('onclick', `window.open('${url}', '_blank')`);
+  // URL tujuan
+  const url = showroomUrl + (member.url_key || '');
+  showroomLink.setAttribute('onclick', `window.open('${url}', '_blank')`);
 
-cardBody.appendChild(showroomLink);
-              member.streaming_url_list.forEach(urlObj => {
-                if (urlObj.label === 'original quality') {
-                  const fullscreenBtn = document.createElement('button');
-fullscreenBtn.classList.add('gotoweb', 'btn-live', 'btn-primary');
-                  fullscreenBtn.innerHTML = '<span class="mdi mdi-video"></span>';
+  cardBody.appendChild(showroomLink);
 
-                  const startDate = member.started_at ? encodeURIComponent(member.started_at) : 'Tidak diketahui';
-                  const viewers = member.viewers ? encodeURIComponent(member.viewers) : '0';
-               const link = `showroom.html#url=${encodeURIComponent(urlObj.url)}&name=${encodeURIComponent(member.name)}&viewers=${viewers}&start_date=${startDate}&type=${encodeURIComponent(member.type)}`;
-                  cardBody.appendChild(fullscreenBtn);
-                  fullscreenBtn.setAttribute('onclick', `goToLink('${link}')`);
-                }
-              });
-            } else if (member.type === 'idn') {
-              const idnLink = document.createElement('button');
-idnLink.classList.add('gotoweb', 'btn-live-link', 'btn-primary');
-idnLink.innerHTML = '<span class="mdi mdi-arrow-top-right-thin-circle-outline"></span>';
+  if (Array.isArray(member.streaming_url_list)) {
+    member.streaming_url_list.forEach(urlObj => {
+      if (urlObj.label === 'original quality' && urlObj.url) {
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.classList.add('gotoweb', 'btn-live', 'btn-primary');
+        fullscreenBtn.innerHTML = '<span class="mdi mdi-video"></span>';
 
-// URL tujuan
-const url = `${idnUrl}${member.url_key}/live/${member.slug}`;
-idnLink.setAttribute('onclick', `window.location.href='${url}', '_blank'`);
+        const startDate = member.started_at ? encodeURIComponent(member.started_at) : 'Tidak diketahui';
+        const viewers = member.viewers ? encodeURIComponent(member.viewers) : '0';
+        const link = `showroom.html#url=${encodeURIComponent(urlObj.url)}&name=${encodeURIComponent(member.name)}&viewers=${viewers}&start_date=${startDate}&type=${encodeURIComponent(member.type)}`;
 
-cardBody.appendChild(idnLink);
+        fullscreenBtn.setAttribute('onclick', `goToLink('${link}')`);
+        cardBody.appendChild(fullscreenBtn);
+      }
+    });
+  }
+} else if (member.type === 'idn') {
+  const idnLink = document.createElement('a');
+  idnLink.classList.add('btn-live-link', 'btn-primary');
+  idnLink.innerHTML = `<span class="mdi mdi-arrow-top-right-thin-circle-outline"></span>`;
+  idnLink.href = `${idnUrl}${member.url_key}/live/`;
+  cardBody.appendChild(idnLink);
 
-              member.streaming_url_list.forEach(urlObj => {
-                const ProxyUrl = 'https://jkt48showroom-api.my.id/proxy?url=';
-                const fullscreenBtn = document.createElement('button');
-fullscreenBtn.classList.add('gotoweb', 'btn-live', 'btn-primary');
-fullscreenBtn.innerHTML = '<span class="mdi mdi-video"></span>';
+  if (Array.isArray(member.streaming_url_list)) {
+    member.streaming_url_list.forEach((urlObj) => {
+      const ProxyUrl = 'https://jkt48showroom-api.my.id/proxy?url=';
+      if (urlObj.url) {
+        const fullscreenBtn = document.createElement('a');
+        fullscreenBtn.classList.add('btn-live', 'btn-primary');
+        fullscreenBtn.innerHTML = '<span class="mdi mdi-video"></span>';
 
-const startDate = member.started_at ? encodeURIComponent(member.started_at) : 'Tidak diketahui';
-const viewers = member.viewers ? encodeURIComponent(member.viewers) : '0';
+        // Tambahkan slug ke URL halaman idn.html
+        const startDate = member.started_at ? encodeURIComponent(member.started_at) : 'Tidak diketahui';
+        const viewers = member.viewers ? encodeURIComponent(member.viewers) : '0';
+        const cleanedSlug = cleanLiveTitle(member.slug || '');
 
-const link = `idn.html#${ProxyUrl}${encodeURIComponent(urlObj.url)}&name=${encodeURIComponent(member.name)}&viewers=${viewers}&start_date=${startDate}&type=${encodeURIComponent(member.type)}`;
-fullscreenBtn.setAttribute('onclick', `goToLink('${link}')`);
+        fullscreenBtn.href = `idn.html#url=${ProxyUrl}${encodeURIComponent(urlObj.url)}&name=${encodeURIComponent(member.name)}&viewers=${viewers}&start_date=${startDate}&type=${encodeURIComponent(member.type)}&slug=${encodeURIComponent(cleanedSlug)}`;
+        cardBody.appendChild(fullscreenBtn);
+      }
+    });
+  }
+}
 
-cardBody.appendChild(fullscreenBtn);
-              });
-            }
+card.appendChild(cardBody);
 
-            card.appendChild(cardBody);
-
-            // Tambahkan kartu di awal container
-            container.prepend(card);
+// Tambahkan kartu di awal container
+container.prepend(card);
           });
         }
       })
@@ -157,3 +172,4 @@ cardBody.appendChild(fullscreenBtn);
   // Fetch untuk SHOWROOM LIVE NO LIMIT
   fetchLiveData('.card-nowlive-container-up', false);
 });
+
