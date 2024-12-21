@@ -133,7 +133,8 @@ card.appendChild(liveType);
   const idnLink = document.createElement('a');
   idnLink.classList.add('btn-live-link', 'btn-primary');
   idnLink.innerHTML = `<span class="mdi mdi-arrow-top-right-thin-circle-outline"></span>`;
-  idnLink.href = `${idnUrl}${member.url_key}/live/`;
+  const url = `${idnUrl}${member.url_key}/live/`;
+  idnLink.setAttribute('onclick', `window.open('${url}', '_blank')`);
   cardBody.appendChild(idnLink);
 
   if (Array.isArray(member.streaming_url_list)) {
@@ -149,7 +150,8 @@ card.appendChild(liveType);
         const viewers = member.viewers ? encodeURIComponent(member.viewers) : '0';
         const cleanedSlug = cleanLiveTitle(member.slug || '');
 
-        fullscreenBtn.href = `idn.html#url=${ProxyUrl}${encodeURIComponent(urlObj.url)}&name=${encodeURIComponent(member.name)}&viewers=${viewers}&start_date=${startDate}&type=${encodeURIComponent(member.type)}&slug=${encodeURIComponent(cleanedSlug)}`;
+        const link = `idn.html#url=${ProxyUrl}${encodeURIComponent(urlObj.url)}&name=${encodeURIComponent(member.name)}&viewers=${viewers}&start_date=${startDate}&type=${encodeURIComponent(member.type)}&slug=${encodeURIComponent(cleanedSlug)}`;
+        fullscreenBtn.setAttribute('onclick', `goToLink('${link}')`);
         cardBody.appendChild(fullscreenBtn);
       }
     });
