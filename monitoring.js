@@ -4,7 +4,12 @@ document.addEventListener("DOMContentLoaded", function () {
   // Fungsi untuk mengirim notifikasi menggunakan OneSignal
   // Fungsi untuk menghapus angka-angka di belakang judul live
 function cleanLiveTitle(title) {
-    return title.replace(/[-\d]+$/, '').replace(/-/, ' ').trim(); 
+    // Menghapus angka dan tanda hubung di akhir judul
+    title = title.replace(/[-\d]+$/, '');
+    // Mengganti tanda hubung dengan spasi
+    title = title.replace(/-/g, ' ');
+    // Menghapus spasi berlebih di awal dan akhir judul
+    return title.trim();
 }
 // Fungsi untuk mengirim notifikasi menggunakan OneSignal
 function sendNotification(memberName, platform, imageUrl, liveTitle, type) {
