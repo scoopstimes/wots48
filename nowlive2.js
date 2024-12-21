@@ -122,7 +122,7 @@ card.appendChild(liveType);
 
         const startDate = member.started_at ? encodeURIComponent(member.started_at) : 'Tidak diketahui';
         const viewers = member.viewers ? encodeURIComponent(member.viewers) : '0';
-        const link = `showroom2.html#url=${encodeURIComponent(urlObj.url)}&name=${encodeURIComponent(member.name)}&viewers=${viewers}&start_date=${startDate}&type=${encodeURIComponent(member.type)}`;
+        const link = `showroom.html#url=${encodeURIComponent(urlObj.url)}&name=${encodeURIComponent(member.name)}&viewers=${viewers}&start_date=${startDate}&type=${encodeURIComponent(member.type)}`;
 
         fullscreenBtn.setAttribute('onclick', `goToLink('${link}')`);
         cardBody.appendChild(fullscreenBtn);
@@ -149,7 +149,7 @@ card.appendChild(liveType);
         const viewers = member.viewers ? encodeURIComponent(member.viewers) : '0';
         const cleanedSlug = cleanLiveTitle(member.slug || '');
 
-        fullscreenBtn.href = `idn2.html#url=${ProxyUrl}${encodeURIComponent(urlObj.url)}&name=${encodeURIComponent(member.name)}&viewers=${viewers}&start_date=${startDate}&type=${encodeURIComponent(member.type)}&slug=${encodeURIComponent(cleanedSlug)}`;
+        fullscreenBtn.href = `idn.html#url=${ProxyUrl}${encodeURIComponent(urlObj.url)}&name=${encodeURIComponent(member.name)}&viewers=${viewers}&start_date=${startDate}&type=${encodeURIComponent(member.type)}&slug=${encodeURIComponent(cleanedSlug)}`;
         cardBody.appendChild(fullscreenBtn);
       }
     });
