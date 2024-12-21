@@ -130,10 +130,11 @@ card.appendChild(liveType);
     });
   }
 } else if (member.type === 'idn') {
-  const idnLink = document.createElement('a');
-  idnLink.classList.add('btn-live-link', 'btn-primary');
+  const idnLink = document.createElement('button');
+  
+  idnLink.classList.add('gotoweb', 'btn-live-link', 'btn-primary');
   idnLink.innerHTML = `<span class="mdi mdi-arrow-top-right-thin-circle-outline"></span>`;
-  const url = `${idnUrl}${member.url_key}/live/`;
+  const url = `${idnUrl}${member.url_key}/live/${member.slug}`;
   idnLink.setAttribute('onclick', `window.open('${url}', '_blank')`);
   cardBody.appendChild(idnLink);
 
@@ -150,7 +151,7 @@ card.appendChild(liveType);
         const viewers = member.viewers ? encodeURIComponent(member.viewers) : '0';
         const cleanedSlug = cleanLiveTitle(member.slug || '');
 
-     const link = `idn2.html#url=${ProxyUrl}${encodeURIComponent(urlObj.url)}&name=${encodeURIComponent(member.name)}&viewers=${viewers}&start_date=${startDate}&type=${encodeURIComponent(member.type)}&slug=${encodeURIComponent(cleanedSlug)}`;
+     const link = `idn2.html#url=${ProxyUrl}${encodeURIComponent(urlObj.url)}&name=${encodeURIComponent(member.name)}&viewers=${viewers}&start_date=${startDate}&type=${encodeURIComponent(member.type)}&slug=${encodeURIComponent(cleanedSlug)}&link=${encodeURIComponent(url)}`;
      fullscreenBtn.setAttribute('onclick', `goToLink('${link}')`);
         cardBody.appendChild(fullscreenBtn);
       }

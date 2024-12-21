@@ -139,6 +139,15 @@
 
     </div>
     </div>
+        <button id="idnapp" class="buttongoweb" style="display: flex; width: 95%;border-radius: 15px; background: #2A3347; gap: 10px; padding: 10px;justify-content: center; align-items: center;box-shadow: 1px black;">
+
+          <span style="font-size: 30px;" class="mdi mdi-link"></span>
+
+          <h1 style="font-size: 14px;font-family: 'Zen Maru Gothic';">Buka di IDN Live</h1>
+
+
+        
+    </button>
             <div style="padding: 0px; width: 91%;">
           <div style="display: flex; align-items: center; padding: 10px 0;">
             <div class="live-indicator">
@@ -178,7 +187,11 @@
   const memberName = urlParams.get('name');
   const startDate = urlParams.get('start_date');
   const liveType = urlParams.get('type');
-  const slug = urlParams.get('slug'); // Ambil slug dari URL
+  const slug = urlParams.get('slug');
+  const link = urlParams.get('link')
+document.getElementById('idnapp').addEventListener('click', () => {
+  window.open(link, '_blank')
+})
 
   // Tampilkan slug sebagai judul live (jika ada)
   const liveTitleElement = document.getElementById('liveTitle');
