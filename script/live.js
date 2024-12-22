@@ -55,11 +55,11 @@ function listLive() {
                   object-fit: cover; margin-top: 10px;" loading="lazy">
                   <button class="buttongoweb" onclick="goToLink('drecentlive.html?id=${live.id}&start=${live.live_info.date.start}&end=${live.live_info.date.end}&gift=${live.gift_rate}&view=${live.live_info.viewers.num}&nama=${live.member.nickname}&image=${live.member.img_alt}')">
                   <div style="margin-top: -10px; display: flex; flex-direction: column;margin-left: -19px;">
-                    <h3 style="font-size: 17px; width: 150%;"> ${live.member.name}</h3>
+                    <h3 style="font-size: 17px; width: 150%;font-family: 'Quicksand';"> ${live.member.name}</h3>
                     <div style="margin-top: 10px; display: flex; flex-direction: column;">
-                      <h3><span style="font-size: 17px" class="mdi mdi mdi-broadcast"> ${live.type}</span></h3>
-                      <h3><span style="font-size: 17px" class="mdi mdi-calendar"> ${formatDate(live.live_info.date.start)}</span></h3>
-                      <h3><span style="font-size: 17px" class="mdi mdi-clock"> ${duration}</span></h3>
+                      <h3><span style="font-size: 17px;font-family: 'Quicksand';" class="mdi mdi mdi-broadcast"> ${live.type}</span></h3>
+                      <h3><span style="font-size: 17px;font-family: 'Quicksand';" class="mdi mdi-timer"> ${duration}</span></h3>
+                      <h3><span style="font-size: 17px;font-family: 'Quicksand';" class="mdi mdi-clock"> ${formatDate(live.live_info.date.start)}</span></h3>
                     </div>
                   </div>
                   </button>
@@ -93,6 +93,19 @@ function calculateDuration(start, end) {
 }
 
 function formatDate(dateString) {
-  const options = { year: "numeric", month: "long", day: "numeric" };
-  return new Date(dateString).toLocaleDateString("id-ID", options);
+  const now = new Date();
+  const date = new Date(dateString);
+  const diffMs = now - date;
+
+  const diffMinutes = Math.floor(diffMs / 60000);
+  const diffHours = Math.floor(diffMinutes / 60);
+  const diffDays = Math.floor(diffHours / 24);
+
+  if (diffMinutes < 60) {
+    return `${diffMinutes} menit yang lalu`;
+  } else if (diffHours < 24) {
+    return `${diffHours} jam yang lalu`;
+  } else {
+    return `${diffDays} hari yang lalu`;
+  }
 }
