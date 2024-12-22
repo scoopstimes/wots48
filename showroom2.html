@@ -218,7 +218,7 @@ document.getElementById('showroomapp').addEventListener('click', () => {
     const formattedTime = date.toLocaleTimeString('id-ID', { 
       hour: '2-digit', 
       minute: '2-digit' 
-    });
+    }).replace('.', ':');
 
     // Menampilkan Tanggal dan Jam secara terpisah
     document.getElementById('startDate').innerHTML = `${formattedDate}`;
