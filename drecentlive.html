@@ -193,8 +193,8 @@
             const startDate = new Date(liveStart);
             const endDate = new Date(liveEnd);
 
-            // Format tanggal dan waktu
-            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            // Format tanggal, waktu, dan hari
+            const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
             const formattedDate = startDate.toLocaleDateString('id-ID', options);
             const formattedStartTime = startDate.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', hour12: true });
             const formattedEndTime = endDate.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', hour12: true });
@@ -202,7 +202,7 @@
             document.getElementById("profile-img").src = `${image}` || "https://via.placeholder.com/80";
             document.getElementById("member-name").textContent = `${nama} JKT48`;
             document.getElementById("badge").textContent = data.sousenkyo || "Active";
-            
+
             document.getElementById("live-date").textContent = formattedDate;
             document.getElementById("live-time").textContent = `${formattedStartTime}`;
             document.getElementById("live-end-time").textContent = `${formattedEndTime}`;
