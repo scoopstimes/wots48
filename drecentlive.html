@@ -23,72 +23,11 @@
     <link href='https://fonts.googleapis.com/css?family=Zen Maru Gothic' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Barlow Condensed' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.3.67/css/materialdesignicons.min.css">
-    <style>
-        
-        .container {
-            padding: 1rem;
-        }
-        .header img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
-        .profile {
-            display: flex;
-            align-items: center;
-            margin-top: 1rem;
-        }
-        .profile img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 50%;
-            margin-right: 1rem;
-        }
-        .profile h1 {
-            font-size: 1.5rem;
-            margin: 0;
-        }
-        .badge {
-            background-color: #6a11cb;
-            padding: 0.25rem 0.5rem;
-            border-radius: 8px;
-            color: #fff;
-            font-size: 0.8rem;
-        }
-        .details, .duration {
-            margin-top: 1.5rem;
-            background-color: #1e1e1e;
-            padding: 1rem;
-            border-radius: 8px;
-        }
-        .details h2, .duration h2 {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-        .stats {
-            margin-top: 0.5rem;
-        }
-        .stats h3 {
-            margin: 0.5rem 0;
-            font-size: 1rem;
-        }
-        footer {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 2rem;
-            background-color: #1e1e1e;
-            padding: 1rem;
-            border-radius: 8px;
-        }
-        footer a {
-            text-decoration: none;
-            color: #fff;
-            font-size: 1rem;
-        }
-    </style>
+
 </head>
 <body>
+
+  
           <nav>
                 <div class="navbar-container">
 
@@ -128,78 +67,160 @@
                         
                 </div>
         </nav>
-<div  style="padding: 1rem;">
-        <div class="header">
-            <img id="header-img" src="https://via.placeholder.com/800x200" alt="Header Image" style="width: 100%; height: auto; border-radius: 8px;">
-        </div>
+  
 
-        <div class="profile" style="display: flex; align-items: center; margin-top: 1rem;">
-            <img id="profile-img" src="https://via.placeholder.com/80" alt="Member Profile" style="width: 80px; height: 80px; object-fit: cover; border-radius: 50%; margin-right: 1rem;">
+<div style="width: 100%; display: flex; flex-direction: column;justify-content: center; padding: 10px;">
+                <div class="header_app" style="height: 50px;">
+
+      <div class="header_logo">
+    <button class="buttongoweb" onclick="goToLink('live.html')"><span class="mdi mdi-chevron-left"></span>    </button>
+        <span style="font-size: 20px; font-weight: 700; font-family: 'Zen Maru Gothic';margin-left: 10px;" >Detail</span>
+      </div>
+                </div>
+  
+        <div class="profile" style="display: flex; align-items: center; margin-top: 50px;">
+            <img id="profile-img" src="" alt="Member Profile" style="width: 80px; height: 80px; object-fit: cover; border-radius: 50%; margin-right: 1rem;">
             <div>
-                <h1 id="member-name" style="font-size: 1.5rem; margin: 0;">Loading...</h1>
-                <span class="badge" id="badge" style="background-color: #6a11cb; padding: 0.25rem 0.5rem; border-radius: 8px; color: #fff; font-size: 0.8rem;">Loading...</span>
-                <p id="member-status">Loading...</p>
-            </div>
-        </div>
-
-        <div class="duration" style="margin-top: 1.5rem; background-color: #1e1e1e; padding: 1rem; border-radius: 8px;background: gray;">
-            <h2 id="live-date" style="font-size: 1.1rem; margin-bottom: 0.5rem;">Loading...</h2>
-            <p id="live-time">Loading...</p>
-            <h2 id="live-duration" style="font-size: 1.1rem; margin-bottom: 0.5rem;">Loading...</h2>
-        </div>
-
-        <div class="details" style="margin-top: 1.5rem; background-color: #1e1e1e; padding: 1rem; border-radius: 8px;background: gray;">
-            <h2 style="font-size: 1.1rem; margin-bottom: 0.5rem;">🔍 Detail</h2>
-            <div class="stats" style="margin-top: 0.5rem;">
-                <h3 id="gift" style="margin: 0.5rem 0; font-size: 1rem;">🎁 Gift: Loading...</h3>
-
-                <h3 id="viewers" style="margin: 0.5rem 0; font-size: 1rem;">👀 Viewer: Loading...</h3>
+                <h1 id="member-name" style="font-size: 1.5rem; margin: 0;"></h1>
+                <span class="badge" id="badge" style="background-color: #00EC4F; padding:  3px 10px; border-radius: 10px; color: #fff; font-size: 0.8rem;"></span>
 
             </div>
         </div>
+<div style="display: flex; width: 100%; flex-direction: column;gap: 10px;margin-top: 20px;">
+  <div style="display: flex; width: 100%; background-color: #323D54; justify-content: center; align-items: center; padding: 15px; border-radius: 20px;">
+    <span style="font-size: 37px;color: #FF3E3E;" class="mdi mdi-clipboard-text-clock"></span>
+    <div style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+      <h1 style="font-size: 21px;font-family: 'Zen Maru Gothic';" id="live-date"></h1>
+          <div style="width: 100%; display: flex; justify-content: center; align-items: center; gap: 5px;">
+      <span id="live-time" style="font-size: 11px; opacity: 0.8;"></span>
+      <span  style="font-size: 11px; opacity: 0.8;">-</span>
+      <span id="live-end-time" style="font-size: 11px; opacity: 0.8;"></span>
+
+    </div>
+    </div>
+  </div>
+    <div style="display: flex; width: 100%; background-color: #323D54; justify-content: center; align-items: center; padding: 15px; border-radius: 20px;">
+          <span style="font-size: 37px;color:#FFE52D;" class="mdi mdi-timer"></span>
+    <div style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+      <h1 style="font-size: 21px;font-family: 'Zen Maru Gothic';" id="live-duration"></h1>
+      <span style="font-size: 11px; opacity: 0.8;">Duration</span>
+    </div>
+    </div>
+        <div style="display: flex; width: 100%;gap: 5px;">
+    <div style="display: flex; width: 100%;border-radius: 15px; background: #323D54; gap: 10px; padding: 15px;justify-content: left; align-items: center;box-shadow: 1px black;">
+      <span style="font-size: 30px;" class="mdi mdi-gift"></span>
+      <div style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                  <h1 style="font-size: 17px;" id="gift"></h1>
+                  <span style="font-family: 'Zen Maru Gothic';font-size: 12px; opacity: 0.8;">Gift</span>
+      </div>
+
+    </div>
+        <div style="display: flex; width: 100%;border-radius: 15px; background: #323D54; gap: 10px; padding: 15px;justify-content: left; align-items: center;box-shadow: 1px black;">
+      <span style="font-size: 30px;" class="mdi mdi-eye"></span>
+      <div style="width: 100%; display: flex; flex-direction: column; justify-content: center;align-items: center;">
+                  <h1 style="font-size: 17px;" id="viewers"></h1>
+                  <span style="font-family: 'Zen Maru Gothic';font-size: 12px; opacity: 0.8;">View</span>
+      </div>
+
+    </div>
+
+</div>
+<div class="section">
+  <div style="display:flex; align-items: center;gap: 10px;">
+      <span style="font-size: 30px;" class="mdi mdi-history"></span>
+<h1 style="font-size: 20px;">Other Recent Live</h1>
+  </div>
+    <div class="container"style="margin-top: -20px;">
+        <div class="flex-container">
+            <!-- Tombol untuk menampilkan semua konten -->
+
+            <!-- Box untuk Live IDN -->
+            <div class="box-live" id="box-idn" style="background: transparent;">
+                <h2 class="titleup"id="title-idn">
+
+                </h2><br>
+                <div id="liveList" style="display:flex;flex-direction: column;width: 100%;">
+                    <!-- Content for Live Idn -->
+
+                </div>
+
+            </div>
+            <div class="box-live" id="box-idn" style="background: transparent;">
+                <h2 class="titleup"id="title-idn">
+
+                </h2><br>
+                <div id="liveListIdn" style="display:block;">
+                    <!-- Content for Live Idn -->
+
+                </div>
+
+            </div>
+            <!-- Box untuk Live Showroom -->
+            <div class="box-live"  style="background: transparent;margin-top: -65px;">
+                <h2 class="titleup" id="title-sr">
+                </h2><br>
+                <div id="liveListShowroom" style="display:block;">
+                    <!-- Content for Live Showroom -->
+
+                </div>
+                <br><hr><br>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const urlParams = new URLSearchParams(window.location.search);
-            const liveId = urlParams.get("id");
-            const liveStart = urlParams.get("start");
-            const liveEnd = urlParams.get("end");
-            const gift = urlParams.get("gift");
-            const view = urlParams.get("view");
-            const nama = urlParams.get("nama");
-            const image = urlParams.get("image");
+    const urlParams = new URLSearchParams(window.location.search);
+    const liveId = urlParams.get("id");
+    const liveStart = urlParams.get("start");
+    const liveEnd = urlParams.get("end");
+    const gift = urlParams.get("gift");
+    const view = urlParams.get("view");
+    const nama = urlParams.get("nama");
+    const image = urlParams.get("image");
 
-            // Fetch live details based on ID
-            fetch(`https://api.crstlnz.my.id/api/live-details/${liveId}`)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById("header-img").src = data.headerImage || "https://via.placeholder.com/800x200";
-                    document.getElementById("profile-img").src = `${image}` || "https://via.placeholder.com/80";
-                    document.getElementById("member-name").textContent = `${nama}`;
-                    document.getElementById("badge").textContent = data.sousenkyo || "No Sousenkyo";
-                    document.getElementById("member-status").textContent = data.status || "No Status";
-                    document.getElementById("live-date").textContent = new Date(liveStart).toLocaleDateString("id-ID");
-                    document.getElementById("live-time").textContent = `Mulai pada: ${new Date(liveStart).toLocaleTimeString("id-ID")}`;
-                    document.getElementById("live-duration").textContent = `Durasi: ${calculateDuration(liveStart, liveEnd)}`;
-                    document.getElementById("gift").textContent = `🎁 Gift: ${gift} G`;
-                    
-                    document.getElementById("viewers").textContent = `👀 Viewers: ${view} viewers`;
-                    
-                })
-                .catch((error) => console.error("Error fetching live details:", error));
+    fetch(`https://api.crstlnz.my.id/api/live-details/${liveId}`)
+        .then(response => response.json())
+        .then(data => {
+            const startDate = new Date(liveStart);
+            const endDate = new Date(liveEnd);
 
-            function calculateDuration(start, end) {
-                const startDate = new Date(start);
-                const endDate = new Date(end);
-                const durationMs = endDate - startDate;
+            // Format tanggal dan waktu
+            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            const formattedDate = startDate.toLocaleDateString('id-ID', options);
+            const formattedStartTime = startDate.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', hour12: true });
+            const formattedEndTime = endDate.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', hour12: true });
 
-                const hours = Math.floor(durationMs / 3600000);
-                const minutes = Math.floor((durationMs % 3600000) / 60000);
+            document.getElementById("profile-img").src = `${image}` || "https://via.placeholder.com/80";
+            document.getElementById("member-name").textContent = `${nama} JKT48`;
+            document.getElementById("badge").textContent = data.sousenkyo || "Active";
+            
+            document.getElementById("live-date").textContent = formattedDate;
+            document.getElementById("live-time").textContent = `${formattedStartTime}`;
+            document.getElementById("live-end-time").textContent = `${formattedEndTime}`;
+            document.getElementById("live-duration").textContent = calculateDuration(liveStart, liveEnd);
+            document.getElementById("gift").textContent = `${gift} G`;
+            document.getElementById("viewers").textContent = `${parseInt(view).toLocaleString('id-ID')}`;
+        })
+        .catch((error) => console.error("Error fetching live details:", error));
 
-                return hours > 0 ? `${hours} Jam ${minutes} Menit` : `${minutes} Menit`;
-            }
-        });
+    function calculateDuration(start, end) {
+        const startDate = new Date(start);
+        const endDate = new Date(end);
+        const durationMs = endDate - startDate;
+
+        const hours = Math.floor(durationMs / 3600000);
+        const minutes = Math.floor((durationMs % 3600000) / 60000);
+
+        return hours > 0 ? `${hours} Jam ${minutes} Menit` : `${minutes} Menit`;
+    }
+});
     </script>
         <script src="../script/main.js"></script>
+        <script src="../script/live.js"></script>
 </body>
 </html>
