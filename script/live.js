@@ -57,9 +57,9 @@ function listLive() {
                   <div style="margin-top: -10px; display: flex; flex-direction: column;margin-left: -19px;">
                     <h3 style="font-size: 17px; width: 150%;"> ${live.member.name}</h3>
                     <div style="margin-top: 10px; display: flex; flex-direction: column;">
-                      <h3><span style="font-size: 17px" class="mdi mdi-access-point-network"> ${live.type}</span></h3>
-                      <h3><span style="font-size: 17px" class="mdi mdi-account-multiple"> ${formatDate(live.live_info.date.start)}</span></h3>
-                      <h3><span style="font-size: 17px" class="mdi mdi-access-point-network"> ${duration}</span></h3>
+                      <h3><span style="font-size: 17px" class="mdi mdi mdi-broadcast"> ${live.type}</span></h3>
+                      <h3><span style="font-size: 17px" class="mdi mdi-calendar"> ${formatDate(live.live_info.date.start)}</span></h3>
+                      <h3><span style="font-size: 17px" class="mdi mdi-clock"> ${duration}</span></h3>
                     </div>
                   </div>
                   </button>
