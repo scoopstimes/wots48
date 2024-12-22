@@ -80,7 +80,7 @@ function cleanLiveTitle(title) {
 // Tambahkan pengecekan jika nama sudah "JKT48", tidak perlu menambahkannya lagi
 title.textContent = member.name + (member.type === 'idn' && member.name !== 'JKT48' ? ' JKT48' : '');
 title.style = `
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
 `;
 card.appendChild(title);
@@ -88,7 +88,7 @@ card.appendChild(title);
             const liveType = document.createElement('p');
 liveType.textContent = `${member.type === 'idn' ? 'IDN Live' : 'Showroom'}`;
 liveType.style = `
-  font-size: 14px;
+  font-size: 12px;
   color: #b0b0b0;
   margin-top: -5px;
 `;
