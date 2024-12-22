@@ -197,8 +197,8 @@
       const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
       const formattedDate = startDate.toLocaleDateString('id-ID', options);
 
-      const formattedStartTime = startDate.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
-      const formattedEndTime = endDate.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+      const formattedStartTime = startDate.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }).replace('.', ':');
+      const formattedEndTime = endDate.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }).replace('.', ':');
 
       document.getElementById("profile-img").src = `${image}` || "https://via.placeholder.com/80";
       document.getElementById("member-name").textContent = `${nama} JKT48`;
