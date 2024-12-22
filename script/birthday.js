@@ -21,6 +21,8 @@ async function getUpcomingBirthdays() {
 function calculateRemainingTime(birthdate) {
   const today = new Date();
   const target = new Date(birthdate);
+
+  // Setel ulang tahun ke tahun ini
   target.setFullYear(today.getFullYear());
 
   // Jika ulang tahun sudah lewat tahun ini, atur ke tahun depan
@@ -28,11 +30,16 @@ function calculateRemainingTime(birthdate) {
     target.setFullYear(today.getFullYear() + 1);
   }
 
-  // Hitung selisih hari
+  // Hitung jarak hari
   const totalDays = Math.ceil((target - today) / (1000 * 60 * 60 * 24));
 
-  // Teks jika "Hari Ini"
-  if (totalDays === 0) return "Hari Ini";
+  // Jika hari ini ulang tahun
+  if (
+    today.getDate() === new Date(birthdate).getDate() &&
+    today.getMonth() === new Date(birthdate).getMonth()
+  ) {
+    return "Hari Ini";
+  }
 
   // Hitung bulan dan sisa hari
   const months = Math.floor(totalDays / 30); // Asumsi 1 bulan = 30 hari
@@ -82,12 +89,11 @@ async function displayUpcomingBirthdays() {
       // Buat elemen HTML
       const birthdayHTML = `
 
-  <div class="birthday-item">
+  <div class="birthday-item" style="justify-content: center;">
     <img src="${img}" alt="${name} Image" class="postermem" loading="lazy">
     <div class="birthday-info">
-      <h3><span class="mdi mdi-cake-variant"> ${name} JKT48</span></h3>
-      <h4><span style="color: white;
-  font-size: 12px;" class="mdi mdi-calendar-multiple"> ${formattedDate}</span></h4>
+      <h2 style="color: white;">${name} JKT48</h2>
+      <h4 style="color: white;"> ${formattedDate}</h4>
       <h5 style="margin-top: 10px;">${remainingTime}</h5>
     </div>
 
