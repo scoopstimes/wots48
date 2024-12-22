@@ -1239,7 +1239,7 @@ img {
 
 .row-live {
 	display: flex;
-	
+	height: auto;
 	width: 100%;
 	color: #fff;
 	flex-wrap: nowrap;
@@ -1262,7 +1262,7 @@ img {
 }
 
 .row-detail img:hover {
-	transform: scale(1.1);
+	
 	transition: transform 0.3s ease-in;
 }
 
@@ -1535,16 +1535,16 @@ img {
 
 .row-live img {
 	width: 25%;
-	height: auto;
+	
 	max-width: 250px;
 	border-radius: 30px;
-	margin-right: 20px;
-	margin-left: 20px;
-	transition: all 0.3s ease;
+	margin-right: 0px;
+	margin-left: 0px;
+	
 }
 
 .row-live:hover img {
-	transform: scale(1.1);
+	
 	transition: transform 0.3s ease-in;
 }
 
@@ -1985,7 +1985,7 @@ footer a:hover {
 
 	.row-live h3 {
 		font-size: 14px;
-		bottom: 20px;
+		bottom: 0px;
 	}
 
 	.row2 h1 {
