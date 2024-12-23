@@ -116,7 +116,7 @@
 <div style="display: flex; width: 100%; flex-direction: column;gap: 10px;margin-top: -5px;padding: 10px;">
   <img src="assets/watermark.png" id="imagelive" style="width: 100%;">
       <div style="display: flex; width: 100%; background-color: #323D54; justify-content: left; align-items: left; padding: 15px; border-radius: 20px;">
-      <span style="font-size: 37px;" class="mdi mdi-star-four-points-box gradient-1"></span>
+      <span style="font-size: 37px;" id="iconExt"></span>
       <div style="width: 84%; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
         <h1 style="font-size: 21px;font-family: 'Zen Maru Gothic';" id="title"></h1>
         <span style="font-size: 11px; opacity: 0.8;" id="bookstar"></span>
@@ -250,11 +250,13 @@
         document.getElementById("title").innerHTML = `${title}`;
         document.getElementById("bookstar").innerHTML = `Judul Live`;
        document.getElementById("imagelive").src = `${imgidn}`;
+       document.getElementById("iconExt").classList = "mdi mdi-application-edit";
       } else if (type === "showroom"){
         document.getElementById("gift").textContent = `${gift} G`;
       document.getElementById("title").innerHTML = `${parseInt(points).toLocaleString('id-ID')}`;
       document.getElementById("bookstar").innerHTML = `Excitement Point`;
       document.getElementById("imagelive").src = `${imgsr}`;
+      document.getElementById("iconExt").classList = "mdi mdi-star-four-points-box gradient-1";
       }
       
       document.getElementById("viewers").textContent = `${parseInt(view).toLocaleString('id-ID')}`;
