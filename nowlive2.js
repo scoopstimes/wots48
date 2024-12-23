@@ -151,7 +151,7 @@ card.appendChild(liveType);
         const viewers = member.viewers ? encodeURIComponent(member.viewers) : '0';
         const cleanedSlug = cleanLiveTitle(member.slug || '');
 
-     const link = `idn.html#url=${ProxyUrl}${encodeURIComponent(urlObj.url)}&name=${encodeURIComponent(member.name)}&viewers=${viewers}&start_date=${startDate}&type=${encodeURIComponent(member.type)}&slug=${encodeURIComponent(cleanedSlug)}&link=${encodeURIComponent(url)}`;
+     const link = `idn.html#url=${ProxyUrl}${encodeURIComponent(urlObj.url)}&name=${encodeURIComponent(member.name)}&viewers=${viewers}&start_date=${startDate}&type=${encodeURIComponent(member.type)}&slug=${encodeURIComponent(cleanedSlug)}&link=${encodeURIComponent(url)}&image=${member.img}`;
      fullscreenBtn.setAttribute('onclick', `goToLink('${link}')`);
         cardBody.appendChild(fullscreenBtn);
       }
