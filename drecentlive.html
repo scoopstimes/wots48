@@ -132,8 +132,8 @@
     <div style="display: flex; width: 100%; background-color: #323D54; justify-content: left; align-items: left; padding: 15px; border-radius: 20px;">
       <span style="font-size: 37px;color:#62F600;" class="mdi mdi-star-four-points-box"></span>
       <div style="width: 84%; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        <h1 style="font-size: 21px;font-family: 'Zen Maru Gothic';" id="points"></h1>
-        <span style="font-size: 11px; opacity: 0.8;">Points</span>
+        <h1 style="font-size: 21px;font-family: 'Zen Maru Gothic';" id="title"></h1>
+        <span style="font-size: 11px; opacity: 0.8;" id="bookstar"></span>
       </div>
     </div>
 <div class="section">
@@ -194,6 +194,8 @@
   const nama = urlParams.get("nama");
   const image = urlParams.get("image");
   const points = urlParams.get("points");
+  const type = urlParams.get("type");
+  const title = urlParams.get("title");
 
   fetch(`https://api.crstlnz.my.id/api/live-details/${liveId}`)
     .then(response => response.json())
@@ -216,8 +218,16 @@
       document.getElementById("live-time").textContent = `${formattedStartTime}`;
       document.getElementById("live-end-time").textContent = `${formattedEndTime}`;
       document.getElementById("live-duration").textContent = calculateDuration(liveStart, liveEnd);
-      document.getElementById("gift").textContent = `${gift} G`;
-      document.getElementById("points").textContent = `${parseInt(points).toLocaleString('id-ID')}`;
+      if (type === "idn"){
+        document.getElementById("gift").textContent = `${parseInt(points).toLocaleString('id-ID')} G`;
+        document.getElementById("title").innerHTML = `${title}`;
+        document.getElementById("bookstar").innerHTML = `Judul Live`;
+      } else if (type === "showroom"){
+        document.getElementById("gift").textContent = `${gift} G`;
+      document.getElementById("title").innerHTML = `${parseInt(points).toLocaleString('id-ID')}`;
+      document.getElementById("bookstar").innerHTML = `Excitement Point`;
+      }
+      
       document.getElementById("viewers").textContent = `${parseInt(view).toLocaleString('id-ID')}`;
     })
     .catch((error) => console.error("Error fetching live details:", error));
