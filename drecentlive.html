@@ -233,15 +233,22 @@
     .catch((error) => console.error("Error fetching live details:", error));
 
   function calculateDuration(start, end) {
-    const startDate = new Date(start);
-    const endDate = new Date(end);
-    const durationMs = endDate - startDate;
+  const startDate = new Date(start);
+  const endDate = new Date(end);
+  const durationMs = endDate - startDate;
 
-    const hours = Math.floor(durationMs / 3600000);
-    const minutes = Math.floor((durationMs % 3600000) / 60000);
+  const hours = Math.floor(durationMs / 3600000);
+  const minutes = Math.floor((durationMs % 3600000) / 60000);
+  const seconds = Math.floor((durationMs % 60000) / 1000);
 
-    return hours > 0 ? `${hours} Jam ${minutes} Menit` : `${minutes} Menit`;
+  if (hours > 0) {
+    return `${hours} Jam ${minutes} Menit ${seconds > 0 ? seconds + " Detik" : ""}`.trim();
+  } else if (minutes > 0) {
+    return `${minutes} Menit ${seconds > 0 ? seconds + " Detik" : ""}`.trim();
+  } else {
+    return `${seconds} Detik`;
   }
+}
 });
     </script>
         <script src="../script/main.js"></script>
