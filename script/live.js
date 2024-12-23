@@ -75,7 +75,9 @@ function listLive() {
                   <div style="margin-top: -25px; display: flex; flex-direction: column;margin-left: 10px;width: 100%;">
                     <h3 style="font-size: 17px; width: 150%;font-family: 'Quicksand';"> ${live.member?.name ?? ''}</h3>
                     <div style="margin-top: 0px; display: flex; flex-direction: column;">
-                      <h3><span style="font-size: 17px;font-family: 'Quicksand';" class="mdi mdi mdi-broadcast"> ${live.type ?? ''}</span></h3>
+<h3><span style="font-size: 17px;font-family: 'Quicksand';" class="mdi mdi mdi-broadcast"> 
+  ${live.type === 'idn' ? 'IDN Live' : live.type === 'showroom' ? 'Showroom' : ''}
+</span></h3>
                       <h3><span style="font-size: 17px;font-family: 'Quicksand';" class="mdi mdi-timer"> ${duration}</span></h3>
                       <h3><span style="font-size: 17px;font-family: 'Quicksand';" class="mdi mdi-clock"> ${formatDate(live.live_info?.date?.start ?? '')}</span></h3>
                     </div>
