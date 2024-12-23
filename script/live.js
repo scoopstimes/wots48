@@ -81,7 +81,7 @@ function listLive() {
   ${live.type === 'idn' ? 'IDN Live' : live.type === 'showroom' ? 'Showroom' : ''}
 </span></h3>
                       <h3><span style="font-size: 17px;font-family: 'Quicksand';" class="mdi mdi-timer"> ${duration}</span></h3>
-                      <h3><span style="font-size: 17px;font-family: 'Quicksand';" class="mdi mdi-clock"> ${formatDate(live.live_info?.date?.start ?? '')}</span></h3>
+                      <h3><span style="font-size: 17px;font-family: 'Quicksand';" class="mdi mdi-clock"> ${formatDate(live.live_info?.date?.end ?? '')}</span></h3>
                     </div>
                   </div>
                   </button>
