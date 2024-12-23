@@ -220,7 +220,7 @@
       const formattedEndTime = endDate.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }).replace('.', ':');
 
       document.getElementById("profile-img").src = `${image}` || "https://via.placeholder.com/80";
-      document.getElementById("member-name").textContent = `${nama} JKT48`;
+      document.getElementById("member-name").textContent = `${nama}`;
       document.getElementById("badge").textContent = data.sousenkyo || "Active";
 
       document.getElementById("live-date").textContent = formattedDate;
