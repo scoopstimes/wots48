@@ -69,7 +69,7 @@
         </nav>
   
 
-<div style="width: 100%; display: flex; flex-direction: column;justify-content: center; padding: 10px;">
+<div style="width: 100%; display: flex; flex-direction: column;justify-content: center; padding: 0px;">
                 <div class="header_app" style="height: 50px;">
 
       <div class="header_logo">
@@ -78,19 +78,32 @@
       <span style="font-size: 20px; font-weight: 700; font-family: 'Zen Maru Gothic';margin-left: 10px;"  >Detail Recent</span>
       </div>
                 </div>
-          <button class="buttongoweb" onclick="goToLink('https://youtu.be/Ztg79dr34n4?si=TDiW-J8Wd32P-AxA')">
-             <img src="assets/banner-mv-bym.jpeg" style="object-fit: cover; width: 100%; height: 150px; margin-top: 45px;opacity: 0.9;">
+                <div style=" width: 100%;display :flex;flex-direction: column;">
+                            <button class="buttongoweb" onclick="goToLink('https://youtu.be/Ztg79dr34n4?si=TDiW-J8Wd32P-AxA')">
+            <img src="assets/banner-mv-bym.jpeg" style="object-fit: cover; width: 100%; height: 150px; margin-top: 50px;opacity: 0.9;border-radius: 0px;">
           </button>
-        <div class="profile" style="display: flex; align-items: center; margin-top: 10px;">
+                </div>
+        <div class="profile" style="display: flex; align-items: center; margin-top: -40px;z-index: 9999;">
+<div style="width: 100%; display: flex; flex-direction: column;">
+              <img id="profile-img" src="" alt="Member Profile" style="width: 90px; height: 90px; object-fit: cover; border-radius: 50%; margin-right: 1rem;box-shadow: 2px black; border: 5px solid #171C28 ;">
 
-            <img id="profile-img" src="" alt="Member Profile" style="width: 70px; height: 70px; object-fit: cover; border-radius: 50%; margin-right: 1rem;box-shadow: 2px black;">
-            <div>
-                <h1 id="member-name" style="font-size: 1.5rem; font-family: 'Quicksand';"></h1>
-                <span class="badge" id="badge" style="background: linear-gradient(to right, #f9a8d4, #d8b4fe, #67e8f9); padding:  3px 10px; border-radius: 10px; color: #fff; font-size: 0.8rem;"></span>
+            <div style="margin-top: -20px;padding: 10px;">
+              <h1 id="member-name" style="font-size: 1.5rem; font-family: 'Quicksand';"></h1>
+              <span class="badge" id="badge" style="background: linear-gradient(to right, #f9a8d4, #d8b4fe, #67e8f9); padding:  3px 10px; border-radius: 10px; color: #fff; font-size: 0.8rem;"></span>
 
             </div>
+</div>
+
         </div>
-<div style="display: flex; width: 100%; flex-direction: column;gap: 10px;margin-top: 15px;">
+<div style="display: flex; width: 100%; flex-direction: column;gap: 10px;margin-top: -5px;padding: 10px;">
+  <img src="assets/watermark.png" id="imagelive" style="width: 100%;">
+      <div style="display: flex; width: 100%; background-color: #323D54; justify-content: left; align-items: left; padding: 15px; border-radius: 20px;">
+      <span style="font-size: 37px;color:#62F600;" class="mdi mdi-star-four-points-box"></span>
+      <div style="width: 84%; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <h1 style="font-size: 21px;font-family: 'Zen Maru Gothic';" id="title"></h1>
+        <span style="font-size: 11px; opacity: 0.8;" id="bookstar"></span>
+      </div>
+    </div>
   <div style="display: flex; width: 100%; background-color: #323D54; justify-content: left; align-items: left; padding: 15px; border-radius: 20px;">
     <span style="font-size: 37px;color: #FF3E3E;" class="mdi mdi-clipboard-text-clock"></span>
     <div style="width: 84%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
@@ -123,19 +136,14 @@
       <span style="font-size: 30px;" class="mdi mdi-eye"></span>
       <div style="width: 85%; display: flex; flex-direction: column; justify-content: center;align-items: center;">
                   <h1 style="font-size: 17px;" id="viewers"></h1>
-                  <span style="font-family: 'Zen Maru Gothic';font-size: 12px; opacity: 0.8;">View</span>
+                  <span style="font-family: 'Zen Maru Gothic';font-size: 12px; opacity: 0.8;">Viewers</span>
       </div>
 
     </div>
+
 
 </div>
-    <div style="display: flex; width: 100%; background-color: #323D54; justify-content: left; align-items: left; padding: 15px; border-radius: 20px;">
-      <span style="font-size: 37px;color:#62F600;" class="mdi mdi-star-four-points-box"></span>
-      <div style="width: 84%; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        <h1 style="font-size: 21px;font-family: 'Zen Maru Gothic';" id="title"></h1>
-        <span style="font-size: 11px; opacity: 0.8;" id="bookstar"></span>
-      </div>
-    </div>
+
 <div class="section">
   <div style="display:flex; align-items: center;gap: 10px;">
       <span style="font-size: 30px;" class="mdi mdi-history"></span>
@@ -196,6 +204,8 @@
   const points = urlParams.get("points");
   const type = urlParams.get("type");
   const title = urlParams.get("title");
+  const imgidn = urlParams.get("imgidn");
+  const imgsr = urlParams.get("imgsr");
 
   fetch(`https://api.crstlnz.my.id/api/live-details/${liveId}`)
     .then(response => response.json())
@@ -222,10 +232,12 @@
         document.getElementById("gift").textContent = `${parseInt(points).toLocaleString('id-ID')} G`;
         document.getElementById("title").innerHTML = `${title}`;
         document.getElementById("bookstar").innerHTML = `Judul Live`;
+       document.getElementById("imagelive").src = `${imgidn}`;
       } else if (type === "showroom"){
         document.getElementById("gift").textContent = `${gift} G`;
       document.getElementById("title").innerHTML = `${parseInt(points).toLocaleString('id-ID')}`;
       document.getElementById("bookstar").innerHTML = `Excitement Point`;
+      document.getElementById("imagelive").src = `${imgsr}`;
       }
       
       document.getElementById("viewers").textContent = `${parseInt(view).toLocaleString('id-ID')}`;
