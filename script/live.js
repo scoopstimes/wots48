@@ -22,63 +22,70 @@ document.addEventListener("DOMContentLoaded", function () {
 // Fungsi untuk mengambil dan menggabungkan data live dari IDN dan Showroom
 function listLive() {
   // Ambil data live IDN
-  fetch(`https://api.crstlnz.my.id/api/recent?sort=date&page=${currentPageIdn}&filter=all&order=-1&group=jkt48&type=idn&perpage=10`)
+  fetch(`https://api.crstlnz.my.id/api/recent?sort=date&page=${currentPageIdn}&filter=all&order=-1&group=jkt48&type=idn&perpage=30`)
     .then((response) => response.json())
     .then((dataIdn) => {
       // Ambil data live Showroom
-      fetch(`https://api.crstlnz.my.id/api/recent?group=jkt48&page=${currentPageShowroom}&perpage=100`)
+      fetch(`https://api.crstlnz.my.id/api/recent?group=jkt48&page=${currentPageShowroom}&perpage=30`)
         .then((response) => response.json())
         .then((dataShowroom) => {
-         
+          console.log(dataIdn);
           // Gabungkan kedua data
           const combinedData = [
             ...dataIdn.recents.filter((item) => item.idn.username !== "ame-5xqz6mqgk4"),
             ...dataShowroom.recents
           ];
 
+          // Filter data agar tidak menampilkan live yang baru dimulai (< 10 menit yang lalu)
+          
           // Urutkan berdasarkan waktu (terbaru di atas)
-          combinedData.sort((a, b) => new Date(b.live_info.date.start) - new Date(a.live_info.date.start));
+          combinedData.sort((a, b) =>
+            new Date(b.live_info?.date?.start ?? 0) - new Date(a.live_info?.date?.start ?? 0)
+          );
 
           const container = document.getElementById("liveList");
           container.innerHTML = "";
 
-          // Loop melalui data gabungan dan tampilkan
+          // Loop melalui data yang difilter dan tampilkan
           combinedData.map((live) => {
-            const duration = calculateDuration(live.live_info.date.start, live.live_info.date.end);
+            const duration = calculateDuration(
+              live.live_info?.date?.start ?? "",
+              live.live_info?.date?.end ?? ""
+            );
+            const viewers = live.live_info?.viewers?.num ?? 0; // Nilai default 0
+            const giftRate = live.gift_rate ?? 0; // Nilai default 0
+            const points = live.points ?? 0; // Nilai default 0
+
             const liveElement = document.createElement("div");
 
             liveElement.innerHTML = `
-<br>
-                <div style="display: flex; flex-wrap: nowrap;margin-right: auto; width: 100%;padding: 0px;">
-                                  <img src="${live.member.img_alt}"style="width: 100px;border-radius:10px 10px 10px 10px;
-                                  height: 141px;
-                  object-fit: cover; margin-top: 0px;z-index: 99;">
-
+              <br>
+              <div style="display: flex; flex-wrap: nowrap;margin-right: auto; width: 100%;padding: 0px;">
+                <img src="${live.member?.img_alt ?? ''}" style="width: 100px;border-radius:10px 10px 10px 10px;
+                height: 141px;
+                object-fit: cover; margin-top: 0px;z-index: 99;">
 
                 <div class="row-live" style="width: 115%;background: #2A3347;border-radius: 0px 10px 10px 0px; margin-left: -18px;justify-content: left;padding-left: 20px;
-                padding-right: 20px;align-items: center; padding-bottom: 0px;height: 141px;>
+                padding-right: 20px;align-items: center; padding-bottom: 0px;height: 141px;">
 
-
-                  <button class="buttongoweb" onclick="goToLink('drecentlive.html?id=${live.id}&start=${live.live_info.date.start}&end=${live.live_info.date.end}&gift=${live.gift_rate}&view=${live.live_info.viewers.num}&nama=${live.member.nickname}&image=${live.member.img_alt}')">
+                  <button class="buttongoweb" onclick="goToLink('drecentlive.html?id=${live.id}&start=${live.live_info?.date?.start ?? ''}&end=${live.live_info?.date?.end ?? ''}&gift=${giftRate}&view=${viewers}&nama=${live.member?.nickname ?? ''}&image=${live.member?.img_alt ?? ''}&points=${points}')">
                   
                   <div style="margin-top: -25px; display: flex; flex-direction: column;margin-left: 10px;width: 100%;">
-                    <h3 style="font-size: 17px; width: 150%;font-family: 'Quicksand';"> ${live.member.name}</h3>
+                    <h3 style="font-size: 17px; width: 150%;font-family: 'Quicksand';"> ${live.member?.name ?? ''}</h3>
                     <div style="margin-top: 0px; display: flex; flex-direction: column;">
-                      <h3><span style="font-size: 17px;font-family: 'Quicksand';" class="mdi mdi mdi-broadcast"> ${live.type}</span></h3>
+                      <h3><span style="font-size: 17px;font-family: 'Quicksand';" class="mdi mdi mdi-broadcast"> ${live.type ?? ''}</span></h3>
                       <h3><span style="font-size: 17px;font-family: 'Quicksand';" class="mdi mdi-timer"> ${duration}</span></h3>
-                      <h3><span style="font-size: 17px;font-family: 'Quicksand';" class="mdi mdi-clock"> ${formatDate(live.live_info.date.start)}</span></h3>
+                      <h3><span style="font-size: 17px;font-family: 'Quicksand';" class="mdi mdi-clock"> ${formatDate(live.live_info?.date?.start ?? '')}</span></h3>
                     </div>
-
                   </div>
                   </button>
                 </div>
-                
-                </div>
-
+              </div>
             `;
             container.appendChild(liveElement);
           });
 
+          // Perbarui status tombol navigasi
           document.getElementById("prevButtonIdn").disabled = currentPageIdn === 1;
           document.getElementById("nextButtonIdn").disabled = currentPageIdn === Math.ceil(dataIdn.total_count / 3);
           document.getElementById("prevButtonShowroom").disabled = currentPageShowroom === 1;

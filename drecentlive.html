@@ -129,6 +129,13 @@
     </div>
 
 </div>
+    <div style="display: flex; width: 100%; background-color: #323D54; justify-content: left; align-items: left; padding: 15px; border-radius: 20px;">
+      <span style="font-size: 37px;color:#62F600;" class="mdi mdi-star-four-points-box"></span>
+      <div style="width: 84%; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <h1 style="font-size: 21px;font-family: 'Zen Maru Gothic';" id="points"></h1>
+        <span style="font-size: 11px; opacity: 0.8;">Points</span>
+      </div>
+    </div>
 <div class="section">
   <div style="display:flex; align-items: center;gap: 10px;">
       <span style="font-size: 30px;" class="mdi mdi-history"></span>
@@ -186,6 +193,7 @@
   const view = urlParams.get("view");
   const nama = urlParams.get("nama");
   const image = urlParams.get("image");
+  const points = urlParams.get("points");
 
   fetch(`https://api.crstlnz.my.id/api/live-details/${liveId}`)
     .then(response => response.json())
@@ -209,6 +217,7 @@
       document.getElementById("live-end-time").textContent = `${formattedEndTime}`;
       document.getElementById("live-duration").textContent = calculateDuration(liveStart, liveEnd);
       document.getElementById("gift").textContent = `${gift} G`;
+      document.getElementById("points").textContent = `${parseInt(points).toLocaleString('id-ID')}`;
       document.getElementById("viewers").textContent = `${parseInt(view).toLocaleString('id-ID')}`;
     })
     .catch((error) => console.error("Error fetching live details:", error));
