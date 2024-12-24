@@ -39,10 +39,20 @@ function listLive() {
           // Filter data agar tidak menampilkan live yang baru dimulai (< 10 menit yang lalu)
           
           // Urutkan berdasarkan waktu (terbaru di atas)
-          combinedData.sort((a, b) =>
-            new Date(b.live_info?.date?.start ?? 0) - new Date(a.live_info?.date?.start ?? 0)
-          );
+          combinedData.sort((a, b) => {
+  const aEndTime = new Date(a.live_info?.date?.end ?? 0).getTime();
+  const bEndTime = new Date(b.live_info?.date?.end ?? 0).getTime();
+  const aStartTime = new Date(a.live_info?.date?.start ?? 0).getTime();
+  const bStartTime = new Date(b.live_info?.date?.start ?? 0).getTime();
 
+  // Jika salah satu live sudah selesai, prioritaskan yang selesai
+  if (aEndTime && bEndTime) {
+    return bEndTime - aEndTime; // Urutkan berdasarkan waktu selesai (terbaru di atas)
+  }
+
+  // Jika live sedang berlangsung, gunakan waktu mulai
+  return bStartTime - aStartTime;
+});
           const container = document.getElementById("liveList");
           container.innerHTML = "";
 
