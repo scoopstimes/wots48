@@ -245,7 +245,7 @@
   const title = urlParams.get("title");
   const imgidn = urlParams.get("imgidn");
   const imgsr = urlParams.get("imgsr");
-  const rateGift = urlParams.get("giftratesr");
+  
 
   fetch(`https://api.crstlnz.my.id/api/live-details/${liveId}`)
     .then(response => response.json())
@@ -288,7 +288,7 @@ function convertToRupiahSr(gift) {
        document.getElementById("imagelive").src = `${imgidn}`;
        document.getElementById("iconExt").classList = "mdi mdi-application-edit gradient-judul";
       } else if (type === "showroom"){
-        document.getElementById("gift").textConltent = `${parseInt(points).toLocaleString('id-ID')} G`;
+        document.getElementById("gift").textContent = `${parseInt(gift).toLocaleString('id-ID')} G`;
         document.getElementById("rupiah").innerHTML = `(<span class="mdi mdi-plus-minus"></span>${convertToRupiahSr(points)})`;
       
       document.getElementById("title").innerHTML = `History Log`;
