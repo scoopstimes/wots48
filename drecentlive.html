@@ -253,6 +253,7 @@
   const imgsr = urlParams.get("imgsr");
   const headerName = urlParams.get("headername");
   const tanggal = urlParams.get("tanggal");
+  const rateGift = urlParams.get("giftrate");
 
   fetch(`https://api.crstlnz.my.id/api/live-details/${liveId}`)
     .then(response => response.json())
@@ -267,7 +268,7 @@
       }
       
       function convertToRupiahSr(gift) {
-        const conversionRateSr = 103.14; // 1 Gift (G) = Rp 103,14
+        const conversionRateSr = rateGift; // 1 Gift (G) = Rp 103,14
         const rupiahAmount = gift * conversionRateSr;
         console.log(`Total Gift: ${gift}, Total Rupiah: ${rupiahAmount}`);
         return `Rp ${new Intl.NumberFormat('id-ID').format(rupiahAmount)}`;
