@@ -109,13 +109,9 @@
 
       <div class="header_logo">
     <button class="buttongoweb" onclick="goToLink('live.html')"><span class="mdi mdi-chevron-left"></span>    </button>
-<div style="display: flex; justify-content: left; align-items: center; width: 100%;padding-right: 40px;">
-  <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
+
         <span style="font-size: 20px; font-weight: 700; font-family: 'Zen Maru Gothic';margin-left: 10px;"  id="headername"></span>
-      <span style="font-size: 20px; font-weight: 700; font-family: 'Zen Maru Gothic';"  >-</span>
-            <span style="font-size: 20px; font-weight: 700; font-family: 'Zen Maru Gothic';"  id="tanggal"></span>
-  </div>
-</div>
+
 
       </div>
                 </div>
@@ -301,8 +297,8 @@
       document.getElementById("live-time").textContent = `${formattedStartTime}`;
       document.getElementById("live-end-time").textContent = `${formattedEndTime}`;
       document.getElementById("live-duration").textContent = calculateDuration(liveStart, liveEnd);
-      document.getElementById("headername").innerHTML = `${headerName} JKT48`;
-      document.getElementById("tanggal").innerHTML = `${formattedDate}`; // showing just date without time
+      document.getElementById("headername").innerHTML = `${headerName} JKT48 - ${formattedDate}`;
+      
 
       if (type === "idn"){
         document.getElementById("gift").textContent = `${parseInt(points).toLocaleString('id-ID')} G`;
