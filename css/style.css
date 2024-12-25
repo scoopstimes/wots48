@@ -27,6 +27,11 @@ hr {
 	border-style: dashed;
 }
 
+  img {
+    user-drag: none; /* Mencegah drag */
+    pointer-events: none; /* Mencegah event default seperti klik */
+  }
+
 body {
 	background-color: #171C28;
 }
