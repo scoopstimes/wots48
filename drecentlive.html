@@ -53,6 +53,11 @@
     -webkit-text-fill-color: transparent; /* Membuat teks transparan agar gradient terlihat */
   
   }
+  .gradient-judul{
+    background: linear-gradient(135deg, #00d4ff, #00BA76 50%, #8a2be2);
+    -webkit-background-clip: text; /* Klip background ke teks */
+    -webkit-text-fill-color: transparent; 
+  }
 </style>
 </head>
 <body>
@@ -281,9 +286,9 @@ function convertToRupiahSr(gift) {
         document.getElementById("bookstar").innerHTML = `Judul Live`;
         
        document.getElementById("imagelive").src = `${imgidn}`;
-       document.getElementById("iconExt").classList = "mdi mdi-application-edit";
+       document.getElementById("iconExt").classList = "mdi mdi-application-edit gradient-judul";
       } else if (type === "showroom"){
-        document.getElementById("gift").textContent = `${parseInt(points).toLocaleString('id-ID')} G`;
+        document.getElementById("gift").textConltent = `${parseInt(points).toLocaleString('id-ID')} G`;
         document.getElementById("rupiah").innerHTML = `(<span class="mdi mdi-plus-minus"></span>${convertToRupiahSr(points)})`;
       
       document.getElementById("title").innerHTML = `History Log`;
