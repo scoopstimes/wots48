@@ -41,6 +41,18 @@
     -webkit-text-fill-color: transparent;
   
   }
+  .gift-gradient-4{
+    background: linear-gradient(135deg, #ffd700, #ff69b4 50%, #9400d3);
+    -webkit-background-clip: text; /* Klip background ke teks */
+    -webkit-text-fill-color: transparent; /* Membuat teks transparan agar gradient terlihat */
+  
+  }
+  .view-gradient{
+    background: linear-gradient(135deg, #00d4ff, #00ffa2 50%, #8a2be2);
+    -webkit-background-clip: text; /* Klip background ke teks */
+    -webkit-text-fill-color: transparent; /* Membuat teks transparan agar gradient terlihat */
+  
+  }
 </style>
 </head>
 <body>
@@ -115,7 +127,29 @@
         </div>
 <div style="display: flex; width: 100%; flex-direction: column;gap: 10px;margin-top: -5px;padding: 10px;">
   <img src="assets/watermark.png" id="imagelive" style="width: 100%;">
-  
+          <div style="display: flex; width: 100%;gap: 5px;">
+    <div style="display: flex; width: 100%;border-radius: 15px; background: #323D54; gap: 10px; padding: 15px;justify-content: left; align-items: center;box-shadow: 1px black;">
+      <span style="font-size: 30px;" class="mdi mdi-gift gift-gradient-4"></span>
+      <div style="width: 85%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <div style="display: flex; flex-direction: column; width: 100%; justify-content: center; align-items: center;">
+                            <h1 style="font-size: 14px;" id="gift"></h1>
+                  <h1 style="font-size: 13px;" id="rupiah"></h1>
+        </div>
+                  <span style="font-family: 'Zen Maru Gothic';font-size: 12px; opacity: 0.8;">Gift</span>
+      </div>
+
+    </div>
+        <div style="display: flex; width: 100%;border-radius: 15px; background: #323D54; gap: 10px; padding: 15px;justify-content: left; align-items: center;box-shadow: 1px black;">
+      <span style="font-size: 30px;" class="mdi mdi-eye view-gradient"></span>
+      <div style="width: 85%; display: flex; flex-direction: column; justify-content: center;align-items: center;">
+                  <h1 style="font-size: 17px;" id="viewers"></h1>
+                  <span style="font-family: 'Zen Maru Gothic';font-size: 12px; opacity: 0.8;">Viewers</span>
+      </div>
+
+    </div>
+
+
+</div>
       <div style="display: flex; width: 100%; background-color: #323D54; justify-content: left; align-items: left; padding: 15px; border-radius: 20px;"
       >
       <span style="font-size: 37px;" id="iconExt"></span>
@@ -143,29 +177,7 @@
       <span style="font-size: 11px; opacity: 0.8;">Durasi</span>
     </div>
     </div>
-        <div style="display: flex; width: 100%;gap: 5px;">
-    <div style="display: flex; width: 100%;border-radius: 15px; background: #323D54; gap: 10px; padding: 15px;justify-content: left; align-items: center;box-shadow: 1px black;">
-      <span style="font-size: 30px;" class="mdi mdi-gift"></span>
-      <div style="width: 85%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        <div style="display: flex; flex-direction: column; width: 100%; justify-content: center; align-items: center;">
-                            <h1 style="font-size: 14px;" id="gift"></h1>
-                  <h1 style="font-size: 13px;" id="rupiah"></h1>
-        </div>
-                  <span style="font-family: 'Zen Maru Gothic';font-size: 12px; opacity: 0.8;">Gift</span>
-      </div>
 
-    </div>
-        <div style="display: flex; width: 100%;border-radius: 15px; background: #323D54; gap: 10px; padding: 15px;justify-content: left; align-items: center;box-shadow: 1px black;">
-      <span style="font-size: 30px;" class="mdi mdi-eye"></span>
-      <div style="width: 85%; display: flex; flex-direction: column; justify-content: center;align-items: center;">
-                  <h1 style="font-size: 17px;" id="viewers"></h1>
-                  <span style="font-family: 'Zen Maru Gothic';font-size: 12px; opacity: 0.8;">Viewers</span>
-      </div>
-
-    </div>
-
-
-</div>
 
 <div class="section">
   <div style="display:flex; align-items: center;gap: 10px;">
