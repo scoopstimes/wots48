@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Monitoring</title>
+  <script defer src="monitoring2.js"></script>
+</head>
+<body>
+    <div style="padding: 20px;">
+  <div style="display: flex; align-items: center; padding: 10px 0;">
+<div class="nolive-indicator">
+  <div class="circle"></div>
+  <div class="pulse"></div>
+</div>
+    <h1 style="font-size: 24px; margin-left: 10px;">Live Monitoring Server Notification</h1>
+
+    <div style="margin-left: auto; font-size: 14px; color: #b0b0b0;" id="liveCount">0 Member</div>
+  </div>
+  <div id="noLiveMessage" style="text-align: center; color: #b0b0b0;"></div>
+  <div style="display: flex;   overflow-x: auto; gap: 10px; margin-top: 20px; width: 100%;" class="card-nowlive-container"></div>
+  
+</div>
+</body>
+</html>
