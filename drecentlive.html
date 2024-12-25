@@ -115,9 +115,11 @@
         </div>
 <div style="display: flex; width: 100%; flex-direction: column;gap: 10px;margin-top: -5px;padding: 10px;">
   <img src="assets/watermark.png" id="imagelive" style="width: 100%;">
-      <div style="display: flex; width: 100%; background-color: #323D54; justify-content: left; align-items: left; padding: 15px; border-radius: 20px;">
+  
+      <div style="display: flex; width: 100%; background-color: #323D54; justify-content: left; align-items: left; padding: 15px; border-radius: 20px;"
+      >
       <span style="font-size: 37px;" id="iconExt"></span>
-      <div style="width: 84%; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+      <div style="width: 84%; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;" >
         <h1 style="font-size: 21px;font-family: 'Zen Maru Gothic';" id="title"></h1>
         <span style="font-size: 11px; opacity: 0.8;" id="bookstar"></span>
       </div>
@@ -142,15 +144,18 @@
     </div>
     </div>
         <div style="display: flex; width: 100%;gap: 5px;">
-    <div style="display: flex; width: 100%;border-radius: 15px; background: #323D54; gap: 10px; padding: 15px;justify-content: left; align-items: left;box-shadow: 1px black;">
+    <div style="display: flex; width: 100%;border-radius: 15px; background: #323D54; gap: 10px; padding: 15px;justify-content: left; align-items: center;box-shadow: 1px black;">
       <span style="font-size: 30px;" class="mdi mdi-gift"></span>
       <div style="width: 85%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                  <h1 style="font-size: 17px;" id="gift"></h1>
+        <div style="display: flex; flex-direction: column; width: 100%; justify-content: center; align-items: center;">
+                            <h1 style="font-size: 14px;" id="gift"></h1>
+                  <h1 style="font-size: 13px;" id="rupiah"></h1>
+        </div>
                   <span style="font-family: 'Zen Maru Gothic';font-size: 12px; opacity: 0.8;">Gift</span>
       </div>
 
     </div>
-        <div style="display: flex; width: 100%;border-radius: 15px; background: #323D54; gap: 10px; padding: 15px;justify-content: left; align-items: left;box-shadow: 1px black;">
+        <div style="display: flex; width: 100%;border-radius: 15px; background: #323D54; gap: 10px; padding: 15px;justify-content: left; align-items: center;box-shadow: 1px black;">
       <span style="font-size: 30px;" class="mdi mdi-eye"></span>
       <div style="width: 85%; display: flex; flex-direction: column; justify-content: center;align-items: center;">
                   <h1 style="font-size: 17px;" id="viewers"></h1>
@@ -223,6 +228,7 @@
   const title = urlParams.get("title");
   const imgidn = urlParams.get("imgidn");
   const imgsr = urlParams.get("imgsr");
+  const rateGift = urlParams.get("giftratesr");
 
   fetch(`https://api.crstlnz.my.id/api/live-details/${liveId}`)
     .then(response => response.json())
@@ -230,6 +236,17 @@
       const startDate = new Date(liveStart);
       const endDate = new Date(liveEnd);
 
+// Fungsi untuk mengonversi points/gift menjadi rupiah
+function convertToRupiahIdn(points) {
+  const conversionRateIdn = 2500; // Misalnya, 1 point = 100 Rupiah
+  return `Rp ${new Intl.NumberFormat('id-ID').format(points * conversionRateIdn)}`;
+}
+function convertToRupiahSr(gift) {
+  const conversionRateSr = 103.14; // 1 Gift (G) = Rp 103,14
+  const rupiahAmount = gift * conversionRateSr;  // Menghitung total Rupiah
+  console.log(`Total Gift: ${gift}, Total Rupiah: ${rupiahAmount}`); // Memeriksa hasil
+  return `Rp ${new Intl.NumberFormat('id-ID').format(rupiahAmount)}`;
+}
       // Format tanggal, waktu, dan hari
       const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
       const formattedDate = startDate.toLocaleDateString('id-ID', options);
@@ -247,14 +264,17 @@
       document.getElementById("live-duration").textContent = calculateDuration(liveStart, liveEnd);
       if (type === "idn"){
         document.getElementById("gift").textContent = `${parseInt(points).toLocaleString('id-ID')} G`;
+        document.getElementById("rupiah").innerHTML = `(<span class="mdi mdi-plus-minus"></span>${convertToRupiahIdn(points)},00)`;
         document.getElementById("title").innerHTML = `${title}`;
         document.getElementById("bookstar").innerHTML = `Judul Live`;
+        
        document.getElementById("imagelive").src = `${imgidn}`;
        document.getElementById("iconExt").classList = "mdi mdi-application-edit";
       } else if (type === "showroom"){
-        document.getElementById("gift").textContent = `${gift} G`;
-      document.getElementById("title").innerHTML = `${parseInt(points).toLocaleString('id-ID')}`;
-      document.getElementById("bookstar").innerHTML = `Excitement Point`;
+        document.getElementById("gift").textContent = `${parseInt(points).toLocaleString('id-ID')} G`;
+        document.getElementById("rupiah").innerHTML = `(<span class="mdi mdi-plus-minus"></span>${convertToRupiahSr(points)})`;
+      
+      document.getElementById("title").innerHTML = `History Log`;
       document.getElementById("imagelive").src = `${imgsr}`;
       document.getElementById("iconExt").classList = "mdi mdi-star-four-points-box gradient-1";
       }

@@ -29,7 +29,7 @@ function listLive() {
       fetch(`https://api.crstlnz.my.id/api/recent?group=jkt48&page=${currentPageShowroom}&perpage=30`)
         .then((response) => response.json())
         .then((dataShowroom) => {
-          console.log(dataIdn);
+          console.log(dataShowroom);
           // Gabungkan kedua data
           const combinedData = [
             ...dataIdn.recents.filter((item) => item.idn.username !== "ame-5xqz6mqgk4"),
@@ -64,7 +64,8 @@ function listLive() {
             );
             
             const viewers = live.live_info?.viewers?.num ?? 0; // Nilai default 0
-            const giftRate = live.gift_rate ?? 0; // Nilai default 0
+            const giftRate = live.points ?? 0; // Nilai default 0
+            const rateGift = live.gift_rate ?? 0;
             const points = live.points ?? 0; // Nilai default 0
             const type = live.type;
             const imgidn = live.idn?.image?? 0;
@@ -82,7 +83,7 @@ function listLive() {
                 <div class="row-live" style="width: 115%;background: #2A3347;border-radius: 0px 10px 10px 0px; margin-left: -18px;justify-content: left;padding-left: 20px;
                 padding-right: 20px;align-items: center; padding-bottom: 0px;height: 141px;">
 
-                  <button class="buttongoweb" onclick="goToLink('drecentlive.html?id=${live.id}&start=${live.live_info?.date?.start ?? ''}&end=${live.live_info?.date?.end ?? ''}&gift=${giftRate}&view=${viewers}&nama=${live.member?.name ?? ''}&image=${live.member?.img_alt ?? ''}&points=${points}&type=${type}&title=${title}&imgidn=${imgidn}&imgsr=${imgsr}')">
+                  <button class="buttongoweb" onclick="goToLink('drecentlive.html?id=${live.id}&start=${live.live_info?.date?.start ?? ''}&end=${live.live_info?.date?.end ?? ''}&gift=${giftRate}&view=${viewers}&nama=${live.member?.name ?? ''}&image=${live.member?.img_alt ?? ''}&points=${points}&type=${type}&title=${title}&imgidn=${imgidn}&imgsr=${imgsr}&giftratesr=${rateGift}')">
                   
                   <div style="margin-top: -25px; display: flex; flex-direction: column;margin-left: 10px;width: 100%;">
                     <h3 style="font-size: 17px; width: 150%;font-family: 'Quicksand';"> ${live.member?.name ?? ''}</h3>
