@@ -104,13 +104,19 @@
         </nav>
   
 
-<div style="width: 100%; display: flex; flex-direction: column;justify-content: center; padding: 0px;">
+<div style="width: 100%; display: flex; flex-direction: column;justify-content: left; padding: 0px;">
                 <div class="header_app" style="height: 50px;">
 
       <div class="header_logo">
     <button class="buttongoweb" onclick="goToLink('live.html')"><span class="mdi mdi-chevron-left"></span>    </button>
+<div style="display: flex; justify-content: left; align-items: center; width: 100%;padding-right: 30px;">
+  <div style="display: flex; justify-content: center; align-items: center; width: 90%;">
+        <span style="font-size: 20px; font-weight: 700; font-family: 'Zen Maru Gothic';margin-left: 10px;"  id="headername"></span>
+      <span style="font-size: 20px; font-weight: 700; font-family: 'Zen Maru Gothic';"  >-</span>
+            <span style="font-size: 20px; font-weight: 700; font-family: 'Zen Maru Gothic';"  id="tanggal"></span>
+  </div>
+</div>
 
-      <span style="font-size: 20px; font-weight: 700; font-family: 'Zen Maru Gothic';margin-left: 10px;"  >Detail Recent</span>
       </div>
                 </div>
                 <div style=" width: 100%;display :flex;flex-direction: column;">
@@ -245,7 +251,8 @@
   const title = urlParams.get("title");
   const imgidn = urlParams.get("imgidn");
   const imgsr = urlParams.get("imgsr");
-  
+  const headerName = urlParams.get("headername");
+  const tanggal = urlParams.get("tanggal");
 
   fetch(`https://api.crstlnz.my.id/api/live-details/${liveId}`)
     .then(response => response.json())
@@ -253,20 +260,34 @@
       const startDate = new Date(liveStart);
       const endDate = new Date(liveEnd);
 
-// Fungsi untuk mengonversi points/gift menjadi rupiah
-function convertToRupiahIdn(points) {
-  const conversionRateIdn = 2500; // Misalnya, 1 point = 100 Rupiah
-  return `Rp ${new Intl.NumberFormat('id-ID').format(points * conversionRateIdn)}`;
-}
-function convertToRupiahSr(gift) {
-  const conversionRateSr = 103.14; // 1 Gift (G) = Rp 103,14
-  const rupiahAmount = gift * conversionRateSr;  // Menghitung total Rupiah
-  console.log(`Total Gift: ${gift}, Total Rupiah: ${rupiahAmount}`); // Memeriksa hasil
-  return `Rp ${new Intl.NumberFormat('id-ID').format(rupiahAmount)}`;
-}
-      // Format tanggal, waktu, dan hari
+      // Fungsi untuk mengonversi points/gift menjadi rupiah
+      function convertToRupiahIdn(points) {
+        const conversionRateIdn = 2500; // Misalnya, 1 point = 100 Rupiah
+        return `Rp ${new Intl.NumberFormat('id-ID').format(points * conversionRateIdn)}`;
+      }
+      
+      function convertToRupiahSr(gift) {
+        const conversionRateSr = 103.14; // 1 Gift (G) = Rp 103,14
+        const rupiahAmount = gift * conversionRateSr;
+        console.log(`Total Gift: ${gift}, Total Rupiah: ${rupiahAmount}`);
+        return `Rp ${new Intl.NumberFormat('id-ID').format(rupiahAmount)}`;
+      }
+
+      // Format tanggal, waktu, dan hari dalam format Indonesia
+      const months = [
+        "Januari", "Februari", "Maret", "April", "Mei", "Juni", 
+        "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+      ];
+
+      // Format tanggal untuk bagian "tanggal"
+      const day = startDate.getDate();
+      const month = months[startDate.getMonth()];
+      const year = startDate.getFullYear();
+      const formattedDate = `${day} ${month} ${year}`;
+
+      // Format start time with the day
       const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
-      const formattedDate = startDate.toLocaleDateString('id-ID', options);
+      const formattedStartDate = startDate.toLocaleDateString('id-ID', options);
 
       const formattedStartTime = startDate.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }).replace('.', ':');
       const formattedEndTime = endDate.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }).replace('.', ':');
@@ -275,48 +296,51 @@ function convertToRupiahSr(gift) {
       document.getElementById("member-name").textContent = `${nama}`;
       document.getElementById("badge").textContent = data.sousenkyo || "Active";
 
-      document.getElementById("live-date").textContent = formattedDate;
+      document.getElementById("live-date").textContent = formattedStartDate; // showing the full date with day
       document.getElementById("live-time").textContent = `${formattedStartTime}`;
       document.getElementById("live-end-time").textContent = `${formattedEndTime}`;
       document.getElementById("live-duration").textContent = calculateDuration(liveStart, liveEnd);
+      document.getElementById("headername").innerHTML = `${headerName} JKT48`;
+      document.getElementById("tanggal").innerHTML = `${formattedDate}`; // showing just date without time
+
       if (type === "idn"){
         document.getElementById("gift").textContent = `${parseInt(points).toLocaleString('id-ID')} G`;
         document.getElementById("rupiah").innerHTML = `(<span class="mdi mdi-plus-minus"></span>${convertToRupiahIdn(points)},00)`;
         document.getElementById("title").innerHTML = `${title}`;
         document.getElementById("bookstar").innerHTML = `Judul Live`;
         
-       document.getElementById("imagelive").src = `${imgidn}`;
-       document.getElementById("iconExt").classList = "mdi mdi-application-edit gradient-judul";
+        document.getElementById("imagelive").src = `${imgidn}`;
+        document.getElementById("iconExt").classList = "mdi mdi-application-edit gradient-judul";
       } else if (type === "showroom"){
         document.getElementById("gift").textContent = `${parseInt(gift).toLocaleString('id-ID')} G`;
         document.getElementById("rupiah").innerHTML = `(<span class="mdi mdi-plus-minus"></span>${convertToRupiahSr(points)})`;
       
-      document.getElementById("title").innerHTML = `History Log`;
-      document.getElementById("imagelive").src = `${imgsr}`;
-      document.getElementById("iconExt").classList = "mdi mdi-star-four-points-box gradient-1";
+        document.getElementById("title").innerHTML = `History Log`;
+        document.getElementById("imagelive").src = `${imgsr}`;
+        document.getElementById("iconExt").classList = "mdi mdi-star-four-points-box gradient-1";
       }
-      
+
       document.getElementById("viewers").textContent = `${parseInt(view).toLocaleString('id-ID')}`;
     })
     .catch((error) => console.error("Error fetching live details:", error));
 
   function calculateDuration(start, end) {
-  const startDate = new Date(start);
-  const endDate = new Date(end);
-  const durationMs = endDate - startDate;
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+    const durationMs = endDate - startDate;
 
-  const hours = Math.floor(durationMs / 3600000);
-  const minutes = Math.floor((durationMs % 3600000) / 60000);
-  const seconds = Math.floor((durationMs % 60000) / 1000);
+    const hours = Math.floor(durationMs / 3600000);
+    const minutes = Math.floor((durationMs % 3600000) / 60000);
+    const seconds = Math.floor((durationMs % 60000) / 1000);
 
-  if (hours > 0) {
-    return `${hours} Jam ${minutes} Menit ${seconds > 0 ? seconds + " Detik" : ""}`.trim();
-  } else if (minutes > 0) {
-    return `${minutes} Menit ${seconds > 0 ? seconds + " Detik" : ""}`.trim();
-  } else {
-    return `${seconds} Detik`;
+    if (hours > 0) {
+      return `${hours} Jam ${minutes} Menit ${seconds > 0 ? seconds + " Detik" : ""}`.trim();
+    } else if (minutes > 0) {
+      return `${minutes} Menit ${seconds > 0 ? seconds + " Detik" : ""}`.trim();
+    } else {
+      return `${seconds} Detik`;
+    }
   }
-}
 });
     </script>
         <script src="../script/main.js"></script>

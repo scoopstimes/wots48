@@ -128,7 +128,7 @@ button.gotoweb:active {
         }
         .header_logo{
                 display: flex;
-                justify-content: center;
+                justify-content: left;
                 align-items: center;
                 width:100%;
                 
