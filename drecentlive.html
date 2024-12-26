@@ -147,10 +147,10 @@
 
     </div>
         <div style="display: flex; width: 100%;border-radius: 15px; background: #323D54; gap: 10px; padding: 15px;justify-content: left; align-items: center;box-shadow: 1px black;">
-      <span style="font-size: 30px;" class="mdi mdi-eye view-gradient"></span>
+      <span style="font-size: 30px;" id="iconviewexct"></span>
       <div style="width: 85%; display: flex; flex-direction: column; justify-content: center;align-items: center;">
                   <h1 style="font-size: 17px;" id="viewers"></h1>
-                  <span style="font-family: 'Zen Maru Gothic';font-size: 12px; opacity: 0.8;">Viewers</span>
+                  <span style="font-family: 'Zen Maru Gothic';font-size: 12px; opacity: 0.8;"id="viewerexct"></span>
       </div>
 
     </div>
@@ -302,6 +302,8 @@
 
       if (type === "idn"){
         document.getElementById("gift").textContent = `${parseInt(points).toLocaleString('id-ID')} G`;
+        document.getElementById("iconviewexct").classList = "mdi mdi-eye view-gradient";
+        document.getElementById("viewerexct").innerHTML = "Viewer"
         document.getElementById("rupiah").innerHTML = `(<span class="mdi mdi-plus-minus"></span>${convertToRupiahIdn(points)},00)`;
         document.getElementById("title").innerHTML = `${title}`;
         document.getElementById("bookstar").innerHTML = `Judul Live`;
@@ -311,7 +313,8 @@
       } else if (type === "showroom"){
         document.getElementById("gift").textContent = `${parseInt(gift).toLocaleString('id-ID')} G`;
         document.getElementById("rupiah").innerHTML = `(<span class="mdi mdi-plus-minus"></span>${convertToRupiahSr(points)})`;
-      
+      document.getElementById("viewerexct").innerHTML = "Excitement Point";
+      document.getElementById("iconviewexct").classList = "mdi mdi-star-four-points view-gradient";
         document.getElementById("title").innerHTML = `${headerName} History Showroom`;
         document.getElementById("imagelive").src = `${imgsr}`;
         document.getElementById("iconExt").classList = "mdi mdi-star-four-points-box gradient-1";
