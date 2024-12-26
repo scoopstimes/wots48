@@ -67,7 +67,7 @@ function listLive() {
             const giftRate = live.points ?? 0; // Nilai default 0
             const rateGift = live.gift_rate ?? 0;
             const points = live.points ?? 0; // Nilai default 0
-            const headerName = live.member?.nickname?? 0;
+            const headerName = live.member?.nickname?? "Official";
             const type = live.type;
             const imgidn = live.idn?.image?? 0;
             const imgsr = live.member?.img?? 0;
