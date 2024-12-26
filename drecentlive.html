@@ -47,8 +47,14 @@
     -webkit-text-fill-color: transparent; /* Membuat teks transparan agar gradient terlihat */
   
   }
-  .view-gradient{
+  .exct-gradient{
     background: linear-gradient(135deg, #00d4ff, #00ffa2 50%, #8a2be2);
+    -webkit-background-clip: text; /* Klip background ke teks */
+    -webkit-text-fill-color: transparent; /* Membuat teks transparan agar gradient terlihat */
+  
+  }
+    .view-gradient{
+    background: linear-gradient(135deg, #18D8FF, #45BEFF 50%, #3682FF);
     -webkit-background-clip: text; /* Klip background ke teks */
     -webkit-text-fill-color: transparent; /* Membuat teks transparan agar gradient terlihat */
   
@@ -314,7 +320,7 @@
         document.getElementById("gift").textContent = `${parseInt(gift).toLocaleString('id-ID')} G`;
         document.getElementById("rupiah").innerHTML = `(<span class="mdi mdi-plus-minus"></span>${convertToRupiahSr(points)})`;
       document.getElementById("viewerexct").innerHTML = "Excitement Point";
-      document.getElementById("iconviewexct").classList = "mdi mdi-star-four-points view-gradient";
+      document.getElementById("iconviewexct").classList = "mdi mdi-star-four-points exct-gradient";
         document.getElementById("title").innerHTML = `${headerName} History Showroom`;
         document.getElementById("imagelive").src = `${imgsr}`;
         document.getElementById("iconExt").classList = "mdi mdi-star-four-points-box gradient-1";
