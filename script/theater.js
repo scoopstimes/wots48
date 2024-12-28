@@ -34,7 +34,7 @@ async function nextTheater() {
 
     // Cek apakah ada theater yang akan datang
     if (!eventData.theater || eventData.theater.upcoming.length === 0) {
-      document.getElementById("noTheaterMessage").textContent = "Tidak ada theater 😭😭";
+      document.getElementById("noTheaterMessage").textContent = "Tidak ada theater";
       document.getElementById("noTheaterMessage").style.display = "block";
       return;
     }
