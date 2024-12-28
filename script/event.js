@@ -84,7 +84,7 @@ async function recentTheater() {
     theaterContainer.innerHTML = '';
 
     if (recentTheaterList.length === 0) {
-      document.getElementById("noTheaterMessage").textContent = "Tidak ada theater 😢😢";
+      document.getElementById("noTheaterMessage").textContent = "Tidak ada theater";
       document.getElementById("noTheaterMessage").style.display = "block";
       return;
     }
